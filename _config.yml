@@ -1,2 +1,3 @@
 name: Ben Machlin
 markdown: kramdown
+permalink: /blog/:year/:month/:day/:title

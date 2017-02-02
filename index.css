@@ -23,3 +23,19 @@
 .self {
 	color: #E81648;
 }
+
+.section {
+	font-size:30px;
+	color: #cc33cc;
+}
+
+.item {
+	font-size: 18px;
+	color: #761D76;
+}
+
+.detail {
+	font-size: 14px;
+	color: #350D35;
+	text-indent: 20px;
+}

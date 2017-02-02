@@ -1,0 +1,25 @@
+.selfpic {
+	float: left;
+	padding-right: 20px;
+}
+
+#selftext {
+	width: 1000px;
+	color: #aa1111;
+}
+
+#biotext {
+
+}
+
+.rabbit {
+	color: #328A22
+}
+
+.tree {
+	color: #92532F;
+}
+
+.self {
+	color: #E81648;
+}

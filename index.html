@@ -1,25 +1,123 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale-1">
-		<title>Ben Machlin's Totally Cool Webpage</title>
-		<link rel="stylesheet" href="index.css">
-	</head>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ben Machlin's Totally Cool Webpage</title>
 
-	<body>
-		<h1>Ben Machlin</h1>
-		<h3>Mountaineer Extraordinaire</h3>
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 
-		<div>
-			<img src="res/self.jpg" alt="Me in New Zealand!" width="400" class="selfpic">
-			<div id="selftext"><p>Hi! I'm a person existing in the world right now. At least I think so . . .</p>
-			<p>There are many qualities that distinquish me from the other billions of organisms in the world. Some of those qualities include my specific set of interests, my various terms of identification, my physical traits and abilities, my unqiue memories and brain composition, and the fact that I've never had bacon.</p></div>
+	<!-- fullPage -->
+	<script type="text/javascript" src="jquery.fullPage.min.js"></script>
+	<script type="text/javascript" src="jquery.fullPage.extensions.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
 
-			<p>Visit my <a href="bio.html">bio</a> or look at my <a href="resume.html">dank resume</a>!!</p>
-		</div>
-	</body>
+	<link rel="stylesheet" href="index.css">
+</head>
 
+<body>
+	<ul id="menu">
+	    <li data-menuanchor="home" class="active"><a href="#home">Home</a></li>
+	    <li data-menuanchor="about"><a href="#about">About</a></li>
+	    <li data-menuanchor="projects"><a href="#projects">Projects</a></li>
+	    <li data-menuanchor="art"><a href="#art">Art</a></li>
+	    <li data-menuanchor="contact"><a href="#contact">Contact</a></li>
+	</ul>
+
+	<div id="fullpage">
+    	<div class="section" data-anchor="home">
+    		<div class="home">Home
+    			<!-- <img src="res/bg.jpg"> -->
+    		</div>
+    	</div>
+    	<div class="section">About</div>
+    	<div class="section">Projects</div>
+    	<div class="section">Art</div>
+    	<div class="section fp-auto-height">Contact</div>
+
+	</div>
+</body>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#fullpage').fullpage({
+        //Navigation
+        menu: '#menu',
+        lockAnchors: false,
+        anchors: ['home', 'about', 'projects', 'art', 'contact'],
+        navigation: false,
+        navigationPosition: 'right',
+        navigationTooltips: ['firstSlide', 'secondSlide'],
+        showActiveTooltip: false,
+        slidesNavigation: false,
+        slidesNavPosition: 'bottom',
+
+        //Scrolling
+        css3: true,
+        scrollingSpeed: 1000,
+        autoScrolling: true,
+        fitToSection: true,
+        fitToSectionDelay: 1000,
+        scrollBar: false,
+        easing: 'easeInOutCubic',
+        easingcss3: 'ease',
+        loopBottom: false,
+        loopTop: false,
+        loopHorizontal: true,
+        continuousVertical: false,
+        continuousHorizontal: false,
+        scrollHorizontally: false,
+        interlockedSlides: false,
+        dragAndMove: false,
+        offsetSections: false,
+        resetSliders: false,
+        fadingEffect: false,
+        normalScrollElements: '#element1, .element2',
+        scrollOverflow: false,
+        scrollOverflowReset: false,
+        scrollOverflowOptions: null,
+        touchSensitivity: 15,
+        normalScrollElementTouchThreshold: 5,
+        bigSectionsDestination: null,
+
+        //Accessibility
+        keyboardScrolling: true,
+        animateAnchor: true,
+        recordHistory: true,
+
+        //Design
+        controlArrows: true,
+        verticalCentered: true,
+        sectionsColor : ['#ccc', '#fff'],
+        paddingTop: '3em',
+        paddingBottom: '10px',
+        fixedElements: '#header, .footer',
+        responsiveWidth: 600,
+        responsiveHeight: 0,
+        responsiveSlides: false,
+        parallax: false,
+        parallaxOptions: {type: 'reveal', percentage: 62, property: 'translate'},
+
+        //Custom selectors
+        sectionSelector: '.section',
+        slideSelector: '.slide',
+
+        lazyLoading: true,
+
+        //events
+        onLeave: function(index, nextIndex, direction){},
+        afterLoad: function(anchorLink, index){},
+        afterRender: function(){},
+        afterResize: function(){},
+        afterResponsive: function(isResponsive){},
+        afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){},
+        onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){}
+    });
+});
+
+</script>
 
 </html>

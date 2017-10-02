@@ -11,7 +11,7 @@ blockquote,body,dd,div,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,li,ol,p,pre,t
 	padding:0
 }
 
-#download a,#fullPage-nav li a,#menu li a,a {
+#download a,#fullPage-nav li a,#menu li,a {
 	text-decoration:none
 }
 
@@ -107,11 +107,11 @@ h2,p {
 	color:#fff
 }
 
-#menu li a,#menu li.active a:hover {
+#menu li,#menu li.active:hover {
 	color:#000
 }
 
-#donations a:hover,#download,#menu li.active a {
+#donations a:hover,#download,#menu li.active {
 	color:#fff
 }
 
@@ -135,6 +135,13 @@ h2,p {
 	width:100%;
 	margin:0
 }
+
+
+
+#sectionHome {
+	background: url("res/bg.jpg");
+}
+
 
 #section3 img {
 	bottom:0;

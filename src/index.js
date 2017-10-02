@@ -1,46 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Ben Machlin's Totally Cool Webpage</title>
-
-	<!-- jquery -->
-	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-
-	<!-- fullPage -->
-	<script type="text/javascript" src="jquery.fullPage.min.js"></script>
-	<script type="text/javascript" src="jquery.fullPage.extensions.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
-
-	<link rel="stylesheet" href="index.css">
-</head>
-
-<body>
-	<ul id="menu">
-	    <li data-menuanchor="home" class="active"><a href="#home">Home</a></li>
-	    <li data-menuanchor="about"><a href="#about">About</a></li>
-	    <li data-menuanchor="projects"><a href="#projects">Projects</a></li>
-	    <li data-menuanchor="art"><a href="#art">Art</a></li>
-	    <li data-menuanchor="contact"><a href="#contact">Contact</a></li>
-	</ul>
-
-	<div id="fullpage">
-    	<div class="section" id="sectionHome">
-    		<div class="home">Home
-    			<!-- <img src="res/bg.jpg"> -->
-    		</div>
-    	</div>
-    	<div class="section" id="sectionAbout">About</div>
-    	<div class="section" id="sectionProjects">Projects</div>
-    	<div class="section" id="sectionArt">Art</div>
-    	<div class="section fp-auto-height" id="sectionContact">Contact</div>
-
-	</div>
-</body>
-
-<script type="text/javascript">
 
 $(document).ready(function() {
     $('#fullpage').fullpage({
@@ -50,7 +7,7 @@ $(document).ready(function() {
         anchors: ['home', 'about', 'projects', 'art', 'contact'],
         navigation: false,
         navigationPosition: 'right',
-        navigationTooltips: ['firstSlide', 'secondSlide'],
+        // navigationTooltips: ['firstSlide', 'secondSlide'],
         showActiveTooltip: false,
         slidesNavigation: false,
         slidesNavPosition: 'bottom',
@@ -62,7 +19,7 @@ $(document).ready(function() {
         fitToSection: true,
         fitToSectionDelay: 1000,
         scrollBar: false,
-        easing: 'easeInOutCubic',
+        easing: 'easeInOutCubic', 
         easingcss3: 'ease',
         loopBottom: false,
         loopTop: false,
@@ -91,11 +48,11 @@ $(document).ready(function() {
         //Design
         controlArrows: true,
         verticalCentered: true,
-        sectionsColor : ['#ccc', '#fff'],
+        sectionsColor : ['#cccccc', '#ffffff', '#abc123', '123abc', '123abc'],
         paddingTop: '3em',
         paddingBottom: '10px',
         fixedElements: '#header, .footer',
-        responsiveWidth: 600,
+        responsiveWidth: 750,
         responsiveHeight: 0,
         responsiveSlides: false,
         parallax: false,
@@ -118,6 +75,3 @@ $(document).ready(function() {
     });
 });
 
-</script>
-
-</html>

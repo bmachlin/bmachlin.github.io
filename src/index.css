@@ -11,7 +11,7 @@ blockquote,body,dd,div,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,li,ol,p,pre,t
 	padding:0
 }
 
-#download a,#fullPage-nav li a,#menu li,a {
+#fullPage-nav li a,#menu li,a {
 	text-decoration:none
 }
 
@@ -46,18 +46,15 @@ h1,h2,h3,h4,h5,h6 {
 	color:#444
 }
 
-body,h2 {
-	color:#333;
-	color:rgba(0,0,0,.5)
-}
-
-q:after,q:before {
-	content:''
+h2 {
+	color:#fff;
+	color:rgba(255,255,255, 1);
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 body {
 	font-family:arial,helvetica;
-	background-color:#1BBC9B
+	/* background-color:#1BBC9B */
 }
 
 body,html {
@@ -75,20 +72,29 @@ body,html {
 }
 
 h1 {
-	font-size:6em
-}
-
-h2,p {
-	font-size:2em
+	font-size:4em
 }
 
 .section {
 	text-align:center
 }
 
-#infoMenu,#menu {
-	z-index:70;
-	position:fixed
+.slide p {
+	text-align: left;
+	font-size: 0.7em;
+	margin: 1em;
+	width: 40%;
+}
+
+.slide h2 {
+	font-size: 1.5em;
+}
+
+.slide img {
+	float: right;
+	width: 40%;
+	font-size: 0.3em;
+	margin: 2em;
 }
 
 #menu li {
@@ -103,16 +109,12 @@ h2,p {
 
 #menu li.active {
 	background:#666;
-	background:rgba(0,0,0,.5);
-	color:#fff
+	background:rgba(209, 151, 151, 0.5);
+	color:#fff;
 }
 
 #menu li,#menu li.active:hover {
 	color:#000
-}
-
-#donations a:hover,#download,#menu li.active {
-	color:#fff
 }
 
 #menu li:hover {
@@ -124,24 +126,45 @@ h2,p {
 	display:block
 }
 
-#examplesList ul,#menu {
-	padding:0
-}
-
 #menu {
 	top:0;
 	left:0;
 	height:40px;
 	width:100%;
-	margin:0
+	margin:0;
+	z-index:70;
+	position:fixed;
 }
 
 
-
-#sectionHome {
-	background: url("res/bg.jpg");
+/* #sectionHome {
+	background-image: url("res/home.jpg");
+	background-position: center;
 }
 
+#sectionAbout {
+	background-image: url("res/about.jpg");
+	background-position: center;
+}
+
+#project0 {
+	background-image: url("res/projects.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+} 
+
+#project1 {
+	background-image: url("res/chronography.png");
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#project2 {
+	background-image: url("res/SAN.png");
+	background-position: center;
+	background-repeat: no-repeat;
+} */
 
 #section3 img {
 	bottom:0;

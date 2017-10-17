@@ -3,7 +3,9 @@ var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/src'));
+app.use(express.static(__dirname + '/src', {
+  extensions: ["html"]
+}));
 app.use('/lib', express.static(__dirname + '/lib'));
 app.use('/res', express.static(__dirname + '/res'));
 

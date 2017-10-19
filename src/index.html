@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-	<title>Ben Machlin!</title>
-
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" href="main.css">
-	<link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" >
+	
+	<head>
+		<title>Ben Machlin!</title>
+		
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" href="main.css">
+		<link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" >
+		
+		
 </head>
 
 <body>
+		<canvas id="theCanvas" data-processing-sources="res/homepage.pde"></canvas>
+
 	<ul id="menu">
 	    <li data-menuanchor="home"><a href="/">Ben Machlin</a></li>
 	    <li data-menuanchor="resume"><a href="/resume">Resume</a></li>
@@ -29,5 +33,5 @@
 </body>
 
 <script type="text/javascript" src="index.js"></script>
-
+<script type="text/javascript" src="lib/processing.js"></script>
 </html>

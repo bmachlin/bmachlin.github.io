@@ -57,7 +57,7 @@ void setup() {
 //int test = 0;
 void draw() {
   //background(backgroundColor());
-  background(235,235,250);
+  background(220,255,235);
   //render nodes
   for(int i = 0; i < nodesSize; i++) {
     Node n = nodes[i];

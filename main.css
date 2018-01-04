@@ -19,13 +19,24 @@ a, a:visited {
 
 #portrait {
 	border-radius: 5%;
-	height: 30%;
-	width: 30%;
+	height: 40%;
+	width: 40%;
 	margin: auto;
 	margin-bottom: 2em;
 	display: block;
 
 }
+/*
+.column {
+	float: left;
+	width: 50%;
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}*/
 
 .item {
 	background: #c1ffdc;

@@ -26,6 +26,11 @@ a, a:visited {
 	display: block;
 
 }
+
+img {
+    image-orientation: from-image;
+}
+
 /*
 .column {
 	float: left;

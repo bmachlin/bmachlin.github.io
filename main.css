@@ -31,6 +31,12 @@ img {
     image-orientation: from-image;
 }
 
+.artwork {
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 10vh;
+}
+
 /*
 .column {
 	float: left;

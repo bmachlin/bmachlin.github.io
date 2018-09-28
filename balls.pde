@@ -21,7 +21,7 @@ void setup() {
   size(screen.width,screen.height);
 
   int nodesSize = 8;
-  for(int i = 0; i < nodeSize; i++) {
+  for(int i = 0; i < nodesSize; i++) {
     nodes[i] = new Node(0, (int)random(5,15));
     nodes[i].radius = (int) (12*sqrt(n.mass/PI));
   }

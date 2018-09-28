@@ -11,19 +11,17 @@ final float KH = 50000;
 final float KC = 89875.517873681764;
 final float FDAMPING = 0.01;
 final float VDAMPING = 0.92;
-final int WALL_MASS = 10;
-final float TICK = 1.0/90;
+final int WALL_MASS = 5;
+final float TICK = 1.0/150;
 
-int nodesSize = 8;
-Node[] nodes = new Node[nodesSize];
+int numBalls = 10;
+Node[] balls = new Node[numBalls];
 
 void setup() {
   size(screen.width,screen.height);
-
-  int nodesSize = 8;
-  for(int i = 0; i < nodesSize; i++) {
-    nodes[i] = new Node(0, (int)random(5,15));
-    nodes[i].radius = (int) (12*sqrt(nodes[i].mass/PI));
+  for(int i = 0; i < numBalls; i++) {
+    balls[i] = new Node(0, (int)random(5,15));
+    balls[i].radius = (int) (12*sqrt(balls[i].mass/PI));
   }
   
 }
@@ -31,9 +29,9 @@ void setup() {
 void draw() {
   //background(backgroundColor());
   background(220,255,235);
-  //render nodes
-  for(int i = 0; i < nodesSize; i++) {
-    Node n = nodes[i];
+  //render balls
+  for(int i = 0; i < numBalls; i++) {
+    Node n = balls[i];
     n.rend(); 
     n.force.x = 0;
     n.force.y = 0;
@@ -47,33 +45,33 @@ void draw() {
 // apply Coulomb's Law: f = k/d^2
 void applyCoulomb() {
   
-  for(int i = 0; i < nodesSize; i++) {
-    Node n1 = nodes[i];
-    for(int j = i+1; j <= nodesSize; j++) {
-      Node n2;
-      if(j == nodesSize) {
+  for(int i = 0; i < numBalls; i++) {
+    Node b1 = balls[i];
+    for(int j = i+1; j <= numBalls; j++) {
+      Node b2;
+      if(j == numBalls) {
         break;
-        //n2 = new Node(-1, MOUSE_MASS);
-        //n2.pos.set(mouseX, mouseY, 0);
+        //b2 = new Node(-1, MOUSE_MASS);
+        //b2.pos.set(mouseX, mouseY, 0);
       } else
-        n2 = nodes[j];
+        b2 = balls[j];
       
-      PVector unitVector = new PVector(n2.pos.x - n1.pos.x, n2.pos.y - n1.pos.y, 0);
-      unitVector.mult(KC * n1.mass * n2.mass / n1.pos.dist(n2.pos) / unitVector.mag());
+      PVector unitVector = new PVector(b2.pos.x - b1.pos.x, b2.pos.y - b1.pos.y, 0);
+      unitVector.mult(KC * b1.mass * b2.mass / b1.pos.dist(b2.pos) / unitVector.mag());
       
-      if(!n2.equals(nearest(n1)))
+      if(!b2.equals(nearest(b1)))
         unitVector.mult(0.01);
       
-      if(n1.attract(n2)) {
+      if(b1.attract(b2)) {
         unitVector.mult(-1);
       } else {
         unitVector.mult(250);
-        n2.setColor();
-        n1.setColor();
+        b2.setColor();
+        b1.setColor();
       }
-      n2.force.add(unitVector);
+      b2.force.add(unitVector);
       unitVector.mult(-1);
-      n1.force.add(unitVector);
+      b1.force.add(unitVector);
       
     }
   }
@@ -81,49 +79,49 @@ void applyCoulomb() {
 }
 
 void applyWallForce() {
-  for(int i = 0; i < nodesSize; i++) {
-    Node n = nodes[i];
-    float dL = n.pos.x;
-    float dR = width - n.pos.x;
-    float dT = n.pos.y;
-    float dB = height - n.pos.y;
+  for(int i = 0; i < numBalls; i++) {
+    Node b = balls[i];
+    float dL = b.pos.x;
+    float dR = width - b.pos.x;
+    float dT = b.pos.y;
+    float dB = height - b.pos.y;
     
-    float FX = KC * n.mass * WALL_MASS / dL - KC * n.mass * WALL_MASS / dR; 
-    float FY = KC * n.mass * WALL_MASS / dT - KC * n.mass * WALL_MASS / dB; 
+    float FX = KC * b.mass * WALL_MASS / dL - KC * b.mass * WALL_MASS / dR; 
+    float FY = KC * b.mass * WALL_MASS / dT - KC * b.mass * WALL_MASS / dB; 
     
-    n.force.add(FX,FY,0);
+    b.force.add(FX,FY,0);
   }
 }
 
-//updates the acceleration, velocity and position of the nodes
+//updates the acceleration, velocity and position of the balls
 void updatePhysicsValues() {
   
   //update node values
-  for(int i = 0; i < nodesSize; i++) {
-    Node n = nodes[i];
-     n.force.div(n.mass/FDAMPING);
-     n.accel.set(n.force);
-     n.accel.mult(TICK);
-     n.velo.mult(VDAMPING);
-     n.velo.add(n.accel);
+  for(int i = 0; i < numBalls; i++) {
+    Node b = balls[i];
+     b.force.div(b.mass/FDAMPING);
+     b.accel.set(b.force);
+     b.accel.mult(TICK);
+     b.velo.mult(VDAMPING);
+     b.velo.add(b.accel);
      
-     // sometimes n.velo.z is NaN, so we calculate magnitude manually
-     float mag = sqrt(sq(n.velo.x)+sq(n.velo.y));
+     // sometimes b.velo.z is NaN, so we calculate magnitude manually
+     float mag = sqrt(sq(b.velo.x)+sq(b.velo.y));
      
-     PVector position = new PVector(n.velo.x*TICK + 0.5*n.accel.x*TICK*TICK, 
-                                    n.velo.y*TICK + 0.5*n.accel.y*TICK*TICK);
-     n.pos.add(position);
+     PVector position = new PVector(b.velo.x*TICK + 0.5*b.accel.x*TICK*TICK, 
+                                    b.velo.y*TICK + 0.5*b.accel.y*TICK*TICK);
+     b.pos.add(position);
   
   }
 }
 
-Node nearest(Node n) {
+Node nearest(Node b) {
   float dist = width+height;
   Node near = null;
-  for(Node other : nodes) {
-    if(!n.equals(other)) {
-       if(n.pos.dist(other.pos) < dist) {
-         dist = n.pos.dist(other.pos);
+  for(Node other : balls) {
+    if(!b.equals(other)) {
+       if(b.pos.dist(other.pos) < dist) {
+         dist = b.pos.dist(other.pos);
          near = other;
        } 
     }
@@ -135,10 +133,10 @@ color backgroundColor() {
   int r = 0;
   int b = 0;
   int g = 0;
-  for(Node n : nodes) {
-    r += red(n.c);
-    g += green(n.c);
-    b += blue(n.c);
+  for(Node ball : balls) {
+    r += red(ball.c);
+    g += green(ball.c);
+    b += blue(ball.c);
   }
   int cr = 255*b/(r+b+g);
   int cg = 255*r/(r+b+g);

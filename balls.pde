@@ -14,47 +14,19 @@ final float VDAMPING = 0.92;
 final int WALL_MASS = 10;
 final float TICK = 1.0/90;
 
-int nodesSize = 12;
+int nodesSize = 8;
 Node[] nodes = new Node[nodesSize];
-
-
-/* 
- * Node class
- *
- * Represents a Node in a treemap
- * 
- * Ben Machlin & Dani Kupfer
- * September 2017
- */
- 
-
 
 void setup() {
   size(screen.width,screen.height);
 
-  nodes[0] = new Node(0, (int)random(5,15));
-  nodes[1] = new Node(1, (int)random(5,15));
-  nodes[2] = new Node(2, (int)random(5,15));
-  nodes[3] = new Node(3, (int)random(5,15));
-  nodes[4] = new Node(4, (int)random(5,15));
-  nodes[5] = new Node(5, (int)random(5,15));
-  nodes[6] = new Node(6, (int)random(5,15));
-  nodes[7] = new Node(7, (int)random(5,15));
-  nodes[8] = new Node(8, (int)random(5,15));
-  nodes[9] = new Node(9, (int)random(5,15));
-  nodes[10] = new Node(10, (int)random(5,15));
-  nodes[11] = new Node(11, (int)random(5,15));
-  
-  
-  //set node radii
-  for(int i = 0; i < nodesSize; i++) {
-    Node n = nodes[i];
-    n.radius = (int) (12*sqrt(n.mass/PI));
+  for(int i = 0; i < nodeSize; i++) {
+    nodes[i] = new Node(0, (int)random(5,15));
+    nodes[i].radius = (int) (12*sqrt(n.mass/PI));
   }
   
 }
 
-//int test = 0;
 void draw() {
   //background(backgroundColor());
   background(220,255,235);

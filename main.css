@@ -32,9 +32,17 @@ img {
 }
 
 .artwork {
+	display: block;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 10vh;
+	margin-top: 4vh;
+	margin-bottom: 4vh;
+	width: 69%;
+}
+
+.art_header {
+	text-align: center;
+	margin-top: 5vh;
 }
 
 /*

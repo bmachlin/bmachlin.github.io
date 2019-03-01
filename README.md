@@ -2,4 +2,4 @@
 
 This is a personal page for me, Ben Machlin.
 
-Currently under devlopment.
+Likely under devlopment.

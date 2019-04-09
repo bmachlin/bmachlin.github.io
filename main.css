@@ -27,6 +27,13 @@ a, a:visited {
 
 }
 
+#bio {
+	width: 80%;
+	display: block;
+	margin: auto;
+	text-align: justify;
+}
+
 img {
     image-orientation: from-image;
 }

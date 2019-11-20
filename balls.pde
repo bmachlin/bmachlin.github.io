@@ -48,7 +48,6 @@ void applyCoulomb() {
   
   for(int i = 0; i < numBalls; i++) {
     Node b1 = balls[i];
-    System.out.println(b1.id + " lasttouched = " + b1.lastTouched.id);
     for(int j = i+1; j <= numBalls; j++) {
       Node b2;
       if(j == numBalls) {
@@ -204,7 +203,6 @@ class Node {
     ellipseMode(RADIUS);
     ellipse(pos.x, pos.y, radius, radius);
     fill(0);
-    text(Integer.toString(id), pos.x, pos.y);
     
     //float energy = 0.5*mass*sq(velo.mag());
     //if(energy > RECOLOR)

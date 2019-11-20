@@ -1,3 +1,4 @@
+
 /*
  * Force-Directed Node-Link Physics Engine
  * 
@@ -11,16 +12,16 @@ final float KH = 50000;
 final float KC = 89875.517873681764;
 final float FDAMPING = 0.01;
 final float VDAMPING = 0.92;
-final int WALL_MASS = 5;
+final int WALL_MASS = 10;
 final float TICK = 1.0/150;
 
 int numBalls = 10;
 Node[] balls = new Node[numBalls];
 
 void setup() {
-  size(screen.width,screen.height);
+  size(screen.width, screen.height);
   for(int i = 0; i < numBalls; i++) {
-    balls[i] = new Node(0, (int)random(5,15));
+    balls[i] = new Node(i, (int)random(5,15));
     balls[i].radius = (int) (12*sqrt(balls[i].mass/PI));
   }
   
@@ -47,6 +48,7 @@ void applyCoulomb() {
   
   for(int i = 0; i < numBalls; i++) {
     Node b1 = balls[i];
+    System.out.println(b1.id + " lasttouched = " + b1.lastTouched.id);
     for(int j = i+1; j <= numBalls; j++) {
       Node b2;
       if(j == numBalls) {
@@ -59,13 +61,15 @@ void applyCoulomb() {
       PVector unitVector = new PVector(b2.pos.x - b1.pos.x, b2.pos.y - b1.pos.y, 0);
       unitVector.mult(KC * b1.mass * b2.mass / b1.pos.dist(b2.pos) / unitVector.mag());
       
-      if(!b2.equals(nearest(b1)))
-        unitVector.mult(0.01);
-      
-      if(b1.attract(b2)) {
-        unitVector.mult(-1);
+      if(!b1.touching(b2)) {
+        if (!b1.lastTouched.equals(b2))
+          unitVector.mult(-1);
+        else
+          unitVector.mult(2);
       } else {
         unitVector.mult(250);
+        b1.lastTouched = b2;
+        b2.lastTouched = b1;
         b2.setColor();
         b1.setColor();
       }
@@ -153,6 +157,7 @@ class Node {
   float mass = 0;
   int radius = 0;
   color c;
+  Node lastTouched;
   
   
   PVector pos = new PVector(random(width), random(height));
@@ -163,6 +168,7 @@ class Node {
   public Node(int id, int val) {
     this.id = id;
     mass = val;
+    lastTouched = this;
     setColor();
   }
   
@@ -197,8 +203,10 @@ class Node {
 
     ellipseMode(RADIUS);
     ellipse(pos.x, pos.y, radius, radius);
+    fill(0);
+    text(Integer.toString(id), pos.x, pos.y);
     
-    float energy = 0.5*mass*sq(velo.mag());
+    //float energy = 0.5*mass*sq(velo.mag());
     //if(energy > RECOLOR)
     //  setColor();
   }
@@ -208,8 +216,8 @@ class Node {
     accel.set(0,0,0);
   }
   
-  boolean attract(Node other) {
-    return (pos.dist(other.pos) >= radius + other.radius - 1);
+  boolean touching(Node other) {
+    return (pos.dist(other.pos) < radius + other.radius - 1);
   }
   
   String toString() {

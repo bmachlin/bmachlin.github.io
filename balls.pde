@@ -66,7 +66,7 @@ void applyCoulomb() {
         else
           unitVector.mult(2);
       } else {
-        unitVector.mult(250);
+        unitVector.mult(1000);
         b1.lastTouched = b2;
         b2.lastTouched = b1;
         b2.setColor();

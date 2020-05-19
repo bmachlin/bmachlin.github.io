@@ -1,91 +1,88 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Ben Machlin!</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ben Machlin!</title>
 
-		<link rel="shortcut icon" href="res/favicon.ico" type="image/x-icon">
-		<link href="https://fonts.googleapis.com/css?family=Hind+Vadodara" rel="stylesheet">
-		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
-		<link rel="stylesheet" href="css/layouts/side-menu.css">
-		<link rel="stylesheet" href="main.css">
+    <link rel="shortcut icon" href="res/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Hind+Vadodara" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .medium {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: space-around;
+            justify-content: center;
+        }
 
+        .artwork {
+            width: 30%;
+            margin: 10px;
+            box-shadow: 1px 2px 3px rgba(0, 0, 0, .5);
+            -moz-box-shadow: 1px 2px 3px rgba(0, 0, 0, .5);
+            -webkit-box-shadow: 1px 2px 3px rgba(0, 0, 0, .5);
+        }
 
+        h2 {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
 </head>
 
 <body>
-	<canvas id="canvas" data-processing-sources="balls.pde"></canvas>
-	<div id="layout">
-		<!-- Menu toggle -->
-	    <a href="#menu" id="menuLink" class="menu-link">
-	        <!-- Hamburger icon -->
-	        <span></span>
-	    </a>
+    <nav>
+        <a href="/" class="active">Ben Machlin</a>
+        <a href="/projects">Projects</a>
+        <a href="/art">Art</a>
+        <a href="res/BenMachlinResume.pdf" target="_blank">Resume</a>
+        <a href="https://github.com/bmachlin/" target="_blank">Github</a>
+        <a href="https://www.linkedin.com/in/bmachlin/" target="_blank">LinkedIn</a>
+        <a class="icon" onclick="toggle(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </a>
+    </nav>
 
-		<div id="menu">
-			<div class="pure-menu">
-				<a class="pure-menu-heading" href="/">Ben Machlin</a>
+    <main>
+        <h1>Art</h1>
+        <h2>Computer Generated</h2>
+        <div class="medium">
+            <img src="res/art/gen5.png" class="artwork" alt="generative art">
+            <img src="res/art/gen4.png" class="artwork" alt="generative art">
+            <img src="res/art/gen7.png" class="artwork" alt="generative art">
+        </div>
 
-	            <ul class="pure-menu-list">
+        <h2>Watercolor</h2>
+        <div class="medium">
+            <img src="res/art/mum.jpg" class="artwork" alt="watercolor painting">
+            <img src="res/art/sunset.jpg" class="artwork" alt="watercolor painting">
+        </div>
 
-	                <li class="pure-menu-item">
-	                	<a href="res/BenMachlinResume.pdf" target="_blank" class="pure-menu-link">Resume</a></li>
+        <h2>Pen</h2>
+        <div class="medium">
+            <img src="res/art/birdandstuff.jpg" class="artwork" alt="b/w pen drawing with bird and crazy stuff">
+            <img src="res/art/brainland.jpg" class="artwork" alt="multicolor pen drawing">
+            <img src="res/art/dolphin.jpg" class="artwork" alt="multicolor pen drawing">
+            <img src="res/art/fingerplace.jpg" class="artwork" alt="multicolor pen drawing">
+            <img src="res/art/indian.jpg" class="artwork" alt="multicolor pen drawing">
+            <img src="res/art/triangles.jpg" class="artwork" alt="multicolor pen drawing">
+        </div>
 
-	                <li class="pure-menu-item">
-	                	<a href="/projects" class="pure-menu-link" class="menu-item-divided pure-menu-selected">Projects</a></li>
+        <h2>Pencil</h2>
+        <div class="medium">
+            <img src="res/art/networkflower.jpg" class="artwork" alt="pencil drawing">
+        </div>
+    </main>
 
-	                <li class="pure-menu-item">
-	                	<a href="/art" class="pure-menu-link">Art</a></li>
-
-	                <li class="pure-menu-item">
-	                	<a target="_blank" href="https://github.com/bmachlin/" class="pure-menu-link">Github</a></li>
-
-	                <li class="pure-menu-item">
-	                	<a target="_blank" href="https://www.linkedin.com/in/bmachlin/" class="pure-menu-link">LinkedIn</a></li>
-	            </ul>
-			</div>
-		</div>
-
-		<div id="main">
-			<div class="header">
-	            <h1>Art</h1>
-	        </div>
-
-	        <div class="content">
-				<h2 class="header">I am Ben Machlin. Here's some art I've made.</h2>
-
-				<h2 class="art_header">Computer Generated</h2>
-				<img src="/res/art/gen5.png" class="artwork" alt="generative art">
-				<img src="/res/art/gen4.png" class="artwork" alt="generative art">
-				<img src="/res/art/gen7.png" class="artwork" alt="generative art">
-
-				<h2 class="art_header">Watercolor</h2>
-				<img src="/res/art/mum.jpg" class="artwork" alt="watercolor painting">
-				<img src="/res/art/sunset.jpg" class="artwork" alt="watercolor painting">
-
-				<h2 class="art_header">Pen</h2>
-				<img src="/res/art/birdandstuff.jpg" class="artwork" alt="b/w pen drawing with bird and crazy stuff">
-				<img src="/res/art/brainland.jpg" class="artwork" alt="multicolor pen drawing">
-				<img src="/res/art/dolphin.jpg" class="artwork" alt="multicolor pen drawing">
-				<img src="/res/art/fingerplace.jpg" class="artwork" alt="multicolor pen drawing">
-				<img src="/res/art/indian.jpg" class="artwork" alt="multicolor pen drawing">
-				<img src="/res/art/triangles.jpg" class="artwork" alt="multicolor pen drawing">
-
-				<h2 class="art_header">Pencil</h2>
-				<img src="/res/art/networkflower.jpg" class="artwork" alt="pencil drawing">
-
-	        </div>
-
-		</div>
-
-		<footer>
-			<p style="text-align: center;">Contact me via email: benmachlin AT gmail DOT com</a></p>
-		</footer>
-	</div>
+    <footer>Contact me via email: benmachlin AT gmail DOT com</footer>
 </body>
-	<script type="text/javascript" src="lib/processing.js"></script>
-	<script type="text/javascript" src="index.js"></script>
+<script src="nav.js"></script>
 
 </html>

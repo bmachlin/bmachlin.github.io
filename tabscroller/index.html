@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tab Scroller</title>
+        <link rel="stylesheet" href="index.css" media="screen" charset="utf-8">
+    </head>
+    <body onload="setup()">
+        
+        <p>Use the format #[MM:SS pp t] to identify a timestamp. 
+            <br>p = position (## => % of screen to scroll to, default is 50. 100 means bottom, 0 means top) 
+            <br>t = type (s, n => scroll (default), snap to this pos at this time)</p>
+        <label>Enter tab:</label><br>
+        <textarea cols=80 rows=15 id="tabText"></textarea><br>
+        <button onclick="processTab()">Submit</button><br><br>
+        <label>Optional YouTube ID:</label>
+        <input type="text" id="playerId"/>
+        <button onclick="createPlayer()">Load Video</button><br>
+        <hr>
+
+        <div class="tab-display"></div>
+        <div class="controls">
+            <div id="player"></div>
+            <p id="timer">00:00</p>
+            <button id="btn-playpause" onclick="playpause()">Play/Pause</button>
+            <button id="btn-reset" onclick="resetTimer()">Reset</button>
+            <button id="btn-set" onclick="setTimer()">Set</button>
+            <input type="text" id="setTime" size=6>
+        </div>
+    </body>
+    <script type="text/javascript" src="index.js"></script>
+</html>

@@ -1,0 +1,20 @@
+.content {
+    background: #81ca8c;
+    padding: 20px;
+    text-align: left;
+}
+
+p {
+    text-indent: 2em;
+    margin: 1em 0em;
+    padding: 0em 2em;
+}
+
+blockquote {
+    display: inline-block;
+    font-family: 'Courier New', Courier, monospace;
+    color: #222;
+    background: lightgrey;
+    padding: 1em 2em;
+    margin: 0.5em 5em;
+}

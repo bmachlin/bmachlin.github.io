@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Ben Machlin!</title>
+
+    <link rel="shortcut icon" href="res/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Hind+Vadodara" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .wordlist {
+            list-style: none;
+        }
+        .wordlist > li {
+            margin: 10px auto;
+        }
+        .word {
+            font-weight: bold;
+        }
+        .example {
+            font-style: italic;
+        }
+        blockquote {
+            border-left: 3px solid black;
+            padding: 0px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/" class="home">Ben Machlin</a>
+        <a href="/projects">Projects</a>
+        <a href="/art">Art</a>
+        <a href="res/BenMachlinResume.pdf" target="_blank">Resume</a>
+        <a href="https://github.com/bmachlin/" target="_blank">Github</a>
+        <a href="https://www.linkedin.com/in/bmachlin/" target="_blank">LinkedIn</a>
+        <a class="icon" onclick="toggle(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </a>
+    </nav>
+
+    <main>
+        <h1>Cool Words</h1>
+
+        <div id="filters">
+            <button name="randomize" onclick="randomize()">Randomize Order</button>
+            <button name="Toggle Examples" onclick="toggleExamples()">Toggle Examples</button>
+        </div>
+        <ul class="wordlist">
+            <li>
+                <span class="word">astrobleme</span> - <span class="definition">an eroded remnant of a large, ancient crater made by the impact of a meteorite or comet</span>
+                <blockquote class="example">I peered around, observing that I was standing in an astrobleme.</blockquote>
+            </li>
+            <li>
+                <span class="word">callipygian</span> - <span class="definition">having shapely buttocks</span>
+                <blockquote class="example">I peered around the Butt Museum, observing the paintings of callipygian gods.</blockquote>
+            </li>
+            <li>
+                <span class="word">minacious</span> - <span class="definition">menacing or threatening</span>
+                <blockquote class="example">I peered around, observing the minacious children taunting their younger classmates.</blockquote>
+            </li>
+        </ul>
+    </main>
+</body>
+<script src="nav.js"></script>
+<script>
+    function randomize() {
+        // https://stackoverflow.com/a/11972692
+        let wordlist = document.querySelector(".wordlist");
+        for (var i = wordlist.children.length; i >= 0; i--) {
+            wordlist.appendChild(wordlist.children[Math.random() * i | 0]);
+        }
+    }
+
+    function toggleExamples() {
+        let examples = document.querySelectorAll(".example");
+        for(var ex of examples) {
+            ex.style.display = ex.style.display === "none" ? "block" : "none";
+        }
+    }
+</script>
+
+</html>

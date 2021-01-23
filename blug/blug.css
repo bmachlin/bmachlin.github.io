@@ -1,5 +1,5 @@
 .content {
-    background: #81ca8c;
+    background: #aaaaaa;
     padding: 20px;
     text-align: left;
     font-size: 110%;
@@ -14,7 +14,7 @@ p {
 blockquote {
     display: inline-block;
     font-family: 'Courier New', Courier, monospace;
-    color: #222;
+    color: #222222;
     background: lightgrey;
     padding: 1em 2em;
     margin: 0.5em 5em;

@@ -8,55 +8,43 @@
     <title>Ben Machlin!</title>
 
     <link rel="shortcut icon" href="res/favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Hind+Vadodara" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <style>
-        #portrait {
-            border-radius: 5%;
-            height: 25%;
-            width: 25%;
-            margin: auto;
-            margin-bottom: 2em;
+        h2 {
             display: block;
+            margin: auto;
         }
 
-        @media screen and (max-width: 600px) {
-            #portrait {
-                height: 66%;
-                width: 66%;
-            }
+        li {
+            font-size: 1.5em;
         }
     </style>
 </head>
 
 <body>
-    <nav>
-        <a href="/index.html" class="home">Ben Machlin</a>
-        <a href="/projects.html">Projects</a>
-        <a href="/art.html">Art</a>
-        <a href="res/BenMachlinResume.pdf" target="_blank">Resume</a>
-        <a href="https://github.com/bmachlin/" target="_blank">Github</a>
-        <a href="https://www.linkedin.com/in/bmachlin/" target="_blank">LinkedIn</a>
-        <a class="icon" onclick="toggle(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </a>
-    </nav>
+    <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
 
     <main>
-        <h1>Ben Machlin</h1>
-        <br/>
-        <h2 class="bio">
-            Hello, I am Ben. Welcome to my website! I love to do a lot of <a href="/things.html">things</a>!
-            You may be interested in my skills as a <a target="_blank" href="https://github.com/bmachlin/">computer
-                science engineer</a>,
-            <a href="/projects.html">projects</a> I've worked on,
-            or my <a href="res/BenMachlinResume.pdf" target="_blank">experience</a>.
-            You can find some drawings and other stuff in the <a href="/art.html">art</a> section.
-        </h2>
+        <h2 class="bio">Hello, I am Ben. Welcome to my website!</h2>
+
+        <p>Check out the pages here:</p>
+        <ul>
+            <li><a href="/projects.html">Projects</a></li>
+            <li><a href="/art.html">Art</a></li>
+            <li><a href="/words.html">Words</a></li>
+            <li><a href="/links.html">Cool Links</a></li>
+            <li><a href="/things.html">Things I Enjoy</a></li>
+            <!-- <li><a href="/blug.html">Blug</a></li> -->
+            <li><a href="/tabscroller/index.html">Tab Scroller</a></li>
+            <li><a href="/about.html">About This Site</a></li>
+        </ul>
+        <p>Other Personal Links:</p>
+        <ul>
+            <li><a href="res/BenMachlinResume.pdf">Resume (PDF)</a></li>
+            <li><a href="https://github.com/bmachlin/" target="_blank">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/bmachlin/" target="_blank">LinkedIn</a></li>
+        </ul>
     </main>
-    <footer><a href="/about.html">About</a></footer>
 </body>
 <script src="nav.js"></script>
 

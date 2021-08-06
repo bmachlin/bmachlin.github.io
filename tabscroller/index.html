@@ -8,11 +8,13 @@
         <link rel="stylesheet" href="index.css" media="screen" charset="utf-8">
     </head>
     <body onload="setup()">
+        <nav><a href="/index.html" class="home">&lt--Ben Machlin</a></nav>
+        
         <h2>Tab Scroller</h2>
         <p style="margin: 10px 0;">
             Use the format #[MM:SS pp t] to identify a timestamp (position and/or type optional). Time 00:00 not allowed<br>
             p = position [##] => % of screen height to scroll to at this time. 99 means bottom, 00 means top, default is 50<br>
-            t = type [s|n] => Scroll (default), or sNap to this pos at this time
+            t = type [s|n] => Scroll (default), or sNap to this pos at this time. It's prettttty buggy so try not to confuse it to much :P
         </p>
         <br>
         <p>TODO: simple way to save tabs+youtube links for easy retrieval</p>

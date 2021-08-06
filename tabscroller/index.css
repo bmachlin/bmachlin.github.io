@@ -3,9 +3,20 @@
     font-family: monospace;
 }
 
+body {
+    background: #eceae7;
+    color: #333;
+}
+
 p, pre {
     padding: 0;
     margin: 0;
+}
+
+#tabText {
+    background-color: #f7f5f3;
+    color: #333;
+    min-width: 1px;
 }
 
 .controls {

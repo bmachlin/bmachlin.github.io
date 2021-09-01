@@ -166,7 +166,7 @@ class Cell {
 }
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(400, 400);
   frameRate(fps);
 
   // create cells

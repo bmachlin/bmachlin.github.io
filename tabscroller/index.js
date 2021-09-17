@@ -18,7 +18,6 @@ Cool stuff:
 
 // defaults
 let defaultSeekTime = 5;
-let defaultDarkTheme = false;
 let defaultSkipBackBuffer = 1.0;
 
 // globals
@@ -34,7 +33,6 @@ let Player;                 // the YT player object
 let seekTime = 5;           // time to seek forward or back when pressing seek keys
 let skipBackBuffer = 1;     // buffer time to after a marker's time has passed 
                             //      to skip to the marker behind it when skipping back
-let darkTheme = false;      // using dark theme
 
 function setup() {
     loadSettings();
@@ -68,75 +66,17 @@ function loadSettings() {
         skipBackBuffer = defaultSkipBackBuffer;
     }
     document.getElementById("skipBackInput").value = skipBackBuffer;
-    
-    darkTheme = localStorage.getItem('darkTheme') === "true";
-    if (!darkTheme) {
-        darkTheme = defaultDarkTheme;
-    }
-    document.getElementById("themeSelection").innerHTML = darkTheme;
-    if ((isDark() && darkTheme == false)
-        || (!isDark() && darkTheme == true))
-        toggleTheme();
 }
 
-function saveSettings(st=null, sbb=null, dt=null) {
+function saveSettings(st=null, sbb=null) {
     localStorage.setItem('seekTime', st ?? document.getElementById("seekInput").value);
     localStorage.setItem('skipBackBuffer', sbb ?? document.getElementById("skipBackInput").value);
-    localStorage.setItem('darkTheme', dt ?? isDark());
     loadSettings();
-    console.log("saved settings", (st ?? seekTime), (sbb ?? skipBackBuffer), (dt ?? darkTheme));
+    console.log("saved settings", (st ?? seekTime), (sbb ?? skipBackBuffer));
 }
 
 function defaultSettings() {
-    saveSettings(defaultSeekTime, defaultSkipBackBuffer, defaultDarkTheme);
-}
-
-// #endregion
-
-// #region theme toggling
-
-// since light is default, change these along with values in index.css
-let lightBodyBackground = "#eceae7";
-let lightBodyColor = "#333";
-let lightTextAreaBackgroundColor = "#f7f5f3";
-let lightTextAreaColor = "#333";
-
-let darkBodyBackground = "#333";
-let darkBodyColor = "#eee";
-let darkTextAreaBackgroundColor = "#444";
-let darkTextAreaColor = "#eee";
-
-function isDark() {
-    let textArea = document.querySelector("#tabText");
-    return window.getComputedStyle(textArea).minWidth != "1px";
-}
-
-function toggleTheme() {
-    let body = document.querySelector("body");
-    let textArea = document.querySelector("#tabText");
-    // using dummy variable to store light/dark theme value (very hacky, i know)
-    console.log(window.getComputedStyle(textArea).minWidth, isDark());
-
-    if (isDark()) {
-        // change to light
-        body.style.background = lightBodyBackground;
-        body.style.color = lightBodyColor;
-        textArea.style.background = lightTextAreaBackgroundColor;
-        textArea.style.color = lightTextAreaColor;
-        textArea.style.minWidth = "1px"
-        console.log("Theme set to light");
-    }
-    else {
-        // change to dark
-        body.style.background = darkBodyBackground;
-        body.style.color = darkBodyColor;
-        textArea.style.background = darkTextAreaBackgroundColor;
-        textArea.style.color = darkTextAreaColor;
-        textArea.style.minWidth = "0px"
-        console.log("Theme set to dark");
-    }
-
-    document.getElementById("themeSelection").innerHTML = isDark();
+    saveSettings(defaultSeekTime, defaultSkipBackBuffer);
 }
 
 // #endregion

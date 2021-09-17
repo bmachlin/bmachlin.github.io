@@ -53,8 +53,3 @@ nav {
 .home:hover {
     background-color: #444;
 }
-
-/* Responsiveness */
-@media screen and (max-width: 600px) {
-    
-}

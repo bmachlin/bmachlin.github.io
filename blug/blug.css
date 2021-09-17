@@ -12,12 +12,3 @@ p {
     margin: 0.5em 0em;
     padding: 0em 1em;
 }
-
-blockquote {
-    display: inline-block;
-    font-family: 'Courier New', Courier, monospace;
-    color: #222222;
-    background: lightgrey;
-    padding: 1em 2em;
-    margin: 0.5em 5em;
-}

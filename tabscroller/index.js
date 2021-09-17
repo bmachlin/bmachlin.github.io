@@ -20,6 +20,14 @@ Cool stuff:
 let defaultSeekTime = 5;
 let defaultSkipBackBuffer = 1.0;
 
+// default ytPlayer state values
+let ytUNSTARTED = -1;
+let ytENDED = 0;
+let ytPLAYING = 1;
+let ytPAUSED = 2;
+let ytBUFFERING = 3;
+let ytCUED = 5;
+
 // globals
 let running = false;        // master play/pause status
 let runtime = 0;            // master time
@@ -33,19 +41,20 @@ let Player;                 // the YT player object
 let seekTime = 5;           // time to seek forward or back when pressing seek keys
 let skipBackBuffer = 1;     // buffer time to after a marker's time has passed 
                             //      to skip to the marker behind it when skipping back
+let storage = new Storage();
 
 function setup() {
     loadSettings();
 
     // populate fields from last use
-    if (localStorage.getItem('tabText') != null) {
+    if (storage.getItem('tabText') != null) {
         let textArea = document.getElementById('tabText');
-        textArea.value = localStorage.getItem('tabText');
+        textArea.value = storage.getItem('tabText');
         // processTab();
     }
-    if (localStorage.getItem('playerId') != null) {
+    if (storage.getItem('playerId') != null) {
         let playerInput = document.getElementById('playerId');
-        playerInput.value = localStorage.getItem('playerId');
+        playerInput.value = storage.getItem('playerId');
         createPlayer();
     }
 
@@ -55,13 +64,13 @@ function setup() {
 
 function loadSettings() {
     console.log("load settings");
-    seekTime = parseInt(localStorage.getItem('seekTime'));
+    seekTime = parseInt(storage.getItem('seekTime'));
     if (!seekTime) {
         seekTime = defaultSeekTime;
     }
     document.getElementById("seekInput").value = seekTime;
 
-    skipBackBuffer = parseFloat(localStorage.getItem('skipBackBuffer'));
+    skipBackBuffer = parseFloat(storage.getItem('skipBackBuffer'));
     if (!skipBackBuffer) {
         skipBackBuffer = defaultSkipBackBuffer;
     }
@@ -69,8 +78,8 @@ function loadSettings() {
 }
 
 function saveSettings(st=null, sbb=null) {
-    localStorage.setItem('seekTime', st ?? document.getElementById("seekInput").value);
-    localStorage.setItem('skipBackBuffer', sbb ?? document.getElementById("skipBackInput").value);
+    storage.setItem('seekTime', st ?? document.getElementById("seekInput").value);
+    storage.setItem('skipBackBuffer', sbb ?? document.getElementById("skipBackInput").value);
     loadSettings();
     console.log("saved settings", (st ?? seekTime), (sbb ?? skipBackBuffer));
 }
@@ -107,7 +116,7 @@ function loadPlayer() {
 
     // set player id and store value
     let id = document.getElementById('playerId').value;
-    localStorage.setItem('playerId', id);
+    storage.setItem('playerId', id);
     Player.cueVideoById(id);
 
     usingPlayer = true;
@@ -136,31 +145,37 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
+    ytPLAYING = YT.PlayerState.PLAYING;
+    ytPAUSED = YT.PlayerState.PAUSED;
+    ytBUFFERING = YT.PlayerState.BUFFERING;
+    ytENDED = YT.PlayerState.ENDED;
+    ytUNSTARTED = YT.PlayerState.UNSTARTED;
+    ytCUED = YT.PlayerState.CUED;
     usingPlayer = true;
     loadPlayer();
 }
 
 function onPlayerStateChange(event) {
     switch(event.data) {
-        case YT.PlayerState.PLAYING:
+        case ytPLAYING:
             // console.log("Player state change: PLAYING", event.data);
             play();
             break;
-        case YT.PlayerState.PAUSED:
+        case ytPAUSED:
             // console.log("Player state change: PAUSED", event.data);
             pause();
             break;
-        case YT.PlayerState.BUFFERING:
+        case ytBUFFERING:
             // console.log("Player state change: BUFFERING", event.data);
             // pause();
             break;
-        case YT.PlayerState.ENDED:
+        case ytENDED:
             // console.log("Player state change: ENDED", event.data);
             break;
-        case YT.PlayerState.UNSTARTED:
+        case ytUNSTARTED:
             // console.log("Player state change: UNSTARTED", event.data);
             break;
-        case YT.PlayerState.CUED:
+        case ytCUED:
             // console.log("Player state change: CUED", event.data);
             break;
         default:
@@ -179,29 +194,31 @@ function onPlayerError(event) {
 // #region tab processing
 
 function clearData() {
-    localStorage.removeItem('tabText');
-    localStorage.removeItem('playerId');
+    storage.removeItem('tabText');
+    storage.removeItem('playerId');
     location.reload();
 }
 
 function loadExample1() {
-    localStorage.setItem('tabText', BLACKBIRD_TAB);
-    localStorage.setItem('playerId', BLACKBIRD_VIDEO);
-    location.reload();
+    storage.setItem('tabText', BLACKBIRD_TAB);
+    storage.setItem('playerId', BLACKBIRD_VIDEO);
+    setup();
 }
 
 function loadExample2() {
-    localStorage.setItem('tabText', DOLLAR_TAB);
-    localStorage.setItem('playerId', DOLLAR_VIDEO);
-    location.reload();
+    storage.setItem('tabText', DOLLAR_TAB);
+    storage.setItem('playerId', DOLLAR_VIDEO);
+    setup();
 }
 
 // parse markers and display tab
 function processTab() {
     let tabText = document.getElementById('tabText').value;
-    localStorage.setItem('tabText', tabText);
+    storage.setItem('tabText', tabText);
     extractMarkersFromTab(tabText);
     displayTab(tabText);
+    resetTimer();
+    document.body.focus();
 }
 
 function extractMarkersFromTab(tab, options) {
@@ -215,7 +232,7 @@ function extractMarkersFromTab(tab, options) {
     // set starting timestamp to snap to top of tab
     markers.unshift(new Marker(0, 0, 'snap', 0));
     // set ending timestamp so that it scrolls to the end after the last stamp
-    markers.push(new Marker(Player ? Player.getDuration() : Infinity, 1, 'scroll', lines.length));
+    markers.push(new Marker(Infinity, 1, 'scroll', lines.length));
     
     markers.sort((a,b) => a.time - b.time);
 }
@@ -261,6 +278,9 @@ function markerStringToObject(markerString, options) {
             // scroll type was listed first
             scrollType = markerString.charAt(8) == 'n' ? 'snap' : 'scroll'
             position = parseInt(markerString.substr(10,2))/100;
+        } else {
+            scrollType = markerString.charAt(11) == 'n' ? 'snap' : 'scroll'
+            position = parseInt(markerString.substr(8,2))/100;
         }
     }
 
@@ -303,7 +323,7 @@ function play() {
         Timer = setInterval(run, interval);
     }
 
-    if (usingPlayer && Player.getPlayerState() != YT.PlayerState.PLAYING) {
+    if (usingPlayer && Player.getPlayerState() != ytPLAYING) {
         Player.playVideo();
     }
 }
@@ -313,7 +333,7 @@ function pause() {
     running = false;
     clearInterval(Timer);
 
-    if (usingPlayer && Player.getPlayerState() != YT.PlayerState.PAUSED) {
+    if (usingPlayer && Player.getPlayerState() != ytPAUSED) {
         Player.pauseVideo();
     }
 }
@@ -321,8 +341,8 @@ function pause() {
 // one cycle
 function run() {
     if (running && usingPlayer 
-        && (Player.getPlayerState() == YT.PlayerState.PAUSED 
-            || Player.getPlayerState() == YT.PlayerState.UNSTARTED)) {
+        && (Player.getPlayerState() == ytPAUSED 
+            || Player.getPlayerState() == ytUNSTARTED)) {
         pause();
     }
 
@@ -345,7 +365,7 @@ function run() {
     if (nextMarkerIndex == markers.length - 1) {
         if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
             // if we're on the last marker and at the bottom of the page
-            if (!usingPlayer || Player.getPlayerState() == YT.PlayerState.ENDED) {
+            if (!usingPlayer || Player.getPlayerState() == ytENDED) {
                 console.log("paused because end was reached")
                 pause();
             }
@@ -408,18 +428,16 @@ function setTimer(time, snap=false) {
 
     setMarkerIndex();
 
-    if (snap)
-        snapToMarker(markers[nextMarkerIndex-1]);
+    if (snap) {
+        scrollTowards(nextMarkerIndex-1, true);
+    }
     
-    if (usingPlayer) {
+    if (usingPlayer && ![ytUNSTARTED, ytCUED].includes(Player.getPlayerState())) {
         Player.seekTo(runtime, true);
     }
 
-    // snap to appropriate previous timestamp
-    scrollTowards(nextMarkerIndex-1, true);
     activateMarkers();
     updateTimerDisplay();
-
 }
 
 function setMarkerIndex() {
@@ -479,9 +497,9 @@ function scrollTowards(markerIndex, snap=false) {
 
     // snap to the timestamp if the flag is set
     // or it's close enough to its time and it's a snap type stamp
-    if (snap || (marker.time - runtime < interval/1000 && marker.scrollType == 'snap')) {
+    if (snap || (marker.time - runtime <= (interval+1)/1000 && marker.scroll == 'snap')) {
         window.scrollBy(0, scrollDiff);
-    } else if (marker.scrollType != 'snap') {
+    } else if (marker.scroll != 'snap') {
         window.scrollBy(0, scrollAmount);
     } // else do nothing
 }
@@ -563,53 +581,3 @@ document.addEventListener("keydown", (event) => {
 }, false);
 
 // #endregion
-
-class Marker {
-    // time = seconds into song to activate marker
-    // position = vertical position marker should be when activated
-    // line = line number
-    // scroll = type of scroll to get to marker
-    // artificial = is this marker hidden/created for control purposes e.g. start/end
-    constructor(time, position, scroll, line=-1) {
-        this.time = Math.round(time);
-        this.minutes = Math.floor(time/60);
-        this.seconds = Math.floor(time%60);
-        this.position = position;
-        this.scroll = scroll;
-        this.inactiveColor = "black";
-        this.activeColor = "red";
-        this.activated = false;
-        this.line = line;
-        if (line != -1)
-            this.setLine(line);
-    }
-
-    setLine(line) {
-        this.line = line;
-        this.artificial = line < 1 || line > document.getElementById('tabText').value.split("\n").length;
-    }
-
-    shouldActivate(t) {
-        return t >= this.time;
-    }
-
-    activate() {
-        if (!this.activated) {
-            this.setColor(this.activeColor);
-            this.activated = true;
-        }
-    }
-
-    deactivate() {
-        if (this.activated) {
-            this.setColor(this.inactiveColor);
-            this.activated = false;
-        }
-    }
-
-    setColor(color) {
-        if (!this.artificial) {
-            document.getElementById("tab-display").children[this.line].setAttribute("style", `color: ${color}`);
-        }
-    }
-}

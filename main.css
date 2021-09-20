@@ -55,7 +55,7 @@ nav {
 }
 
 blockquote {
-    display: inline-block;
+    display: block;
     font-family: 'Courier New', Courier, monospace;
     color: #222222;
     background: lightgrey;

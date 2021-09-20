@@ -2,7 +2,7 @@
 
 /*
 Key controls: 
-    -left/right go back/forward a few seconds (with configurable offet)
+    -left/right go back/forward X seconds - configurable
     -up/down to go between markers
     -space to pause/resume
     -1234567890 to go to nth marker
@@ -50,7 +50,7 @@ function setup() {
     if (storage.getItem('tabText') != null) {
         let textArea = document.getElementById('tabText');
         textArea.value = storage.getItem('tabText');
-        // processTab();
+        processTab();
     }
     if (storage.getItem('playerId') != null) {
         let playerInput = document.getElementById('playerId');
@@ -58,6 +58,10 @@ function setup() {
         createPlayer();
     }
 
+}
+
+function submitted() {
+    return document.getElementById("tab-display").childElementCount > 0;
 }
 
 // #region settings
@@ -317,6 +321,7 @@ function playpause() {
 }
 
 function play() {
+    if (!submitted()) return;
     console.log("PLAY");
     if (!running) {
         running = true;
@@ -326,9 +331,15 @@ function play() {
     if (usingPlayer && Player.getPlayerState() != ytPLAYING) {
         Player.playVideo();
     }
+
+    // set focus to body for proper keypress fucntionality
+    // this probably isn't best pracitce
+    if (document.activeElement != document.body)
+        document.body.focus();
 }
 
 function pause() {
+    if (!submitted()) return;
     console.log("PAUSE");
     running = false;
     clearInterval(Timer);
@@ -340,26 +351,24 @@ function pause() {
 
 // one cycle
 function run() {
+    // check that we should be running
     if (running && usingPlayer 
         && (Player.getPlayerState() == ytPAUSED 
             || Player.getPlayerState() == ytUNSTARTED)) {
         pause();
     }
 
-    scrollTowards(nextMarkerIndex);
-
-    if (usingPlayer) {
-        newruntime = Player.getCurrentTime();
-    } else {
-        newruntime = runtime + interval/1000;
-    }
-    if (Math.abs(runtime - newruntime) > interval/1000*2) {
-        setMarkerIndex();
-        activateMarkers(newruntime);
-    }
+    let newruntime = usingPlayer ? Player.getCurrentTime() : runtime + interval/1000;
+    let rtDiff = Math.abs(runtime - newruntime);
     runtime = parseFloat(newruntime.toFixed(3));
+    // if a large skip in runtime, reset marker state
+    if (rtDiff > interval/1000*2) {
+        setMarkerIndex();
+        activateMarkers();
+    }
 
     updateTimerDisplay();
+    scrollTowards(nextMarkerIndex);
 
     // check to move on to next stamp 
     if (nextMarkerIndex == markers.length - 1) {
@@ -385,36 +394,30 @@ function updateTimerDisplay() {
     document.getElementById('timer').innerHTML = `${runmins}:${runsecs}`;
 }
 
-function activateMarkers(t=-1) {
-    // act=[];
-    // dact=[];
+function activateMarkers() {
     for (let marker of markers) {
-        if (marker.shouldActivate(t < 0 ? runtime : t)) {
-            // act.push(marker.line);
+        if (marker.shouldActivate(runtime)) {
             marker.activate();
         } else {
-            // dact.push(marker.line);
             marker.deactivate();
         }
     }
-    // console.log("Activate", act)
-    // console.log("Decativate", dact);
-}
-
-function resetTimer() {
-    console.log("RESET");
-    setTimer(0, true);
 }
 
 function userSetTimer() {
     let timeText = document.getElementById("setTime").value;
-    console.log("SET to: " + timeText);
+    console.log("user SET to: " + timeText);
     let timeMatch = (timeText.match(/^\d\d:\d\d$/g) || []).length;
     if (timeMatch != 1) {
         alert('Invalid format. Must use: MM:SS');
         return;
     }
     setTimer(parseInt(timeText.substr(0,2))*60 + parseInt(timeText.substr(3,2)));
+}
+
+function resetTimer() {
+    console.log("RESET");
+    setTimer(0, true);
 }
 
 function setTimer(time, snap=false) {
@@ -441,7 +444,9 @@ function setTimer(time, snap=false) {
 }
 
 function setMarkerIndex() {
-    // find new next timestamp
+    // find next timestamp
+    if (runtime == 0)
+        return 0;
     for (let i = 0; i < markers.length; i++) {
         if (runtime < markers[i].time) {
             nextMarkerIndex = i;
@@ -519,7 +524,7 @@ function setSeekTime() {
 document.addEventListener("keydown", (event) => {
     // var keyName = event.key; // "c", " ", "Meta"
     // var keyCode = event.code; // "KeyC", "Space", "MetaRight"
-    console.log(`Keyup key=${event.key} code=${event.code}`);
+    // console.log(`Keyup key=${event.key} code=${event.code}`);
 
     if (document.activeElement != document.body) {
         // don't intercept keys unless we're focused on the body

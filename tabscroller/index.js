@@ -41,18 +41,20 @@ let Player;                 // the YT player object
 let seekTime = 5;           // time to seek forward or back when pressing seek keys
 let skipBackBuffer = 1;     // buffer time to after a marker's time has passed 
                             //      to skip to the marker behind it when skipping back
-let storage = new Storage();
+let storage;
 
 function setup() {
+    storage = new Storage();
+    
     loadSettings();
 
     // populate fields from last use
-    if (storage.getItem('tabText') != null) {
+    if (storage.getItem('tabText')) {
         let textArea = document.getElementById('tabText');
         textArea.value = storage.getItem('tabText');
         processTab();
     }
-    if (storage.getItem('playerId') != null) {
+    if (storage.getItem('playerId'))  {
         let playerInput = document.getElementById('playerId');
         playerInput.value = storage.getItem('playerId');
         createPlayer();
@@ -67,7 +69,6 @@ function submitted() {
 // #region settings
 
 function loadSettings() {
-    console.log("load settings");
     seekTime = parseInt(storage.getItem('seekTime'));
     if (!seekTime) {
         seekTime = defaultSeekTime;
@@ -84,12 +85,20 @@ function loadSettings() {
 function saveSettings(st=null, sbb=null) {
     storage.setItem('seekTime', st ?? document.getElementById("seekInput").value);
     storage.setItem('skipBackBuffer', sbb ?? document.getElementById("skipBackInput").value);
-    loadSettings();
     console.log("saved settings", (st ?? seekTime), (sbb ?? skipBackBuffer));
+    loadSettings();
 }
 
 function defaultSettings() {
     saveSettings(defaultSeekTime, defaultSkipBackBuffer);
+}
+
+function setSeekTime() {
+    let seekInput = parseInt(document.getElementById("seekInput").value);
+    if (!isNaN(seekInput)) {
+        console.log("Set seekTime to", seekInput);
+        seekTime = seekInput;
+    }
 }
 
 // #endregion
@@ -221,7 +230,8 @@ function processTab() {
     storage.setItem('tabText', tabText);
     extractMarkersFromTab(tabText);
     displayTab(tabText);
-    resetTimer();
+    if (nextMarkerIndex != 0 || runtime != 0)
+        resetTimer();
     document.body.focus();
 }
 
@@ -274,16 +284,16 @@ function markerStringToObject(markerString, options) {
     let scrollType = 'scroll'; // default scroll type
     let position = 0.5; // default position
     if (markerString.length == 10) {
-        scrollType = markerString.charAt(8) == 'n' ? 'snap' : 'scroll'
+        scrollType = markerString.charAt(8).toLowerCase() == 'n' ? 'snap' : 'scroll'
     } else if (markerString.length == 11) {
         position = parseInt(markerString.substr(8,2))/100;
     } else if (markerString.length == 13) {
         if (isNaN(parseInt(markerString.substr(8,2)))) {
             // scroll type was listed first
-            scrollType = markerString.charAt(8) == 'n' ? 'snap' : 'scroll'
+            scrollType = markerString.charAt(8).toLowerCase() == 'n' ? 'snap' : 'scroll'
             position = parseInt(markerString.substr(10,2))/100;
         } else {
-            scrollType = markerString.charAt(11) == 'n' ? 'snap' : 'scroll'
+            scrollType = markerString.charAt(11).toLowerCase() == 'n' ? 'snap' : 'scroll'
             position = parseInt(markerString.substr(8,2))/100;
         }
     }
@@ -391,7 +401,10 @@ function updateTimerDisplay() {
     // add '0' padding
     runmins = runmins < 10 ? '0' + runmins : runmins;
     runsecs = runsecs < 10 ? '0' + runsecs : runsecs;
-    document.getElementById('timer').innerHTML = `${runmins}:${runsecs}`;
+
+    let runstring = runtime == Infinity ? "Infinity" : `${runmins}:${runsecs}`;
+
+    document.getElementById('timer').innerHTML = runstring;
 }
 
 function activateMarkers() {
@@ -468,7 +481,7 @@ function snapToMarker(marker) {
 // increment scroll the page towards the line at timestamps[stampIndex]
 // using the distance and time until that timestamp is hit to determine the rate
 function scrollTowards(markerIndex, snap=false) {
-    // console.log('SCROLL to ' + markerIndex);
+    console.log('SCROLL to ' + markerIndex);
     if (markerIndex < 0 || markerIndex >= markers.length) {
         console.log(markerIndex + " not valid");
         return;
@@ -479,7 +492,7 @@ function scrollTowards(markerIndex, snap=false) {
     let target = window.innerHeight * marker.position;
 
     let scrollAmount = 0;
-    let timeDiff = Math.max(marker.time - runtime, 1);
+    let timeDiff = Math.max(marker.time - runtime, 0);
     let scrollDiff = line ? line.getBoundingClientRect().y - target : null;
 
     if (marker.time != Infinity && scrollDiff != null) {
@@ -513,18 +526,10 @@ function scrollTowards(markerIndex, snap=false) {
 
 // #region keyboard controls
 
-function setSeekTime() {
-    let seekInput = parseInt(document.getElementById("seekInput").value);
-    if (!isNaN(seekInput)) {
-        console.log("Set seekTime to", seekInput);
-        seekTime = seekInput;
-    }
-}
-
 document.addEventListener("keydown", (event) => {
-    // var keyName = event.key; // "c", " ", "Meta"
-    // var keyCode = event.code; // "KeyC", "Space", "MetaRight"
-    // console.log(`Keyup key=${event.key} code=${event.code}`);
+    // event.key is "c", " ", "Meta"
+    // event.code is "KeyC", "Space", "MetaRight"
+    // console.log(`Keydown key=${event.key} code=${event.code}`);
 
     if (document.activeElement != document.body) {
         // don't intercept keys unless we're focused on the body
@@ -532,39 +537,44 @@ document.addEventListener("keydown", (event) => {
     }
 
     switch (event.code) {
+        // toggle control help visiblity
         case "Period":
-            console.log("toggled control help hidden")
             document.getElementById("controlHelp").hidden = 
                 !document.getElementById("controlHelp").hidden;
             break;
+        // restart
         case "KeyR":
             resetTimer();
             break;
+        // skip back seekTime
         case "ArrowLeft":
             event.preventDefault();
             setTimer(runtime-seekTime);
             break;
+        // skip ahead seekTime
         case "ArrowRight":
             event.preventDefault();
             setTimer(runtime+seekTime);
             break;
+        // skip to previous marker
         case "ArrowUp":
             event.preventDefault();
             prevMarkerIndex = Math.max(0, nextMarkerIndex-1);
+            // skip another if we're just (< skipBackBuffer) past a marker
             if (runtime - markers[prevMarkerIndex].time < skipBackBuffer) {
-                // skip another if we're just past a marker
                 prevMarkerIndex = Math.max(0, nextMarkerIndex-2);
             }
             setTimer(markers[prevMarkerIndex].time, true);
             break;
+        // skip to next marker
         case "ArrowDown":
             event.preventDefault();
             console.log("-------",markers[nextMarkerIndex].time);
             setTimer(markers[nextMarkerIndex].time, true);
             break;
+        // toggle play/pause
         case "Space":
             event.preventDefault();
-            prevMarkerIndex = Math.max(0, nextMarkerIndex-1);
             playpause();
             break;
         case "Digit0":

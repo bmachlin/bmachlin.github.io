@@ -12,10 +12,14 @@
         
         <h2>Tab Scroller</h2>
         <p style="margin: 10px 0;">
-            Use the format #[MM:SS pp t] to identify a timestamp (position and/or type optional). Time 00:00 not allowed<br>
+            Add Markers to you tab to define the scroll behavior.<br>
+            Use the format "#[MM:SS pp t]" where pp = position and t = scroll type (both optional). Time 00:00 is reserved.<br>
             p = position [##] => % of screen height to scroll to at this time. 99 means bottom, 00 means top, default is 50<br>
             t = type [s|n] => <span style="text-decoration: underline;">S</span>croll (default) to smooth scroll from the previous marker to this one, 
-                            or s<span style="text-decoration: underline;">N</span>ap to this pos at this time.
+                            or s<span style="text-decoration: underline;">N</span>ap to this pos at this time.<br>
+            "#[02:00 50 s]" means "Smoothly scroll the page so that this line is 50% from the top of the screen at 2 minutes."<br>
+            "#[02:00]" means the same thing.<br>
+            "#[02:00 25 n]" means "At 2 minutes, snap the screen so that this line is 25% from the top of the screen."<br>
         </p>
         <br>
         <p>TODO:</p>
@@ -24,7 +28,6 @@
             <li>search + scrape for tabs and yt</li>
             <li>add interactivity for adding/editing markers</li>
             <li>fix all the weird scrolling bugs lol</li>
-            <li>clean up JS</li>
         </ul>
         <br>
         <div id="tabBox">

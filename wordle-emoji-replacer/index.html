@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Wordle Emoji Replacer</title>
+        <link rel="shortcut icon" href="../res/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="index.css" media="screen" charset="utf-8">
+    </head>
+    <body tabindex="0">
+        <h2>Wordle Emoji Replacer</h2>
+        <p style="margin: 10px auto;">
+            Paste your results into the box below and select desired emojis
+        </p>
+        <button class="center" onclick="paste()">Paste</button>
+        <br>
+        <textarea id="in" rows=12 cols=15 style="display: block; margin: auto;"></textarea>
+        <table style="margin: auto; border-spacing: 5px;">
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>???</th>
+            </tr>
+            <tr>
+                <td>⬛/⬜</td>
+                <td><input id="row1" size=2 value="🍑"></td>
+                <td><button onclick="randomEmoji(1)" class="emoji-button">⚄</button></td>
+            </tr>
+            <tr>
+                <td>&nbsp;🟨</td>
+                <td><input id="row2" size=2 value="🌽"></td>
+                <td><button onclick="randomEmoji(2)" class="emoji-button">⚄</button></td>
+            </tr>
+            <tr>
+                <td>&nbsp;🟩</td>
+                <td><input id="row3" size=2 value="🍆"></td>
+                <td><button onclick="randomEmoji(3)" class="emoji-button">⚄</button></td>
+            </tr>
+        </table>
+        <br>
+        <button class="center" onclick="go()">GO!</button>
+        <br>
+        <textarea id="out" rows=12 cols=15 style="display: block; margin: auto;"></textarea>
+        <br>
+        <button class="center" onclick="copy()">Copy</button>
+        <br>
+        <p id="copyMessage" style="display: none;">Copied!</p>
+    </body>
+    <script type="text/javascript" src="index.js"></script>
+</html>

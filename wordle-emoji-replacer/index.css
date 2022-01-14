@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+body {
+    background: #eceae7;
+    color: #333;
+}
+
+p, pre {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+h2 {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+button.center {
+    display: block; 
+    margin: auto;
+}
+
+.tooltip:not(.shown) {
+    display: none;
+}

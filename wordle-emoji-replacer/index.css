@@ -26,6 +26,6 @@ button.center {
     margin: auto;
 }
 
-.tooltip:not(.shown) {
-    display: none;
+.replace-box {
+    font-size: 15px;
 }

@@ -6,6 +6,7 @@ function outArea() {
     return document.getElementById("out");
 }
 
+// paste clipboard contents to input textarea
 function paste() {
     document.getElementById("copyMessage").setAttribute("style", "display: none;")
 
@@ -31,26 +32,40 @@ function insertIn(text) {
 }
 
 function go() {
+    // collect inputs
     let input = inArea().value;
     let r1 = document.getElementById("row1").value;
     let r2 = document.getElementById("row2").value;
     let r3 = document.getElementById("row3").value;
-    let in1a = '⬛';
-    let in1b = '⬜';
+
+    // detect black or white squares
+    let in1 = '⬛';
+    if (input.includes('⬜')) in1 = '⬜';
     let in2 = '🟨';
     let in3 = '🟩';
-    input = input.replaceAll(in1a, r1);
-    input = input.replaceAll(in1b, r1);
-    input = input.replaceAll(in2, r2);
+    
+    // make sure temp variables are not in the input string
+    let temp1 = "!QAZ";
+    let temp2 = "@WSX";
+    while (input.includes(temp1))
+        temp1 += '!'
+    while (input.includes(temp2))
+        temp2 += '!'
+
+    input = input.replaceAll(in1, temp1);
+    input = input.replaceAll(in2, temp2);
     input = input.replaceAll(in3, r3);
+    input = input.replaceAll(temp1, r1);
+    input = input.replaceAll(temp2, r2);
+
     outArea().value = input;
 }
 
+// copy output textarea content to clipboard
 function copy() {
     navigator.clipboard.writeText(outArea().value);
     document.getElementById("copyMessage").setAttribute("style", "display: block; text-align: center;")
 }
-
 
 
 function setRandomEmoji(rowNum) {
@@ -120,17 +135,17 @@ function getRandomEmoji () {
     return emojis[~~(Math.random() * emojis.length)]
 }
 
+// event listeners to clear the input boxes when they are selected
 document.getElementById("row1").addEventListener('focus', (event) => {
     event.target.value = ""
 });
-
 document.getElementById("row2").addEventListener('focus', (event) => {
     event.target.value = ""
 });
-
 document.getElementById("row3").addEventListener('focus', (event) => {
     event.target.value = ""
 });
 
+// clear input and output every page load
 inArea().value = "";
 outArea().value = "";

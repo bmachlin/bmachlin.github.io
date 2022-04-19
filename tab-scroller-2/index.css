@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+    font-family: monospace;
+    font-size: 1em;
+}
+
+body {
+    background: #eceae7;
+    color: #333;
+}
+
+p, pre {
+    padding: 0;
+    margin: 0;
+}
+
+/* HEADING */
+
+#heading {
+    border: 2px solid #333;
+    padding: 20px;
+}
+
+#tabBox {
+    padding: 10px;
+    border: 2px solid #111;
+    width: fit-content;
+}
+
+#tabText {
+    background-color: #f7f5f3;
+    color: #333;
+    min-width: 1px;
+}
+
+#settings {
+    width: fit-content;
+    padding: 10px;
+    border: 2px solid #111;
+}
+
+#settings h3 {
+    margin: 0px;
+    text-decoration: underline;
+}
+
+/* TAB AREA */
+
+#tab-display {
+    position: absolute;
+    line-height: 1.1em;
+}
+
+#marker-bar {
+    width: 2ch;
+    padding-left: 0.5ch;
+    padding-right: 0.5ch;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #c9c7c4;
+}
+
+.marker:hover {
+    cursor: pointer;
+}
+
+.non-marker:hover {
+    cursor: pointer;
+}
+
+.marker > p {
+    margin: 0;
+    padding: 0;
+}
+
+#marker-editor {
+    width: auto;
+    height: auto;
+    position: absolute;
+    padding: 1ch;
+    z-index: 100;
+    background-color: rgb(185, 210, 238);
+    border: 2px solid #111;
+}
+
+#marker-editor > input[type=number] {
+    width: 5em;
+}
+
+#tab-text {
+    margin-left: 2ch;
+    padding-left: 10px;
+}
+
+/* CONTROLS */
+
+#controls {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    display: inline-block;
+    /* height: 150px; */
+    overflow: hidden;
+}
+
+#controlHelpBox {
+    text-align: right;
+    background: rgba(167, 167, 167, 0.185);
+}
+

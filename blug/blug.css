@@ -1,3 +1,7 @@
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 section {
     background: #c7c7c7;
     padding: 20px;
@@ -8,7 +12,12 @@ section {
 
 p {
     text-align: justify;
-    text-indent: 1.5em;
+    /* text-indent: 1.5em; */
     margin: 0.5em 0em;
     padding: 0em 1em;
+}
+
+img {
+    max-width: 100%;
+    box-shadow: 5px 5px 5px grey;
 }

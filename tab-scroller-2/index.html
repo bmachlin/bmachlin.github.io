@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../../res/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../../main.css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="index.css" media="screen" charset="utf-8">
+        <title>Tab Scroller</title>
+    </head>
+    <body tabindex="0" onload="setup()">
+        <section id="heading">
+            <nav><a href="/index.html" class="home">&lt--Home</a></nav>
+
+            <h2>Tab Scroller</h2>
+            <p style="margin: 10px 0;">
+                Add Markers to your tab to define the scroll behavior.<br>
+                Use can click on the left bar to edit/add/remove markers.
+                Or use the format "#[MM:SS pp t]" where pp = position and t = scroll type (both optional). Time 00:00 is reserved.<br>
+                p = position [##] => % of screen height to scroll to at this time. 99 means bottom, 00 means top, default is 50<br>
+                t = type [s|n] => <span style="text-decoration: underline;">S</span>croll (default) to smooth scroll from the previous marker to this one, 
+                                or s<span style="text-decoration: underline;">N</span>ap to this pos at this time.<br>
+                "#[02:00 50 s]" means "Smoothly scroll the page so that this line is 50% from the top of the screen at 2 minutes."<br>
+                "#[02:00]" means the same thing.<br>
+                "#[02:00 25 n]" means "At 2 minutes, snap the screen so that this line is 25% from the top of the screen."<br>
+            </p>
+            <br>
+            <div id="tabBox">
+                <label><strong>Enter tab:</strong></label>
+                <br>
+                <textarea cols=80 rows=15 id="input-tab"></textarea>
+                <br>
+                <button onclick="processTab()">Submit</button>
+                <br>
+                <br>
+                <label>Optional YouTube ID:</label>
+                <input type="text" id="playerId"/>
+                <button onclick="createPlayer()">Load Video</button>
+                <button onclick="unloadPlayer()">Unload Video</button>
+                <br>
+                <br>
+                <button onclick="clearData()">Clear Saved Tab</button>
+                <button onclick="loadExample1()">Load Example Tab 1</button>
+                <button onclick="loadExample2()">Load Example Tab 2</button>
+            </div>
+            <br>
+            <div id="settings">
+                <h3>Settings</h3>
+                <label>Seek Time (seconds): </label><input type="number" id="seekInput" name="seekTime" min="1" max="100"><br>
+                <label>Skip Back Buffer Time (seconds): </label><input type="number" id="skipBackInput" name="skipBackTime" min="0" max="10" step=".01"><br>
+                <div hidden>
+                <label>Theme: </label>
+                    <input type="radio" id="themeLight" value="light" name="themeInput"><label for="themeLight">Light</label>
+                    <input type="radio" id="themeDark" value="dark" name="themeInput"><label for="themeDark">Dark</label>
+                </div>
+                <br><br>
+                <button id="saveSettingsButton" onclick="saveSettings()">Save Settings</button>
+                <button id="clearSettingsButton" onclick="defaultSettings()">Restore Defaults</button>
+            </div>
+        </section>
+        <button id="toggle-heading" style="width: 100%;" onclick="toggleHeading()">/\</button>
+        <br><br>
+
+        <section id="tab-display">
+            <div id="marker-editor" hidden>
+                <label>Time: </label>
+                <input type="number" id="editorMinutesInput" name="markerMinutes" min="0" max="99">:<input type="number" id="editorSecondsInput" name="markerSeconds" min="0" max="59"><br>
+                <label>Position: </label><input type="number" id="positionInput" name="positionInput" min="0" max="1" step=".01" value="0.50"><br>
+                <label>Scroll style: </label>
+                    <input type="radio" id="scrollSmooth" value="smooth" name="scrollStyle"><label for="scrollSmooth">Smooth</label>
+                    <input type="radio" id="scrollSnap" value="snap" name="scrollStyle"><label for="scrollSnap">Snap</label>
+                <br><br>
+                <button id="saveMarkerButton" onclick="saveMarkerEditor()">Save</button>
+                <button id="removeMarkerButton" onclick="removeMarkerEditor()">Remove</button>
+                <button id="closeMarkerButton" onclick="closeMarkerEditor()">Close</button>
+            </div>
+            <div id="marker-bar">
+                <!-- list of markers -->
+            </div>
+            <div id="tab-text">
+                <!-- list of tab lines -->
+            </div>
+        </section>
+
+        <div id="controls">
+            <div id="controlHelpBox">
+                <div id="controlHelp">
+                    <pre>Space : Play/Pause                </pre>
+                    <pre>Right : Seek backwards            </pre>
+                    <pre> Left : Seek forwards             </pre>
+                    <pre>   Up : Seek to previous marker   </pre>
+                    <pre> Down : Seek to next marker       </pre>
+                    <pre>    R : Restart                   </pre>
+                    <pre>  0-9 : Go to # marker            </pre>
+                </div>
+                    <pre>    . : Show/Hide controls        </pre>
+            </div>
+            <div id="player"></div>
+            <p id="timer">00:00</p>
+            <button id="btn-playpause" onclick="playpause()">Play.</button>
+            <button id="btn-reset" onclick="resetTimer()">Reset</button>
+            <button id="btn-set" onclick="userSetTimer()">Set</button>
+            <input type="text" id="setTime" size=6>
+        </div>
+    </body>
+    <script type="text/javascript" src="../Storage.js"></script>
+    <script type="text/javascript" src="Objects/Context.js"></script>
+    <script type="text/javascript" src="Objects/Settings.js"></script>
+    <script type="text/javascript" src="Objects/MarkerBar.js"></script>
+    <script type="text/javascript" src="Objects/NonMarker.js"></script>
+    <script type="text/javascript" src="Objects/Marker.js"></script>
+    <script type="text/javascript" src="Objects/MarkerEditor.js"></script>
+    <script type="text/javascript" src="Objects/Tab.js"></script>
+    <script type="text/javascript" src="Objects/TabScroller.js"></script>
+    <script type="text/javascript" src="Objects/TabParser.js"></script>
+
+    <script type="text/javascript" src="examples.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</html>

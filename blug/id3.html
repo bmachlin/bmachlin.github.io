@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ID3 - Ben Machlin</title>
+
+    <link rel="shortcut icon" href="../res/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="blug.css">
+    <style>
+        main {
+            max-width: 1200px;
+        }
+        img {
+            margin-top: 10px;;
+            margin-bottom: 10px;;
+        }
+    </style>
+</head>
+
+<body>
+    <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
+
+    <main>
+        <a href="/blug/index.html">&lt-- Blug home</a>
+        <h1>ID3</h1>
+        <h2>Exploring the world of mp3 metadata</h2>
+        <h4>January 30, 2022</h4>
+        <hr>
+        <section id="intro">
+            <a href="#intro"><h3>Introduction</h3></a>
+            <h4>Context</h4>
+            <p>
+                I recently bought a spiffy new computer and decided that <em>this time I'll do things right</em>. 
+                I'll keep my files tidy. I'll understand my Python setup and keep it organized. I'll only install 
+                software that I need and keep it all on a short leash......Yeah you can guess how well it's going haha. 
+                Ok it's not a total failure (yet) but it turns out I don't have the time/desire to keep my computer as 
+                perfect as I'd like it. And unlike an apartment, you can't really hire someone to come around every 
+                so often and do it for you.
+            </p>
+            <p>
+                One task that I'm actually trying to get right it my music library. It's not that it was entirely messy 
+                but there were/are ample inconsistencies and I always figured I ought to put my programming skills to 
+                use here and iron out those issues. Most of them are metadata nitpicks anyway. Why not get a little DIY 
+                with it and chisel my library just to my liking.
+            </p>
+            <h4>Music Metadata</h4>
+            <p>
+                There are many articles on audio formats, and metadata formats, and the history and details of all of them. 
+                Here I'm just going to focus on one audio encoding and it's most popular metadata tagging standard: MP3 and ID3.
+                <a href="http://www.mp3developments.com/article8.php" target="_blank" rel="noopener">This short article provides a great intro.</a>
+                Basically, after they made MP3, someone thought it'd be nifty to tack on a little metadata (e.g. artist, album, year) 
+                to the end of the files. This was ID3v1. But it was a static block of 128 bytes and there was a ton more 
+                metadata music and tech nerds wanted to associate with each MP3. Thus the ID3v2 standard was created and  
+                allowed for a lot more flexibility and extensibility. That was back in the 1990s/early 2000s. Now, 20-something 
+                years later, in a 7th or 8th effort to organize my music library, I'm learning the nuance of ID3.
+            </p>
+        </section>
+        <section id="id3v2-basics">
+            <a href="#id3v2-basics"><h3>ID3v2 Basics</h3></a>
+            <p>
+                Reference material:
+            </p>
+            <ul>
+                <li><a href="https://id3.org/id3v2.3.0" target="_blank" rel="noopener">ID3v2.3 Spec</a></li>
+                <li><a href="https://id3.org/id3v2.4.0-structure" target="_blank" rel="noopener">ID3v2.4 Spec</a></li>
+            </ul>
+            <p>
+                After doing some research online and looking at my existing ~20k file library, I've determined that ID3v2 is 
+                the de facto MP3 tagging standard, and further, version 2.3 is a bit more ubiquitous than 2.4. Most other 
+                versions of ID3 and other tagging standards are less common and I will ignore for my purposes. 2.3 and 2.4 
+                aren't all too different, but differ enough that support for 2.4 isn't a given. I'll focus on 2.3 here, though 
+                I expect 2.4 might sneak in here and there.
+            </p>
+            <p>
+                The basic structure of an ID3v2.3 tag is this:
+            </p>
+            <ol style="font-family: monospace;">
+                <li>
+                    Header
+                    <ul>
+                        <li>The tag is usually at the beginning of the MP3 file and starts with the bytes "ID3"</li>
+                        <li>Two bytes for the version</li>
+                        <ul><li>2.3 is represented as "03 00"</li></ul>
+                        <li>One byte for flags</li>
+                        <li>Four bites for the total size of the tag, not including this header</li>
+                    </ul>
+                </li>
+                <li>
+                    Body
+                    <ul>
+                        <li>Series of frames, each with a frame header and frame data</li>
+                        <li>Padding</li>
+                        <ul><li>Padding is included so that if more tag data is added, it's less 
+                            likely that the file needs to be resized - which is time consuming and 
+                            tag editting is often done in bulk
+                        </li></ul>
+                    </ul>
+                </li>
+            </ol>
+            <p>
+                Frames are made up of a short header and a data body:
+            </p>
+            <ol style="font-family: monospace;">
+                <li>
+                    Header
+                    <ul>
+                        <li>Four bytes/characters for frame ID, e.g. TALB, APIC</li>
+                        <li>Four bites for size</li>
+                        <li>Two bytes for flags</li>
+                    </ul>
+                </li>
+                <li>
+                    Data bytes
+                </li>
+            </ol>
+            <p>
+                To demonstrate these basics, I made a tag with only a song title and artist:
+                <br><img src="../res/blug/tag_example_1.png"><br>
+                The artist is "Ben!" (TPE1) and the title is "Test Song" (TIT2). I've yet to figure out 
+                why the text fields start with 01. The tag size is 2104 bytes, but everything after the 
+                song title is just padding. If you know your 
+                character encodings, you might've figured out that this tag is in UTF-16. The spec doesn't 
+                mention anything about encodings but for whatever reason 2.3 uses either UTF-16 or ISO-8859-1
+                and 2.4 uses UTF-8.
+            </p>
+        </section>
+        <section id="my-goal">
+            <a href="#my-goal"><h3>My Goal</h3></a>
+            <h4>High Level Goal</h4>
+            <p>
+                My goal is to create an automated pipeline through which I can send all my music (as well as 
+                new music I acquire) that conforms it to my personal standards. Imagine a logging machine 
+                that takes raw tree trunks, shaves them, cuts them, and labels them. Lucky for me, my music 
+                isn't as organizationally complex as it could be. I have almost exlcusively: albums, partial 
+                albums, singles, and compilations. I feel bad for classical music nerds! Here are my 
+                requirements - roughly in order of importance:
+            </p>   
+            <ol style="background-color:rgb(221, 221, 221)"> 
+                <li>Album is always filled in and identical across an album</li>
+                <ul><li>Singles' album names should be the name of the single</li></ul>
+                <li>Album Artist is always filled in and identical across an album</li>
+                <ul><li>This is often equal to the Artist</li></ul>
+                <li>Album art should always be filled in and identical across an album</li>
+                <li>Year should always be filled in and identical across an album</li>
+                <ul><li>This can be a little tricky for Greatest Hits record, 
+                    or songs on a single album came out in different years</li></ul>
+                <li>Genre is always filled in and identical across an album</li>
+                <ul><li>This only has to be kinda accurate. Lots of music can't be describe by a single genre.</li></ul>
+                <li>Any songs with a feature should be tagged like so: "Song Name (feat. Other Person)"</li>
+                <ul><li>Note the feature details are in the song title and the artist should remain unaffected</li></ul>
+                <li>Track number should always be filled in</li>
+                <li>Unless part of a multi-disc album, disc number, total discs, and total tracks should be null</li>
+                <li>Lyrics should ideally be filled in</li>
+            </ol>
+            <p>    
+                As you can see, consistency across an album is important to me - especially because some music 
+                players have a tendency to split your albums if certain fields aren't uniform.
+            </p>
+            <p>
+                Let's also do a quick check to see what the approximate size of each tag would be if everything 
+                fit my requirements. I ran the numbers on my existing library to get approximations:
+            </p>
+            <ol>
+                <li>Album name, 18 characters => 36 bytes + 10 for header => 46 bytes</li>
+                <li>Track name, 23 characters ==> 56 bytes</li>
+                <li>Artist name (x2 for album artist), 13 characters ==> 36 bytes x2 = 72 bytes</li>
+                <li>Year, 14 bytes</li>
+                <li>Genre, 10 characters, 30 bytes</li>
+                <li>Album art, wildly guessing 80,000 bytes</li>
+                <li>Track number, 13 bytes</li>
+                <li>Lyrics, 40 characters per line, 40 lines, 3210 bytes</li>
+                <li>Other misc tags, 500 bytes</li>
+            </ol>
+            <p>
+                Total = 83941 bytes = 0.08MB per tag, which is about 1/100th the size of an avergae mp3. 
+                Sounds good to me.
+            </p>
+            <h4>Attempts</h4>
+            <p>
+                My first attempt was with <a href="https://beets.io/" target="_blank" rel="noopener">beets</a>.
+                It's a music tagging CLI/Python package. It integrates with Picard, is tenured and has an 
+                active community. I thought my journey might start and end here. Alas, I found that it doesn't 
+                always get the right match from Picard (which would totally mess up your tag) and when it does, 
+                there's often at least one field that doesn't seem right. Getting it to match my requirements 
+                felt like more effort than writing something myself. While I still think it's super useful, I'm 
+                not sure it's for me.
+            </p>
+            <p>
+                I decided that even if I'll eventually want to fetch tag data from an API, there's still plenty of 
+                the "cleaning" I can do with a script. For example, a lot of the "identical across an album" requirements 
+                are just a matter of fixing outliers. Being the typical Python developer, I googled "python music 
+                tagging library". I found my way to <a href="https://eyed3.readthedocs.io" target="_blank" rel="noopener">eyed3</a> 
+                and started messing around in a jupyter notebook. I played around (read: struggled) for a while 
+                trying to properly read and save tags but faced a lot of friction. Then I found a better solution - 
+                <a href="https://mutagen.readthedocs.io" target="_blank" rel="noopener">mutagen</a> which beets 
+                actually uses for its tagging.
+            </p>
+        </section>
+        <section>
+            <p>
+                If you're into computer stuff, you probably know the struggle of keeping accurate metadata.<br>
+                If you're into music and have a digital library, you definitely know the struggle of keeping 
+                accurate metadata.<br>If you're into computer stuff and music and have a digital library, you 
+                might've wandered a similar path to the one I'm on now: Using your computer skills to organize 
+                your music library.<br>You've seen enough albums split in two in ITunes. You've been frustrated 
+                when all but one track on an album has album art. You've been disheartened when half 
+                your library has a year, a third has a genre, and a quarter of those are correct. And maybe 
+                one day with a bunch of time to kill you thought "I could probably write a script to clean 
+                up this mess".
+            </p>
+            <p>
+                Here I am now, not with a perfectly organized library (spoiler: there's no such thing), but 
+                with a piqued interest. I've been working on creating a pipeline through which I can shove 
+                all my music and any new music I acquire such that everything will come out neat and sparkling 
+                - or as close as I can it. I fumbled around with a few technologies:
+            </p>
+            <ul>
+                <li><a href="https://beets.io/" target="_blank" rel="noopener">beets</a></li>
+                <ul><li>CLI and Python package that has a lot of music tagging automation built in</li></ul>
+                <li><a href="https://www.mp3tag.de/en/" target="_blank" rel="noopener">Mp3Tag</a></li>
+                <ul><li>Long standing Windows program that helps with (bulk) tag editting, no CLI/package</li></ul>
+                <li><a href="https://eyed3.readthedocs.io" target="_blank" rel="noopener">eyed3</a></li>
+                <ul><li>Python package for reading/writing mp3 tags</li></ul>
+                <li><a href="https://mutagen.readthedocs.io" target="_blank" rel="noopener">mutagen</a></li>
+                <ul><li>Python package for reading/writing mp3 tags</li></ul>
+            </ul>
+            <p>
+                I'll spare you the details and just say that in the end, I'm planning on using mutagen with 
+                some support from Mp3Tag. The interesting part comes from what I had to dig into to understand 
+                the files I'm working with. MP3s don't have metadata built into the specification. Instead 
+                there's a little thing called ID3 that <em>tags</em> along with each MP3 to provide metadata.
+            </p>
+            <p>
+                One interesting thing about ID3 is that there is a spec, but there's nothing impelling a 
+                program to follow it to a tee if it doesn't want to. Tons of music players don't support 
+                every aspect of ID3 but nothing blows up. Not every program that tags MP3s with ID3s 
+                will do so in the same way. There are several ways to achieve similar results. Really, it's 
+                up to the user to either a) make sure their files are tagged in a way that their music 
+                player(s) of choice will interpret the metadata correctly, and/or b) pick music player(s) 
+                that correctly intepret their music library as it's tagged. 
+            </p>
+        </section>
+    </main>
+</body>
+</html>

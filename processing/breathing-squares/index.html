@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Ben Machlin!</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <link rel="shortcut icon" href="/res/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="../processing.css">
+  </head>
+  <body>
+    <noscript>This page requires JavaScript.</noscript>
+    <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
+    <a href="/processing/index.html"><h1>&lt-- Processing Sketches</h1></a>
+    <main>
+        <h2>Breathing Squares</h2>
+        <p>Click RESET to apply parameter changes.</p>
+        <p>Warning: Maxing out certain parameters may cause lag or crashing depending on the power of your computer.</p>
+        <div class="sketch-options">
+          <div class="sketch-controls">
+
+            <button class="btn-start-stop" onclick="toggle(this)">Stop</button>
+            <button class="btn-reset" onclick="reset(this)">Reset</button>
+            <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
+            <button class="btn-record">Start Recording</button>
+          </div>
+          <br>
+          <div class="param">
+            <label for="divisionsInput" class="param-label">Divisions</label>
+            <input type="number" min="1" max="256" value="36" step="1" class="param-number" id="divisionsInput">
+          </div>
+        </div>
+        <script src="breathing-squares.js"></script>
+        <script src="../default-controls.js"></script>
+        <script src="../parameters.js"></script>
+    </main>
+
+  </body>
+</html>

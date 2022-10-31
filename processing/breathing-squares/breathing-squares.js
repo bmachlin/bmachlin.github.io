@@ -1,6 +1,5 @@
-
-
 let sketchName = "breathing-squares";
+let cnv;
 let fps = 30
 let squares;
 let buttons;
@@ -104,7 +103,7 @@ class BreathingSquare {
 }
 
 function setup() {
-    let cnv = createCanvas(600, 500);
+    cnv = createCanvas(600, 500);
     cnv.id(sketchName + "-canvas");
     ellipseMode(CORNERS);
     frameRate(fps);

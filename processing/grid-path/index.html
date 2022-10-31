@@ -17,8 +17,7 @@
     <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
     <a href="/processing/index.html"><h1>&lt-- Processing Sketches</h1></a>
     <main>
-        <h2>Shape Shapes</h2>
-        <p>Click RESET to apply parameter changes.</p>
+        <h2>Grid Path</h2>
         <div class="sketch-options">
           <div class="sketch-controls">
 
@@ -29,12 +28,27 @@
           </div>
           <br>
           <div class="param">
-            <label for="shapesInput" class="param-label">Shapes</label>
-            <input type="range" min="5" max="200" value="100" step="5" class="param-slider" oninput="shapesValue.innerText = this.value" id="shapesInput">
-            <p class="param-value" id="shapesValue">100</p>
+            <label for="rowsInput" class="param-label">Rows</label>
+            <input type="range" min="1" max="50" value="10" step="1" class="param-slider" oninput="rowsValue.innerText = this.value" id="rowsInput">
+            <p class="param-value" id="rowsValue">10</p>
+          </div>
+          <div class="param">
+            <label for="colsInput" class="param-label">Columns</label>
+            <input type="range" min="1" max="50" value="10" step="1" class="param-slider" oninput="colsValue.innerText = this.value" id="colsInput">
+            <p class="param-value" id="colsValue">10</p>
+          </div>
+          <div class="param">
+            <label for="deformInput" class="param-label">Deform</label>
+            <input type="range" min="1" max="50" value="2" step="1" class="param-slider" oninput="deformValue.innerText = this.value" id="deformInput">
+            <p class="param-value" id="deformValue">2</p>
+          </div>
+          <div class="param">
+            <label for="fpsInput" class="param-label">Frames Per Second</label>
+            <input type="range" min="1" max="10" value="2" step="1" class="param-slider" oninput="fpsValue.innerText = this.value" id="fpsInput">
+            <p class="param-value" id="fpsValue">2</p>
           </div>
         </div>
-        <script src="shape-shapes.js"></script>
+        <script src="grid-path.js"></script>
         <script src="../default-controls.js"></script>
         <script src="../parameters.js"></script>
     </main>

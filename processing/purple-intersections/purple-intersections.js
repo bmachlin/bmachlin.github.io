@@ -52,12 +52,12 @@ class Intersection {
 }
 
 let sketchName = "purple-intersections";
-let rows, cols, rowSize, colSize, fps;
+let rows, cols, rowSize, colSize, fps, cnv;
 let numTypes = 6;
 let isecs;
 
 function setup() {
-    let cnv = createCanvas(500, 500);
+    cnv = createCanvas(500, 500);
     cnv.id(sketchName + "-canvas");
     angleMode(DEGREES);
     activate();

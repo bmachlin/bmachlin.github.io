@@ -1,4 +1,5 @@
 let sketchName = "planets";
+let cnv;
 let numPlanets;
 let stars;
 let inputElem;
@@ -160,7 +161,7 @@ function NewPlanet(id) {
 }
 
 function setup() {
-  let cnv = createCanvas(500, 500);
+  cnv = createCanvas(500, 500);
   cnv.id(sketchName + "-canvas");
   ellipseMode(RADIUS);
   frameRate(fps);

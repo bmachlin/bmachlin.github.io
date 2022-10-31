@@ -1,4 +1,5 @@
 let sketchName = "shape-shapes";
+let cnv;
 let numDots;
 let dots;
 let margin = 30;
@@ -172,7 +173,7 @@ function newCell(index) {
 }
 
 function setup() {
-    let cnv = createCanvas(500, 500);
+    cnv = createCanvas(500, 500);
     cnv.id(sketchName + "-canvas");
     frameRate(fps);
 

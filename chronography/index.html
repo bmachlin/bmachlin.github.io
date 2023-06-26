@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Chronography</title>
+    
+        <link rel="shortcut icon" href="/res/favicon.ico" type="image/x-icon">
+
+        <!-- JS -->
+        <script src="lib/bantam-2.1.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+        <!-- CSS -->
+        <link href="https://fonts.googleapis.com/css?family=Overpass+Mono&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="avgs.css" media="screen" title="no title" charset="utf-8">
+        
+
+    </head>
+
+    <body>
+        <div class="page-container">
+            <main>
+
+                <div id ="intro"></div>
+
+                <div id="search-results">
+                    <h5>Large selections (e.g. long playlists, artists with more than a few albums) will take a while and may bug out.</h5>
+                    <div id="result-buttons">
+                        <div class='search-column' id='album-buttons'>Albums</div>
+                        <div class='search-column' id='artist-buttons'>Artists</div>
+                        <div class='search-column' id='playlist-buttons'>Playlists</div>
+                    </div>
+
+                </div>
+
+                <div id="data-results">
+                    <h2 id="result-name"></h2>
+                    <h5>Click the legend to show & hide series.</h5>
+                    <div id="result-chart"></div>
+                </div>
+
+                <button id="authorize-button">Authorize</button>
+            </main>    
+            <footer>Created by <a href="https://benmachlin.com" target="_blank">Ben</a>. Powered by <a href="https://spotify.com" target="_blank">Spotify</a>.</footer>
+        
+        </div>
+
+        <script src="lib/sc.js"></script>
+        <script src="config.js"></script>
+        <script src="avgs-processing.js"></script>
+        <script src="avgs-search-results.js"></script>
+        <script src="avgs.js"></script>
+        <script>
+            let chartData, chartView;
+            (function() {
+                let googleLoad = google.charts.load('current', {packages: ['corechart']})
+                    .then((data) => {
+                        chartData = new google.visualization.DataTable();
+                        chartData.addColumn('string', 'name', 'name');
+                        // labels is loaded in avgs-processing.js (not clean, I know)
+                        labels.forEach((label) => chartData.addColumn('number', label, label));
+                        chartView = new google.visualization.DataView(chartData);
+                    });
+                $bt.ajax("header.html", {
+                    method: "GET",
+                    headers: { 'Content-Type': 'html' },
+                    success: (res) => {
+                        document.getElementById("intro").innerHTML = res;
+                        args = parseArgs();
+                        processArgs();
+                    },
+                    failure: (res) => {
+                        console.log("ajax header request failed");
+                    }
+                });
+            })();
+        </script>
+    </body>
+</html>

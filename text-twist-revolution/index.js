@@ -65,8 +65,6 @@ function updateGame() {
     document.getElementById("upTimer").innerHTML = context.Game.upTimerSec;
     document.getElementById("level").innerHTML = context.Game.level;
     document.getElementById("canMoveOn").innerHTML = context.Game.foundTargetWord;
-    document.getElementById("foundWords").innerHTML = [...context.Game.foundWords];
-    document.getElementById("unfoundWords").innerHTML = [...context.Game.unfoundWords];
     context.Renderer.RenderFindableWords();
     
     if (context.Game.IsGameOver()) {

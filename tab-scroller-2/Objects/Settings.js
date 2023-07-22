@@ -26,9 +26,9 @@ class Settings {
 
         this.theme = this.storage.getItem("theme");
         if (this.theme == null || this.theme === "light") {
-            setTheme("light")
+            this.SetTheme("light")
         } else {
-            setTheme("dark");
+            this.SetTheme("dark");
         }
 
         // some weird stuff here bc sometimes show-heading is stored as a bool, sometimes it's stored as a string "true"/"false"

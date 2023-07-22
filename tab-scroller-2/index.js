@@ -1,4 +1,4 @@
-// Copyleft QNU.net, 2022
+// Copyleft benmachlin.com, 2023
 
 // default ytPlayer state values
 let ytUNSTARTED = -1;
@@ -13,8 +13,8 @@ let ytCUED = 5;
 let tabId = "tab-text";
 let inputTabId = "input-tab";
 let settingsId = "settings";
-let markerBarId= "marker-bar";
-let markerEditorId= "marker-editor";
+let markerBarId = "marker-bar";
+let markerEditorId = "marker-editor";
 
 // globals
 let Timer;  // the run cycle controller

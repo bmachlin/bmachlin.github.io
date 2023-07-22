@@ -3,6 +3,7 @@ class Game {
         this.letters = [];                       // current level letters to unscramble
         this.foundWords = new Set();             // all words found by player
         this.findableWords = new Set();          // all words makeable with <letters>
+        this.unfoundWords = new Set();                  // findable words that haven't been found
         this.foundTargetWord = false;            // has the player found a target word (and can move to next level)
         this.downTimer = 60000;                  // timer counting down until game over (ms)
         this.upTimer = 0;                        // timer counting up for total time (aka score) (ms)

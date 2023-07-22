@@ -1,0 +1,17 @@
+#findableWords {
+    font-family: monospace;
+    font-size: 2em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wordColumn {
+    flex: 50%;
+    padding: 0px 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .wordColumn {
+        flex-direction: column;
+    }
+}

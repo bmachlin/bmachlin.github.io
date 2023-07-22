@@ -25,6 +25,7 @@ function setup() {
     context.Game = new Game();
     context.Dict = new Dictionary();
     context.GameActions = new GameActions(context);
+    context.Renderer = new Renderer(context);
     context.Dict.LoadWords().then(() => setup2());
 }
 
@@ -65,6 +66,8 @@ function updateGame() {
     document.getElementById("level").innerHTML = context.Game.level;
     document.getElementById("canMoveOn").innerHTML = context.Game.foundTargetWord;
     document.getElementById("foundWords").innerHTML = [...context.Game.foundWords];
+    document.getElementById("unfoundWords").innerHTML = [...context.Game.unfoundWords];
+    context.Renderer.RenderFindableWords();
     
     if (context.Game.IsGameOver()) {
         context.GameActions.EndGame();

@@ -9,5 +9,6 @@ class Context {
         this.Game = null;
         this.GameActions = null;
         this.Scoring = null;
+        this.Renderer = null;
     }
 }

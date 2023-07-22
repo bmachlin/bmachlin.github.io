@@ -27,10 +27,11 @@ class GameActions {
         this.Game.letters = [...letters];
         this.Game.findableWords = new Set(subWords);
         this.Game.ShuffleLetters();
+        this.Game.unfoundWords = new Set(subWords.filter(w => !this.Game.foundWords.has(w)));
     }
 
     EndGame() {
-        
+        alert(`Game Over! Score: ${this.Game.upTimerSec}`);
     }
 
     //#endregion
@@ -42,6 +43,7 @@ class GameActions {
         let word = this.Game.currentWord.join("");
         if (this.Dict.IsWord(word) && !this.Game.foundWords.has(word) && this.Game.findableWords.has(word)) {
             this.Game.foundWords.add(word);
+            this.Game.unfoundWords.delete(word);
             if (word.length == this.context.Settings.numLetters) {
                 this.Game.foundTargetWord = true;
             }

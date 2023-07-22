@@ -10,7 +10,7 @@
     </head>
     <body tabindex="0" onload="setup()">
         <section id="heading" style="padding: 10px; background-color: rgb(187, 255, 255);">
-            <nav><a href="/index.html" class="home">&lt--Home</a></nav>
+            <!-- <nav><a href="/index.html" class="home">&lt--Home</a></nav> -->
 
             <h2>Text Twist Revolution</h2>
             <p style="margin: 10px 0;">
@@ -42,7 +42,12 @@
             Level: <span id="level"></span><br>
             Can Move On: <span id="canMoveOn"></span><br>
             <hr>
-            Found Words: <div id="foundWords"></div>
+            Found Words: <div id="foundWords"></div><br>
+            Unfound Words: <div id="unfoundWords"></div><br>
+            <div id="findableWords">
+                <div class="wordColumn"></div>
+                <div class="wordColumn"></div>
+            </div>
             
         
         </section>
@@ -54,7 +59,7 @@
         <script type="text/javascript" src="Objects/Dictionary.js"></script>
         <script type="text/javascript" src="Objects/Game.js"></script>
         <script type="text/javascript" src="Objects/GameActions.js"></script>
-        <script type="text/javascript" src="loadWords.js"></script>
+        <script type="text/javascript" src="Objects/Renderer.js"></script>
     
         <script type="text/javascript" src="index.js"></script>
     </body>

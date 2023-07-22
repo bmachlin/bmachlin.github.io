@@ -11,7 +11,7 @@ class Context {
         this.Timer = null;              // the run cycle controller
         this.Player = null;             // the YT player object
         this.Storage = null;            // local storage   
-        this.TabScroller = null;          // controls the scrolling
+        this.TabScroller = null;        // controls the scrolling
         this.Settings = null;
         this.MarkerEditor = null;
         this.MarkerBar = null;

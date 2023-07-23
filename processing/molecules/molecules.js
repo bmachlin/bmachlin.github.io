@@ -73,10 +73,14 @@ class Agent {
 
     move() {
         if (this.following == -1) {
-            this.leadMove();
+            if (mouseIsPressed) 
+            { this.followMove(true); }
+            else 
+            { this.leadMove(); }
         } else {
             this.followMove();
         }
+
         if (!this.inBounds() && !this.returning) {
             this.returning = true;
             this.vel.rotate(random(PI / 2, PI * 1.5));
@@ -92,13 +96,13 @@ class Agent {
         this.vel.normalize();
     }
 
-    // move towards who this is following
-    followMove() {
-        if (this.following == -1)
-            return;
+    // move towards who this is following (or mouse)
+    followMove(mouse=false) {
+        let x = mouse ? mouseX : agents[this.following].pos.x;
+        let y = mouse ? mouseY : agents[this.following].pos.y;
+
         this.pos.add(this.vel);
-        let dirVec = new p5.Vector(agents[this.following].pos.x - this.pos.x,
-            agents[this.following].pos.y - this.pos.y);
+        let dirVec = new p5.Vector(x - this.pos.x, y - this.pos.y);
         let angle = this.vel.angleBetween(dirVec);
         this.vel.rotate(angle / fps);
         this.vel.normalize();
@@ -259,10 +263,7 @@ function setup() {
 function activate() {
     inputElem = document.querySelector("#moleculesInput");
     numAgents = getSliderValue(inputElem, 50);
-    inputElem = document.querySelector("#diffThresholdInput");
-    diffThreshold = getSliderValue(inputElem, 100);
-    inputElem = document.querySelector("#blurInput");
-    blur = getSliderValue(inputElem, 100);
+    background(160, 190, 255);
     agents = [];
     fmatrix = [];
     for (let i = 0; i < numAgents; i++) {
@@ -275,13 +276,13 @@ function activate() {
 
 function reset() { activate(); }
 
-function draw() {
-
+function draw() {    
     background(160, 190, 255, blur);
 
     for (let a of agents) {
         a.render();
         a.update();
+        // // reset sketch if all (or nearly all) are following a single agent
         // if (a.getNumFollowers() > numAgents - 2)
         //   setup();
     }
@@ -306,6 +307,17 @@ function mousePressed() {
                     print(b.id, a.getInfluence(b.id), a.canFollow(b.id, true));
             }
         }
-
     }
 }
+
+
+// live update diffThreshold and blur
+document.querySelector("#diffThresholdInput").addEventListener('input', (e) => {
+    document.querySelector("#diffThresholdValue").innerText = e.target.value;
+    diffThreshold = e.target.value;
+})
+
+document.querySelector("#blurInput").addEventListener('input', (e) => {
+    document.querySelector("#blurValue").innerText = e.target.value;
+    blur = 255 - e.target.value;
+})

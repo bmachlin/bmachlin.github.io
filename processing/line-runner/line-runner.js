@@ -58,9 +58,6 @@ function reset() {
     activate();
 }
 
-let above = 0;
-let below = 0;
-
 class Runner {
     constructor(x, y, size, rightBias, upBias, col) {
         this.x = x;
@@ -78,13 +75,12 @@ class Runner {
         // if current direction is clear, continue
         if (this.isDirectionClear(this.directionX, this.directionY)) {
             if (noise(this.x, this.y) > randomTurnProbability) {
-                above += 1;
-                // console.log("above", above);
                 return;
             }
             else {
-                below += 1;
-                console.log("below", below);
+                this.directionX = random(this.xOrder);
+                this.directionY = random(this.yOrder);
+                return;
             }
         }
         // else, look for a new direction

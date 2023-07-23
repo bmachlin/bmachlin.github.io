@@ -22,7 +22,7 @@ function activate() {
     noFill();
     sCount = 0;
     queue = null;
-    sizeThreshold = 5;
+    sizeThreshold = 10;
     queue = [];
     queue.push(new Square(9, 1,1, width-1,height-1)); // add first square, whole canvas size
 }

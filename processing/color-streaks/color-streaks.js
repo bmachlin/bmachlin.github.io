@@ -28,6 +28,7 @@ function activate() {
     background(0);
     lines = getNumberValue(document.querySelector("#linesInput"), 20);
     colorPack = getNumberValue(document.querySelector("#colorInput"), 0);
+    points = [];
     for (let q = 0; q < lines; q++) {
         points[q] = [random(width), random(height * 2)];
         pointsColors[q] = int(random(7));
@@ -37,6 +38,31 @@ function activate() {
 
 function updateColors() {
     colorPack = getNumberValue(document.querySelector("#colorInput"), 0);
+}
+
+document.querySelector("#linesInput").addEventListener('input', e => {
+    document.querySelector("#linesValue").innerText = e.target.value;
+    lines = e.target.value;
+    updateLines();
+});
+
+function updateLines() {
+    // need to remove lines
+    if (lines < points.length) {
+        lines = Math.max(lines,0);
+        while(points.length > lines) {
+            points.splice(Math.floor(Math.random()*points.length), 1);
+        }
+    }
+    // need to add lines
+    else if (lines > points.length) {
+        for (let q = points.length; q < lines; q++) {
+            points[q] = [random(width), random(height * 2)];
+            pointsColors[q] = int(random(7));
+        }
+    }
+
+    
 }
 
 function reset() { activate(); }

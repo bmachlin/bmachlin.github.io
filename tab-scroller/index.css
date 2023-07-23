@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+body {
+    background: #eceae7;
+    color: #333;
+}
+
+p, pre {
+    padding: 0;
+    margin: 0;
+}
+
+#tabBox {
+    padding: 10px;
+    border: 2px solid;
+    width: fit-content;
+}
+
+#tabText {
+    background-color: #f7f5f3;
+    color: #333;
+    min-width: 1px;
+}
+
+#controls {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    display: inline-block;
+    /* height: 150px; */
+    overflow: hidden;
+}
+
+#controlHelpBox {
+    text-align: right;
+    background: rgba(167, 167, 167, 0.185);
+}
+
+#settings {
+    width: fit-content;
+    padding: 10px;
+    border: 2px solid;
+}
+
+#settings h3 {
+    margin: 0px;
+    text-decoration: underline;
+}

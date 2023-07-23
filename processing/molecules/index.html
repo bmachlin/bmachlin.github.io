@@ -26,21 +26,25 @@
             <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
             <button class="btn-record">Start Recording</button>
           </div>
+          <p>Click and hold to have molecules follow mouse. (As best as they can)</p>
           <br>
           <div class="param">
             <label for="moleculesInput" class="param-label">Molecules</label>
-            <input type="range" min="2" max="100" value="50" step="1" class="param-slider" oninput="moleculesValue.innerText = this.value" id="moleculesInput">
+            <input type="range" min=2 max=100 value=50 step=1 class="param-slider" 
+                    autocomplete="off" oninput="moleculesValue.innerText = this.value" id="moleculesInput">
             <p class="param-value" id="moleculesValue">50</p>
           </div>
           <div class="param">
             <label for="diffThresholdInput" class="param-label">Distance Threshold</label>
-            <input type="range" min="1" max="500" value="100" step="1" class="param-slider" oninput="diffThresholdValue.innerText = this.value" id="diffThresholdInput">
+            <input type="range" min=1 max=500 value=100 step=1 class="param-slider"
+                    autocomplete="off" id="diffThresholdInput">
             <p class="param-value" id="diffThresholdValue">100</p>
           </div>
           <div class="param">
             <label for="blurInput" class="param-label">Blur</label>
-            <input type="range" min="1" max="255" value="255" step="1" class="param-slider" oninput="blurValue.innerText = this.value" id="blurInput">
-            <p class="param-value" id="blurValue">255</p>
+            <input type="range" min=1 max=255 value=1 step=1 class="param-slider"
+                    autocomplete="off" id="blurInput">
+            <p class="param-value" id="blurValue">1</p>
           </div>
         </div>
         <script src="molecules.js"></script>

@@ -1,11 +1,9 @@
 class Settings {
     // defaults
-    static defaultSeekTime = 5;
-    static defaultSkipBackBuffer = 1.0;
     static defaultTheme = "light"
     static defaultNumLetters = 6;
     static defaultMode = "normal";
-    static defaultMinWordLength = "3";
+    static defaultMinWordLength = 3;
 
     constructor(storage) {
         this.storage = storage;
@@ -15,18 +13,12 @@ class Settings {
     }
 
     LoadSettings() {
-        this.numLetters = parseInt(this.storage.getItem('numLetters'));
-        console.log("nl", this.numLetters)
-        if (!this.numLetters) {
-            this.numLetters = Settings.defaultnumLetters;
-        }
+        this.numLetters = parseInt(this.storage.getItem('numLetters')) || Settings.defaultNumLetters;
+        console.log("nl", this.numLetters);
         document.getElementById("numLettersInput").value = this.numLetters;
 
-        this.minWordLength = parseInt(this.storage.getItem('minWordLength'));
+        this.minWordLength = parseInt(this.storage.getItem('minWordLength')) || Settings.defaultMinWordLength;
         console.log("mw", this.minWordLength)
-        if (!this.minWordLength) {
-            this.minWordLength = Settings.defaultminWordLength;
-        }
         document.getElementById("minWordLengthInput").value = this.minWordLength;
 
         this.theme = this.storage.getItem("theme");

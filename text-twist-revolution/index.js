@@ -60,7 +60,7 @@ function toggleHeading() {
 function updateGame() {
     context.GameActions.IncrementTimers(interval);
     document.getElementById("letters").innerHTML = context.Game.letters.join(" ").toUpperCase();
-    document.getElementById("word").innerHTML = context.Game.currentWord.join("");
+    document.getElementById("word").innerHTML = context.Game.currentWord.join("").toUpperCase();
     document.getElementById("downTimer").innerHTML = context.Game.downTimerSec;
     document.getElementById("upTimer").innerHTML = context.Game.upTimerSec;
     document.getElementById("level").innerHTML = context.Game.level;

@@ -7,7 +7,7 @@ class GameActions {
 
     //#region game actions
 
-    StartGame() {
+    NewGame() {
         this.NewLevel();
     }
 
@@ -31,7 +31,8 @@ class GameActions {
     }
 
     EndGame() {
-        alert(`Game Over! Score: ${this.Game.upTimerSec}`);
+        let finalWords = [...this.Game.findableWords].filter(w => w.length == this.context.Settings.numLetters);
+        alert(`Game Over! Score: ${this.Game.upTimerSec}.\nFinal word(s): ${finalWords}`);
     }
 
     //#endregion

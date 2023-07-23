@@ -12,16 +12,10 @@ class Settings {
     }
 
     LoadSettings() {
-        this.seekTime = parseInt(this.storage.getItem('seekTime'));
-        if (!this.seekTime) {
-            this.seekTime = Settings.defaultSeekTime;
-        }
+        this.seekTime = parseInt(this.storage.getItem('seekTime')) || Settings.defaultSeekTime;
         document.getElementById("seekInput").value = this.seekTime;
 
-        this.skipBackBuffer = parseFloat(this.storage.getItem('skipBackBuffer'));
-        if (!this.skipBackBuffer) {
-            this.skipBackBuffer = Settings.defaultSkipBackBuffer;
-        }
+        this.skipBackBuffer = parseFloat(this.storage.getItem('skipBackBuffer')) || Settings.defaultSkipBackBuffer;
         document.getElementById("skipBackInput").value = this.skipBackBuffer;
 
         this.theme = this.storage.getItem("theme");

@@ -17,23 +17,32 @@
     <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
     <a href="/processing/index.html"><h1>&lt-- Processing Sketches</h1></a>
     <main>
-        <h2>Planets</h2>
+        <h2>Purple Intersections</h2>
         <div class="sketch-options">
           <div class="sketch-controls">
-
-            <button class="btn-start-stop" onclick="toggle(this)">Stop</button>
             <button class="btn-reset" onclick="reset(this)">Reset</button>
             <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
             <button class="btn-record">Start Recording</button>
           </div>
           <br>
           <div class="param">
-            <label for="planetsInput" class="param-label">Planets</label>
-            <input type="range" min=0 max=100 value=10 step=1 class="param-slider" oninput="planetsValue.innerText = this.value" id="planetsInput">
-            <p class="param-value" id="planetsValue">10</p>
+            <label for="dotsInput" class="param-label">Dots</label>
+            <input type="range" min=2 max=20 value=6 step=1 class="param-slider" autocomplete="off" oninput="dotsValue.innerText = this.value" id="dotsInput">
+            <p class="param-value" id="dotsValue">6</p>
+          </div>
+          <div class="param">
+            <label for="marginInput" class="param-label">Margin</label>
+            <input type="range" min=0 max=100 value=10 step=1 class="param-slider" autocomplete="off" id="marginInput">
+            <p class="param-value" id="marginValue">10</p>
+          </div>
+          <div class="param">
+            <label for="perfInput" class="param-label">Improve Performance?</label>
+            <input type="checkbox" class="param-slider" autocomplete="off" id="perfInput">
+            <input type="checkbox" class="param-slider" autocomplete="off" id="perfInput2">
           </div>
         </div>
-        <script src="planets.js"></script>
+
+        <script src="voronoi.js"></script>
         <script src="../default-controls.js"></script>
         <script src="../parameters.js"></script>
     </main>

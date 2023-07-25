@@ -7,7 +7,7 @@
         <link rel="shortcut icon" href="../res/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="index.css" media="screen" charset="utf-8">
     </head>
-    <body tabindex="0" onload="setup()">
+    <body tabindex=0 onload="setup()">
         <nav><a href="/index.html" class="home">&lt--Home</a></nav>
         
         <h2>Tab Scroller</h2>
@@ -51,8 +51,8 @@
         <br>
         <div id="settings">
             <h3>Settings</h3>
-            <label>Seek Time (seconds): </label><input type="number" id="seekInput" name="seekTime" min="1" max="100"><br>
-            <label>Skip Back Buffer Time (seconds): </label><input type="number" id="skipBackInput" name="skipBackTime" min="0" max="10" step=".01"><br>
+            <label>Seek Time (seconds): </label><input type="number" id="seekInput" name="seekTime" min=1 max=100><br>
+            <label>Skip Back Buffer Time (seconds): </label><input type="number" id="skipBackInput" name="skipBackTime" min=0 max=10 step=.01><br>
             <br>
             <button id="saveSettingsButton" onclick="saveSettings()">Save Settings</button>
             <button id="clearSettingsButton" onclick="defaultSettings()">Restore Defaults</button>

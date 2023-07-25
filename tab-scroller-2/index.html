@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="index.css" media="screen" charset="utf-8">
         <title>Tab Scroller</title>
     </head>
-    <body tabindex="0" onload="setup()">
+    <body tabindex=0 onload="setup()">
         <section id="heading">
             <nav><a href="/index.html" class="home">&lt--Home</a></nav>
 
@@ -46,8 +46,8 @@
             <br>
             <div id="settings">
                 <h3>Settings</h3>
-                <label>Seek Time (seconds): </label><input type="number" id="seekInput" name="seekTime" min="1" max="100"><br>
-                <label>Skip Back Buffer Time (seconds): </label><input type="number" id="skipBackInput" name="skipBackTime" min="0" max="10" step=".01"><br>
+                <label>Seek Time (seconds): </label><input type="number" id="seekInput" name="seekTime" min=1 max=100><br>
+                <label>Skip Back Buffer Time (seconds): </label><input type="number" id="skipBackInput" name="skipBackTime" min=0 max=10 step=.01><br>
                 <div hidden>
                 <label>Theme: </label>
                     <input type="radio" id="themeLight" value="light" name="themeInput"><label for="themeLight">Light</label>
@@ -64,8 +64,8 @@
         <section id="tab-display">
             <div id="marker-editor" hidden>
                 <label>Time: </label>
-                <input type="number" id="editorMinutesInput" name="markerMinutes" min="0" max="99">:<input type="number" id="editorSecondsInput" name="markerSeconds" min="0" max="59"><br>
-                <label>Position: </label><input type="number" id="positionInput" name="positionInput" min="0" max="1" step=".01" value="0.50"><br>
+                <input type="number" id="editorMinutesInput" name="markerMinutes" min=0 max="99">:<input type="number" id="editorSecondsInput" name="markerSeconds" min=0 max="59"><br>
+                <label>Position: </label><input type="number" id="positionInput" name="positionInput" min=0 max=1 step=.01 value="0.50"><br>
                 <label>Scroll style: </label>
                     <input type="radio" id="scrollSmooth" value="smooth" name="scrollStyle"><label for="scrollSmooth">Smooth</label>
                     <input type="radio" id="scrollSnap" value="snap" name="scrollStyle"><label for="scrollSnap">Snap</label>

@@ -15,3 +15,13 @@
         flex-direction: column;
     }
 }
+
+.letterbox {
+    display: inline-block;
+    text-align: center;
+    border: 1px solid black;
+    width: 1.5em;
+    height: 1.5em;
+    margin: 2px;
+    padding: 2px;
+}

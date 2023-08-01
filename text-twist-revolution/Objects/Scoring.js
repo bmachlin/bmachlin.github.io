@@ -14,8 +14,17 @@ class Scoring {
         }
     }
 
+    GetFoundAllBonus() {
+        switch(this.system) {
+            case 0:
+                return 5;
+            default:
+                return 5;
+        }
+    }
+
     System0(word) {
         let length = word.length;
-        return 2 + length - this.minlen;
+        return 3 + length - this.minlen;
     }
 }

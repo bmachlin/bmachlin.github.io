@@ -1,27 +1,39 @@
 class Game {
-    constructor() {
+    constructor(min,max) {
         this.letters = [];                       // current level letters to unscramble
         this.foundWords = new Set();             // all words found by player
         this.findableWords = new Set();          // all words makeable with <letters>
-        this.unfoundWords = new Set();                  // findable words that haven't been found
+        this.unfoundWords = new Set();           // findable words that haven't been found
         this.foundTargetWord = false;            // has the player found a target word (and can move to next level)
         this.downTimer = 60000;                  // timer counting down until game over (ms)
         this.upTimer = 0;                        // timer counting up for total time (aka score) (ms)
         this.level = 0;
+
+        this.minLetters = min;
+        this.maxLetters = max;
         
         this.currentWord = [];                   // letters waiting to be submitted
+        this.remainingLetters = [];              // letters not used in current word
     }
 
     IsGameOver() {
         return this.downTimer <= 0;
     }
 
+    HasFoundAllWords() {
+        for (let word of this.findableWords) {
+            if (!this.foundWords.has(word))
+                return false;
+        }
+        return true;
+    }
+
     ShuffleLetters() {
-        for (let i = this.letters.length-1; i > 0; i--) {
+        for (let i = this.remainingLetters.length-1; i > 0; i--) {
             let j = Math.floor(Math.random()*i);
-            let temp = this.letters[j];
-            this.letters[j] = this.letters[i];
-            this.letters[i] = temp;
+            let temp = this.remainingLetters[j];
+            this.remainingLetters[j] = this.remainingLetters[i];
+            this.remainingLetters[i] = temp;
         }
     }
 

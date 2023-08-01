@@ -1,94 +1,74 @@
 class Settings {
-    // defaults
-    static defaultTheme = "light"
-    static defaultNumLetters = 6;
-    static defaultMode = "normal";
-    static defaultMinWordLength = 3;
 
     constructor(storage) {
         this.storage = storage;
-        this.theme;
-        this.numLetters;
-        this.minWordLength;
+        this.settings = [];
+
+        this.theme = new Setting("theme", "string", "light");
+        this.theme.elementId = "themeInput";
+        this.theme.options = ["light", "dark"];
+        this.settings.push(this.theme);
+        this.showHeading = new Setting("show-heading", "boolean", true);
+        this.showHeading.elementId = "heading";
+        this.settings.push(this.showHeading);
+        this.maxWordLength = new Setting("maxWordLength", "number", 6, 4, 8);
+        this.maxWordLength.elementId = "maxWordLengthInput";
+        this.settings.push(this.maxWordLength);
+        this.minWordLength = new Setting("minWordLength", "number", 3, 2, 4);
+        this.minWordLength.elementId = "minWordLengthInput";
+        this.settings.push(this.minWordLength);
     }
 
     LoadSettings() {
-        this.numLetters = parseInt(this.storage.getItem('numLetters')) || Settings.defaultNumLetters;
-        console.log("nl", this.numLetters);
-        document.getElementById("numLettersInput").value = this.numLetters;
+        this.LoadInputSetting(this.maxWordLength);
+        this.LoadInputSetting(this.minWordLength);
+        this.LoadInputSetting(this.theme);
 
-        this.minWordLength = parseInt(this.storage.getItem('minWordLength')) || Settings.defaultMinWordLength;
-        console.log("mw", this.minWordLength)
-        document.getElementById("minWordLengthInput").value = this.minWordLength;
-
-        this.theme = this.storage.getItem("theme");
-        if (this.theme == null || this.theme === "light") {
-            this.SetTheme("light")
-        } else {
-            this.SetTheme("dark");
-        }
-
-        // some weird stuff here bc sometimes show-heading is stored as a bool, sometimes it's stored as a string "true"/"false"
-        let sh = this.storage.getItem("show-heading") ?? "true";
-        if (sh == null || sh.toString() === "true") {
-            this.SetHeadingVisible(true);
-        } else {
-            this.SetHeadingVisible(false);
-        }
+        this.showHeading.Parse(this.storage.getItem(this.showHeading.name));
+        if (DEBUG) console.log(this.showHeading.name, this.showHeading.value);
+        this.SetHeadingVisible(this.showHeading.value);
     }
 
-    SaveSettings(nli, mwl, thm) {
-        nli = this.IsNanOrNull(nli) ? Settings.defaultNumLetters : nli;
-        mwl = this.IsNanOrNull(mwl) ? Settings.defaultMinWordLength : mwl;
-        thm = thm == undefined || this.theme == undefined || this.theme == null || this.theme == "" ? Settings.defaultTheme : thm;
-        this.storage.setItem('numLetters', nli);
-        this.storage.setItem('minWordLength', mwl);
-        this.storage.setItem('theme', thm);
-        console.log("saved settings", nli, mwl, thm);
+    LoadInputSetting(setting) {
+        setting.Parse(this.storage.getItem(setting.name));
+        if (DEBUG) console.log(setting.name, setting.value);
+        document.getElementById(setting.elementId).value = setting.value;
+    }
+
+    SaveSettings() {
+        for (let setting of this.settings) {
+            this.SaveSettingObj(setting);
+        }
         this.LoadSettings();
     }
 
+    SaveSettingByName(name) {
+        for (let setting of this.settings) {
+            if (setting.name == name) {
+                this.SaveSettingObj(setting);
+            }
+        }
+    }
+
     SaveDefaultSettings() {
-        this.SaveSettings(Settings.defaultNumLetters, Settings.defaultMinWordLength, Settings.defaultTheme);
+        for (let setting of this.settings) {
+            this.SaveSettingObj(setting, true);
+        }
+        this.LoadSettings();
     }
 
-    SetNumLetters(numLettersInput) {
-        if (!isNaN(numLettersInput)) {
-            console.log("Set numLetters to", numLettersInput);
-            this.numLetters = numLettersInput;
-        }
-    }
-
-    SetMinWordLength(minWordLengthInput) {
-        if (!isNaN(minWordLengthInput)) {
-            console.log("Set minWordLength to", minWordLengthInput);
-            this.minWordLength = minWordLengthInput;
-        }
-    }
-    
-    SetTheme(themeName) {
-        this.storage.setItem('theme', themeName);
-        if (themeName === "light") {
-            document.getElementById("themeLight").checked = true;
-        } else {
-            document.getElementById("themeDark").checked = true;
-        }
-        this.theme = themeName;
+    SaveSettingObj(setting, useDeafult=false) {
+        this.storage.setItem(setting.name, useDeafult ? setting.default : setting.value);
     }
     
     ToggleHeading() {
-        this.SetHeadingVisible(document.getElementById("heading").hidden);
+        this.showHeading.value = !this.showHeading.value;
+        this.SetHeadingVisible();
     }
     
-    SetHeadingVisible(visible) {
-        document.getElementById("heading").hidden = !visible;
-        document.getElementById("toggle-heading").innerHTML = !visible ? "\\/" : "/\\";
-        this.storage.setItem("show-heading", visible);
-    }
-
-
-    // helper
-    IsNanOrNull(val) {
-        return val == undefined || val == null || isNaN(val);
+    SetHeadingVisible() {
+        document.getElementById("heading").hidden = !this.showHeading.value;
+        document.getElementById("toggle-heading").innerHTML = !this.showHeading.value ? "\\/" : "/\\";
+        this.storage.setItem(this.showHeading.name, this.showHeading.value);
     }
 }

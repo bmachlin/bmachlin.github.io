@@ -2,47 +2,30 @@
 let DEBUG = true;
 let DEBUG2 = false;
 
-// html ids
-// match these with the ids in index.html
-let tabId = "tab-text";
-let inputTabId = "input-tab";
-let settingsId = "settings";
-let markerBarId= "marker-bar";
-let markerEditorId= "marker-editor";
-
 // globals
-let Timer;  // the run cycle controller
-let context;
-let interval = 100;
-let looper;
+let context;                    // main reference object
+let looper;                     // Interval object
+let interval = 100;             // interval in ms to run the game loop
 
 function setup() {
     context = new Context();
     context.Storage = new Storage();
     context.Settings = new Settings(context.Storage);
     context.Settings.LoadSettings();
-    context.Scoring = new Scoring(context.Settings.minWordLength, context.Settings.numLetters);
-    context.Game = new Game();
+    context.Scoring = new Scoring(context.Settings.minWordLength.value, context.Settings.maxWordLength.value);
+    context.Game = new Game(context.Settings.minWordLength.value, context.Settings.maxWordLength.value);
     context.Dict = new Dictionary();
     context.GameActions = new GameActions(context);
     context.Renderer = new Renderer(context);
-    context.Dict.LoadWords().then(() => setup2());
+    context.Dict.LoadWords();
 }
-
-function setup2() {
-    context.GameActions.NewLevel();
-    looper = setInterval(updateGame, interval);
-    console.log("Done");
-}
-
 
 //#region settings
 
 function saveSettings() {
-    let nli = parseInt(document.getElementById("numLettersInput").value);
-    let mwl = parseFloat(document.getElementById("minWordLengthInput").value);
-    let thm = document.getElementById("themeLight").checked ? "light" : "dark";
-    context.Settings.SaveSettings(nli, mwl, thm);
+    context.Settings.maxWordLength.ParseFromElementValue();
+    context.Settings.minWordLength.ParseFromElementValue();
+    context.Settings.SaveSettings();
 }
 function defaultSettings() {
     context.Settings.SaveDefaultSettings();
@@ -53,29 +36,55 @@ function toggleHeading() {
 
 // #endregion
 
+//#region render
+
+function initialRender() {
+    context.Renderer.RenderLetters(true);
+    context.Renderer.RenderWord(true);
+    context.Renderer.RenderFindableWords();
+}
+
+//#endregion
 
 
 //#region gameplay
+function newGame() {
+    clearInterval(looper);
+    context.GameActions.NewGame();
+    looper = setInterval(updateGame, interval);
+    initialRender();
+}
+
+function endGame() {
+    context.GameActions.EndGame();
+    clearInterval(looper);
+}
 
 function updateGame() {
+    if (document.activeElement != document.body) {
+        document.body.focus();
+    }
     context.GameActions.IncrementTimers(interval);
-    document.getElementById("letters").innerHTML = context.Game.letters.join(" ").toUpperCase();
-    document.getElementById("word").innerHTML = context.Game.currentWord.join("").toUpperCase();
+    document.getElementById("root-letters").innerHTML = context.Game.letters.join(" ").toUpperCase();
+    document.getElementById("xletters").innerHTML = context.Game.remainingLetters.join(" ").toUpperCase();
+    document.getElementById("xword").innerHTML = context.Game.currentWord.join("").toUpperCase();
     document.getElementById("downTimer").innerHTML = context.Game.downTimerSec;
     document.getElementById("upTimer").innerHTML = context.Game.upTimerSec;
-    document.getElementById("level").innerHTML = context.Game.level;
+    document.getElementById("level").innerHTML = context.Game.level; 
     document.getElementById("canMoveOn").innerHTML = context.Game.foundTargetWord;
-    context.Renderer.RenderFindableWords();
+    document.getElementById("foundAllWords").innerHTML = context.Game.HasFoundAllWords();
     
     if (context.Game.IsGameOver()) {
-        context.GameActions.EndGame();
-        clearInterval(looper);
+        endGame();
     }
 }
 
 function handleKeyDown(event) {
     if (event.repeat) return;
     if (DEBUG2) console.log("Key pressed:", event.key);
+
+    if (context.Game.IsGameOver()) return;
+
     let key = event.key.toLowerCase();
     if (/^[a-z]$/i.test(key)) {
         context.GameActions.AddLetter(key)
@@ -87,7 +96,10 @@ function handleKeyDown(event) {
         context.GameActions.Backspace();
     }
     else if (event.key == " ") {
-        context.Game.ShuffleLetters();
+        if (event.target == document.body) {
+            event.preventDefault();
+        }
+        context.GameActions.Shuffle();
     }
     else if (event.key == "`") {
         if (context.Game.foundTargetWord) {

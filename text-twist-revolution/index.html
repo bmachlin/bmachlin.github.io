@@ -21,10 +21,10 @@
             <div id="settings">
                 <h3>Settings</h3>
                 <label>Number of Letters</label>
-                <input type="number" id="numLettersInput" name="numLetters" min="5" max="7" size=2><br>
+                <input type="number" id="maxWordLengthInput" name="maxWordLength" min=4 max=8 size=2><br>
                 <label>Minimum Word Length</label>
-                <input type="number" id="minWordLengthInput" name="minWordLength" min=2 max="4" size=2><br>
-                <div hidden>
+                <input type="number" id="minWordLengthInput" name="minWordLength" min=2 max=4 size=2><br>
+                <div id="themeInput" hidden>
                 <label>Theme: </label>
                     <input type="radio" id="themeLight" value="light" name="themeInput"><label for="themeLight">Light</label>
                     <input type="radio" id="themeDark" value="dark" name="themeInput"><label for="themeDark">Dark</label>
@@ -32,6 +32,10 @@
                 <br><br>
                 <button id="saveSettingsButton" onclick="saveSettings()">Save Settings</button>
                 <button id="clearSettingsButton" onclick="defaultSettings()">Restore Defaults</button>
+                <br><br>
+                <button id="newGameButton" onclick="newGame()">New Game</button>
+                <button id="endGameButton" onclick="endGame()">End Game</button>
+                &nbsp High Score: <span id="highScoreText"></span>
             </div>
         </section>
         <button id="toggle-heading" style="width: 100%;" onclick="toggleHeading()">/\</button>
@@ -40,9 +44,17 @@
             Total time: <span id="upTimer"></span><br>
             Level: <span id="level"></span><br>
             Can Move On: <span id="canMoveOn"></span><br>
+            Found all words: <span id="foundAllWords"></span><br>
             <hr>
-            Letters: <span id="letters"></span><br>
-            Word: <span id="word"></span><br>
+            Letters: <span id="root-letters"></span><br>
+            RLetters: <span id="xletters"></span><br>
+            Word: <span id="xword"></span><br><br>
+            <div id="letters" style="margin: 10px;"></div>
+            <div id="word" style="margin: 10px;"></div>
+            <button id="submitButton">Submit</button>
+            <button id="shuffleButton">Shuffle</button>
+            <button id="clearButton">Clear</button>
+            <button id="nextLevelButton">Next Level</button>
             <hr>
             <div id="findableWords">
                 <div class="wordColumn"></div>
@@ -52,6 +64,7 @@
 
         <script type="text/javascript" src="../Storage.js"></script>
         <script type="text/javascript" src="Objects/Context.js"></script>
+        <script type="text/javascript" src="Objects/Setting.js"></script>
         <script type="text/javascript" src="Objects/Settings.js"></script>
         <script type="text/javascript" src="Objects/Scoring.js"></script>
         <script type="text/javascript" src="Objects/Dictionary.js"></script>

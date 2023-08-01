@@ -1,6 +1,6 @@
 class Dictionary {
     constructor() {
-        this.words;
+        this.words = null;
     }
 
     async LoadWords() {
@@ -9,6 +9,7 @@ class Dictionary {
             const jsonData = await response.json();
             if (jsonData) {
                 const dataSet = new Set(Object.keys(jsonData));
+                if (DEBUG) console.log("words loaded");
                 this.words = dataSet;
             } else {
                 console.error("Failed to load words.");

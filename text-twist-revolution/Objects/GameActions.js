@@ -42,7 +42,8 @@ class GameActions {
     }
 
     EndGame() {
-        let finalWords = [...this.Game.findableWords].filter(w => w.length == this.Game.maxLetters);
+        let finalWords = [...this.Game.findableWords];
+        finalWords.sort((a,b) => b.length > a.length);
         alert(`Game Over! Score: ${this.Game.upTimerSec}.\nFinal word(s): ${finalWords}`);
     }
 

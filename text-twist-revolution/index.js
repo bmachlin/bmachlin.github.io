@@ -18,6 +18,7 @@ function setup() {
     context.GameActions = new GameActions(context);
     context.Renderer = new Renderer(context);
     context.Dict.LoadWords();
+    context.Renderer.RenderHighScore();
 }
 
 //#region settings
@@ -42,6 +43,7 @@ function initialRender() {
     context.Renderer.RenderLetters(true);
     context.Renderer.RenderWord(true);
     context.Renderer.RenderFindableWords();
+    context.Renderer.RenderHighScore();
 }
 
 //#endregion
@@ -57,6 +59,11 @@ function newGame() {
 
 function endGame() {
     context.GameActions.EndGame();
+    if (context.Settings.highScore.value < context.Game.upTimerSec) {
+        context.Settings.highScore.value = context.Game.upTimerSec;
+        context.Settings.SaveSettingObj(context.Settings.highScore);
+        context.Renderer.RenderHighScore();
+    }
     clearInterval(looper);
 }
 
@@ -66,8 +73,6 @@ function updateGame() {
     }
     context.GameActions.IncrementTimers(interval);
     document.getElementById("root-letters").innerHTML = context.Game.letters.join(" ").toUpperCase();
-    document.getElementById("xletters").innerHTML = context.Game.remainingLetters.join(" ").toUpperCase();
-    document.getElementById("xword").innerHTML = context.Game.currentWord.join("").toUpperCase();
     document.getElementById("downTimer").innerHTML = context.Game.downTimerSec;
     document.getElementById("upTimer").innerHTML = context.Game.upTimerSec;
     document.getElementById("level").innerHTML = context.Game.level; 

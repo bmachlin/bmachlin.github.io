@@ -67,6 +67,10 @@ class Renderer {
 
     }
 
+    RenderHighScore() {
+        document.getElementById(context.Settings.highScore.elementId).innerText = context.Settings.highScore.value;
+    }
+
     // hide = hide finable words (false for testing)
     // showPrevFound = show words found in prev rounds
     RenderFindableWords(hide=false,showPrevFound=true) {

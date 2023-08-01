@@ -8,7 +8,7 @@ class Settings {
         this.theme.elementId = "themeInput";
         this.theme.options = ["light", "dark"];
         this.settings.push(this.theme);
-        this.showHeading = new Setting("show-heading", "boolean", true);
+        this.showHeading = new Setting("showHeading", "boolean", true);
         this.showHeading.elementId = "heading";
         this.settings.push(this.showHeading);
         this.maxWordLength = new Setting("maxWordLength", "number", 6, 4, 8);
@@ -17,6 +17,9 @@ class Settings {
         this.minWordLength = new Setting("minWordLength", "number", 3, 2, 4);
         this.minWordLength.elementId = "minWordLengthInput";
         this.settings.push(this.minWordLength);
+        this.highScore = new Setting("highScore", "number", 0, 0);
+        this.highScore.elementId = "highScoreText";
+        this.settings.push(this.highScore);
     }
 
     LoadSettings() {
@@ -27,6 +30,9 @@ class Settings {
         this.showHeading.Parse(this.storage.getItem(this.showHeading.name));
         if (DEBUG) console.log(this.showHeading.name, this.showHeading.value);
         this.SetHeadingVisible(this.showHeading.value);
+
+        this.highScore.Parse(this.storage.getItem(this.highScore.name));
+        if (DEBUG) console.log(this.highScore.name, this.highScore.value);
     }
 
     LoadInputSetting(setting) {

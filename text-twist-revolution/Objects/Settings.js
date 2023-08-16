@@ -8,15 +8,19 @@ class Settings {
         this.theme.elementId = "themeInput";
         this.theme.options = ["light", "dark"];
         this.settings.push(this.theme);
-        this.showHeading = new Setting("showHeading", "boolean", true);
-        this.showHeading.elementId = "heading";
-        this.settings.push(this.showHeading);
+        this.showSettings = new Setting("showSettings", "boolean", true);
+        this.showSettings.elementId = "show-settings";
+        this.settings.push(this.showSettings);
         this.maxWordLength = new Setting("maxWordLength", "number", 6, 4, 8);
         this.maxWordLength.elementId = "maxWordLengthInput";
         this.settings.push(this.maxWordLength);
         this.minWordLength = new Setting("minWordLength", "number", 3, 2, 4);
         this.minWordLength.elementId = "minWordLengthInput";
         this.settings.push(this.minWordLength);
+        this.difficulty = new Setting("difficulty", "string", "easy");
+        this.difficulty.options = ["easy","medium","hard"];
+        this.difficulty.elementId = "difficultyInput";
+        this.settings.push(this.difficulty);
         this.highScore = new Setting("highScore", "number", 0, 0);
         this.highScore.elementId = "highScoreText";
         this.settings.push(this.highScore);
@@ -26,10 +30,11 @@ class Settings {
         this.LoadInputSetting(this.maxWordLength);
         this.LoadInputSetting(this.minWordLength);
         this.LoadInputSetting(this.theme);
+        this.LoadInputSetting(this.difficulty);
 
-        this.showHeading.Parse(this.storage.getItem(this.showHeading.name));
-        if (DEBUG) console.log(this.showHeading.name, this.showHeading.value);
-        this.SetHeadingVisible(this.showHeading.value);
+        this.showSettings.Parse(this.storage.getItem(this.showSettings.name));
+        if (DEBUG) console.log(this.showSettings.name, this.showSettings.value);
+        this.SetSettingsVisible(this.showSettings.value);
 
         this.highScore.Parse(this.storage.getItem(this.highScore.name));
         if (DEBUG) console.log(this.highScore.name, this.highScore.value);
@@ -67,14 +72,15 @@ class Settings {
         this.storage.setItem(setting.name, useDeafult ? setting.default : setting.value);
     }
     
-    ToggleHeading() {
-        this.showHeading.value = !this.showHeading.value;
-        this.SetHeadingVisible();
+    ToggleSettings() {
+        this.showSettings.value = !this.showSettings.value;
+        this.SetSettingsVisible();
     }
     
-    SetHeadingVisible() {
-        document.getElementById("heading").hidden = !this.showHeading.value;
-        document.getElementById("toggle-heading").innerHTML = !this.showHeading.value ? "\\/" : "/\\";
-        this.storage.setItem(this.showHeading.name, this.showHeading.value);
+    SetSettingsVisible() {
+        document.getElementById("settings").hidden = !this.showSettings.value;
+        document.getElementById("toggle-settings-top").innerHTML = !this.showSettings.value ? "/\\" : "\\/";
+        document.getElementById("toggle-settings-bot").innerHTML = !this.showSettings.value ? "\\/" : "/\\";
+        this.storage.setItem(this.showSettings.name, this.showSettings.value);
     }
 }

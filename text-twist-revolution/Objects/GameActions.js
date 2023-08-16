@@ -41,12 +41,6 @@ class GameActions {
         this.context.Renderer.RenderFindableWords();
     }
 
-    EndGame() {
-        let finalWords = [...this.Game.findableWords];
-        finalWords.sort((a,b) => b.length > a.length);
-        alert(`Game Over! Score: ${this.Game.upTimerSec}.\nFinal word(s): ${finalWords}`);
-    }
-
     //#endregion
 
     //#region word actions
@@ -59,7 +53,17 @@ class GameActions {
     Submit() {
         let word = this.Game.currentWord.join("");
         if (DEBUG2) console.log("Submitting current word", word);
+        
+        // if word is empty, populate with last submitted word
+        if (word.length == 0 && this.Game.lastSubmitted.length > 0) {
+            this.RepopulateWord();
+            return;
+        }
+
+        this.Game.lastSubmitted = [...this.Game.currentWord];
+
         if (this.Dict.IsWord(word) && !this.Game.foundWords.has(word) && this.Game.findableWords.has(word)) {
+            // valid word found
             this.Game.foundWords.add(word);
             this.Game.unfoundWords.delete(word);
             if (word.length == this.Game.maxLetters) {
@@ -73,9 +77,16 @@ class GameActions {
             this.context.Renderer.RenderFindableWords();
         }
         else {
-
+            // invalid/found word
         }
         this.Clear();
+    }
+
+    RepopulateWord() {
+        console.log()
+        for (let l of this.Game.lastSubmitted) {
+            this.AddLetter(l);
+        }
     }
 
     Clear() {

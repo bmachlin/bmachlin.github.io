@@ -12,6 +12,7 @@ class Game {
         this.minLetters = min;
         this.maxLetters = max;
         
+        this.lastSubmitted = [];
         this.currentWord = [];                   // letters waiting to be submitted
         this.remainingLetters = [];              // letters not used in current word
     }

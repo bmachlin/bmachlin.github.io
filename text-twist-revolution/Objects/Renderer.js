@@ -71,15 +71,8 @@ class Renderer {
         document.getElementById(context.Settings.highScore.elementId).innerText = context.Settings.highScore.value;
     }
 
-    // hide = hide finable words (false for testing)
-    // showPrevFound = show words found in prev rounds
-    RenderFindableWords(hide=false,showPrevFound=true) {
-        let el = document.getElementById("findableWords");
-        let c1 = el.children[0];
-        let c2 = el.children[1];
-        c1.replaceChildren();
-        c2.replaceChildren();
-
+    // showUnfound = reveal all words
+    RenderFindableWords(showUnfound=false) {
         let fbwords = [...this.context.Game.findableWords];
         // sort first by word length, then alphabetically
         fbwords.sort((a,b) => {
@@ -87,21 +80,47 @@ class Renderer {
             return b < a;
         });
 
-        let col = c1;
-        for (let word of fbwords) {
-            // adding 2 elems per word so halfway is when children = # of words
-            if (col.childElementCount >= fbwords.length-1) col = c2;
+        let wordListElem = document.getElementById("findableWords");
+        wordListElem.replaceChildren();
 
-            let child = document.createElement("span");
-            if (this.context.Game.foundWords.has(word)) {
-                child.innerHTML = word.toUpperCase();
-            }
-            else {
-                child.innerHTML = this.BLANK_CHAR.repeat(word.length);
-            }
-            
-            col.appendChild(child);
-            col.appendChild(document.createElement("br"));
+        let columnCount = this.calcWordColumns(fbwords.length);
+        let columns = [];
+        for (let i = 0; i < columnCount; i++) {
+            let col = document.createElement("div");
+            col.className = "wordColumn";
+            columns.push(col);
         }
+
+
+        let colIndex = -1;
+        let count = 0;
+        let switchNum = Math.ceil(fbwords.length/columnCount);
+        for (let word of fbwords) {
+            if (count%switchNum == 0) {
+                colIndex++;
+            }
+            // console.log(count,switchNum,count%switchNum, fbwords.length,columnCount,colIndex)
+            
+            let child = document.createElement("span");
+            let text = this.BLANK_CHAR.repeat(word.length);
+            child.classList.add("findable-word");
+            if (this.context.Game.foundWords.has(word)) {
+                text = word.toUpperCase();
+            }
+            else if (showUnfound) {
+                child.classList.add("unfound-word");
+                text = word.toUpperCase();
+            }
+
+            child.innerText = text;
+
+            columns[colIndex].appendChild(child);
+            count++;
+        }
+        wordListElem.append(...columns);
+    }
+
+    calcWordColumns(numWords) {
+        return Math.ceil(numWords/15);
     }
 }

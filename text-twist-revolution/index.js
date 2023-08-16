@@ -12,8 +12,8 @@ function setup() {
     context.Storage = new Storage();
     context.Settings = new Settings(context.Storage);
     context.Settings.LoadSettings();
-    context.Scoring = new Scoring(context.Settings.minWordLength.value, context.Settings.maxWordLength.value);
     context.Game = new Game(context.Settings.minWordLength.value, context.Settings.maxWordLength.value);
+    context.Scoring = new Scoring(context.Settings.minWordLength.value, context.Settings.maxWordLength.value, context.Settings.difficulty.value);
     context.Dict = new Dictionary();
     context.GameActions = new GameActions(context);
     context.Renderer = new Renderer(context);
@@ -26,13 +26,14 @@ function setup() {
 function saveSettings() {
     context.Settings.maxWordLength.ParseFromElementValue();
     context.Settings.minWordLength.ParseFromElementValue();
+    context.Settings.difficulty.ParseFromElementValue();
     context.Settings.SaveSettings();
 }
 function defaultSettings() {
     context.Settings.SaveDefaultSettings();
 }
-function toggleHeading() {
-    context.Settings.ToggleHeading();
+function toggleSettings() {
+    context.Settings.ToggleSettings();
 }
 
 // #endregion
@@ -58,12 +59,12 @@ function newGame() {
 }
 
 function endGame() {
-    context.GameActions.EndGame();
     if (context.Settings.highScore.value < context.Game.upTimerSec) {
         context.Settings.highScore.value = context.Game.upTimerSec;
         context.Settings.SaveSettingObj(context.Settings.highScore);
         context.Renderer.RenderHighScore();
     }
+    context.Renderer.RenderFindableWords(true);
     clearInterval(looper);
 }
 

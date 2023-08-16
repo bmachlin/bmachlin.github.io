@@ -1,30 +1,67 @@
 class Scoring {
-    constructor(minWordLength, maxWordLength) {
+    EASY = 0;
+    MEDIUM = 1;
+    HARD = 2;
+
+    constructor(minWordLength, maxWordLength, system) {
         this.minlen = minWordLength;
         this.maxlen = maxWordLength;
-        this.system = 0;
+        switch (system.toLowerCase()) {
+            case "easy":
+                this.system = this.EASY;
+                break;
+            case "medium":
+                this.system = this.MEDIUM;
+                break;
+            case "hard":
+                this.system = this.HARD;
+                break;
+        }
     }
 
     GetWordScore(word) {
-        switch(this.system) {
-            case 0:
-                return this.System0(word);
+        switch (this.system) {
+            case this.EASY:
+                return this.Easy(word);
+            case this.MEDIUM:
+                return this.Medium(word);
+            case HARD:
+                return this.Hard(word);
             default:
-                return this.System0(word);
+                return this.Easy(word);
         }
     }
 
     GetFoundAllBonus() {
-        switch(this.system) {
-            case 0:
+        switch (this.system) {
+            case EASY:
                 return 5;
+            case this.MEDIUM:
+                return 3;
+            case HARD:
+                return 1;
             default:
                 return 5;
         }
     }
 
-    System0(word) {
+    Easy(word) {
+        console.log("esay")
         let length = word.length;
         return 3 + length - this.minlen;
+    }
+
+    Medium(word) {
+        console.log("m")
+
+        let length = word.length;
+        return 2 + length - this.minlen;
+    }
+
+    Hard(word) {
+        console.log("h")
+
+        let length = word.length;
+        return 1 + length - this.minlen;
     }
 }

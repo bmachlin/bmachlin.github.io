@@ -18,7 +18,7 @@ class Spotify {
         this.GenerateCodeChallenge(codeVerifier).then(codeChallenge => {
             let state = this.GenerateRandomString(16);
             let scope = 'user-top-read';
-
+ 
             this.storage.setItem('code_verifier', codeVerifier);
 
             let args = new URLSearchParams({
@@ -230,6 +230,18 @@ class Spotify {
     GetArtist(id, callback) {
         let url = this.API_BASE + "artists/" + id;
         return this.CallSpotify(url, {}, callback);
+    }
+
+    // options: include_groups [album,single,appears_on,compilation], market, limit [1,50] (20), offset (0)
+    GetArtistAlbums(id, options = {}, callback) {
+        let url = this.API_BASE + "artists/" + id + "/albums";
+        return this.CallSpotify(url, options, callback);
+    }
+
+    // options: market
+    GetAlbums(ids, options = {}, callback) {
+        let url = this.API_BASE + "albums?ids=" + ids.join(",");
+        return this.CallSpotify(url, options, callback);
     }
 
     //#endregion

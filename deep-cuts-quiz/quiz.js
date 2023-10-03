@@ -15,26 +15,28 @@ function setup() {
     context.GameActions = new GameActions(context);
     context.Renderer = new Renderer(context);
 
-    processArgs();
+    context.Spotify = new Spotify(config.client, config.redirectRoot + "index.html", localStorage);
+    if (context.Spotify.NeedsAuth()) {
+        if (context.Spotify.HasRefreshToken()) {
+            context.Spotify.RefreshAccess(
+                (data) => { processArgs(); },
+                (error) => { window.location = "index.html"; });
+        } else {
+            window.location = "index.html";
+        }
+    } else {
+        processArgs();
+    }
 }
 
 function initialRender() {
     context.Renderer.RenderHighScore();
 }
 
-
-function auth() {
-    context.Spotify.AuthorizeUserImplicit();
-}
-
-function test() {
-    context.Spotify.SearchSpotify("pink", null, () => { console.log("works") });
-}
-
 async function processArgs() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    if (DEBUG) console.log(urlParams);
+    if (DEBUG2) console.log(urlParams);
 
     if (!urlParams.has("id")) {
         // window.location = "selection.html";
@@ -44,13 +46,13 @@ async function processArgs() {
 
     context.Renderer.RenderLoading();
 
-    let res = await context.Game.artist.Load(context.Spotify, urlParams.get("id"));
-    console.log(res)
-    if (!res) {
-        alert("could not get artists data for id", urlParams.get("id"));
-    } else {
-        readyGame();
-    }
+    context.Game.artist.Load(context.Spotify, urlParams.get("id"), (done) => {
+        if (!done) {
+            alert("could not get artists data for id", urlParams.get("id"));
+        } else {
+            readyGame();
+        }
+    });
 }
 
 function readyGame() {

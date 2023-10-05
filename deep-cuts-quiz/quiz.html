@@ -33,7 +33,7 @@
                     <div class="mc-answer answer-button">Answer 3</div>
                     <div class="mc-answer answer-button">Answer 4</div>
                 </div>
-                <div hidden id="next-button" class="answer-button">Next</div>
+                <div hidden id="next-button" class="answer-button" onclick="nextQuestion()">Next</div>
             </div>
             
         </main>
@@ -46,11 +46,14 @@
         <script type="text/javascript" src="config.js"></script>
         <script type="text/javascript" src="Objects/Context.js"></script>
         <script type="text/javascript" src="Objects/Settings.js"></script>
+        <script type="text/javascript" src="Objects/AlbumDataRetriever.js"></script>
         <script type="text/javascript" src="Objects/ArtistData.js"></script>
-        <script type="text/javascript" src="Objects/ArtistDataRetriever.js"></script>
         <script type="text/javascript" src="Objects/Game.js"></script>
         <script type="text/javascript" src="Objects/GameActions.js"></script>
         <script type="text/javascript" src="Objects/Renderer.js"></script>
+        <script type="text/javascript" src="Objects/Questions/QuestionMaker.js"></script>
+        <script type="text/javascript" src="Objects/Questions/Question.js"></script>
+        <script type="text/javascript" src="Objects/Questions/ChoiceQuestion.js"></script>
     
         <script type="text/javascript" src="quiz.js"></script>
     </body>

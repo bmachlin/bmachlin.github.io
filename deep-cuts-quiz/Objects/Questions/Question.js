@@ -1,8 +1,8 @@
 class Question {
-    // type [choice, text, number, order]
-    constructor(type, questionText, uri = null) {
+    constructor(type, difficulty, data, uri = null) {
         this.type = type;
-        this.questionText = questionText;
+        this.difficulty = difficulty;
+        this.data = data;
         this.uri = uri;
     }
 }

@@ -1,4 +1,4 @@
-class ArtistDataRetiever {
+class AlbumDataRetiever {
     constructor(Spot, id, type) {
         this.Spot = Spot;
         this.id = id;
@@ -31,38 +31,38 @@ class ArtistDataRetiever {
                 "uri": item.uri,
                 "name": item.name,
                 "totalTracks": item.total_tracks,
-                "releaseYear": parseInt(item.release_date.substring(0,4))
+                "releaseYear": parseInt(item.release_date.substring(0, 4))
             };
             this.items.push(newItem);
         });
-        this.items.sort((a,b) => {
+        this.items.sort((a, b) => {
             return a.releaseYear > b.releaseYear;
         });
     }
 
     ParseReleaseYear(date, precision) {
-        return parseInt(date.substring(0,4));
+        return parseInt(date.substring(0, 4));
     }
 
     FillList() {
-        // **ONLY DOING EARLIEST 20 ITEMS** //
-
-        let idList = [];
-        for (let i = 0; i < 20; i++) {
-            if (i >= this.items.length) break;
-            idList.push(this.items[i].id);
+        let idLists = [];
+        for (let i = 0; i < this.items.length; i += 20) {
+            const idGroup = this.items.slice(i, i + 20).map((item) => { return item.id });
+            idLists.push(idGroup);
         }
 
-        this.Spot.GetAlbums(idList, {}, (data) => {
-            if (data) {
-                this.ProcessListFill(data);
-            } else {
-                console.log("error filling list", this.id, this.type);
-            }
-        });
+        for (let i = 0; i < idLists.length; i ++) {
+            this.Spot.GetAlbums(idLists[i], {}, (data) => {
+                if (data) {
+                    this.ProcessListFill(data, i+1 == idLists.length);
+                } else {
+                    console.log("error filling list", this.id, this.type);
+                }
+            });
+        }
     }
 
-    ProcessListFill(data) {
+    ProcessListFill(data, last) {
         let albums = {};
         data.albums.forEach((album) => {
             albums[album.id] = album;
@@ -72,11 +72,14 @@ class ArtistDataRetiever {
             let album = albums[item.id];
             item.popularity = album.popularity;
             item.artists = this.ProcessArtists(album.artists);
-            item.label = album.label;
+            item.label = album.label ?? "";
             item.image = album.images.length > 0 ? album.images[0].url : "no-album-art.png";
             item.tracks = this.ProcessAlbumTracks(album)
         });
-        this.loadedCB(true);
+        this.items.sort((a, b) => {
+            return a.popularity < b.popularity;
+        });
+        if (last) this.loadedCB(true);
     }
 
     ProcessArtists(artistsData) {

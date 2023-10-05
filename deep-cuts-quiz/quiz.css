@@ -14,8 +14,13 @@ main {
     justify-content: space-between;
 }
 
-#game-info, #question-text, #spotify-embed, #answer-area {
+#game-info, #question-text, #answer-area {
     margin: 3vh 0;
+}
+
+#spotify-embed {
+    width: 50%;
+    margin: auto;
 }
 
 #question-text {

@@ -56,13 +56,12 @@ class Renderer {
             let elem = document.createElement("div");
             elem.classList.add("mc-answer", "answer-button");
             elem.innerText = item;
-            elem.addEventListener("click", (e) => {
+            elem.addEventListener("click", function el(e) {
                 selectionCB(elem.innerText);
             });
             $answers.push(elem);
         });
         shuffleArray($answers);
-        console.log($answers[0])
         $answers.forEach((ans) => {
             this.$answerArea.appendChild(ans);
         });
@@ -75,7 +74,7 @@ class Renderer {
         this.$gameArea.hidden = false;
 
         this.$answerArea.childNodes.forEach((elem) => {
-            elem.classList.add(elem.innerText == correct ? "correct" : "incorrect"); 
+            elem.classList.add(elem.innerText == correct ? "correct" : "incorrect");
         })
     }
 

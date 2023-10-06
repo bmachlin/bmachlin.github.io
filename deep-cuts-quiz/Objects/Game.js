@@ -5,5 +5,6 @@ class Game {
         this.currentQuestion = null;
         this.totalQuestions = 10;
         this.artist = new ArtistData();
+        this.selected = false;
     }
 }

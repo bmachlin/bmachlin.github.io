@@ -34,7 +34,6 @@ class QuestionMaker {
         let question = new ChoiceQuestion();
         let album = randomElement(this.artistData.albums);
         let track = randomElement(album.tracks);
-        console.log(track);
         let correctAnswer = album.name;
         let incorrectAnswers = randomElements(this.artistData.albums, 3, (item) => {
             if (item.id == album.id) return false;
@@ -45,7 +44,6 @@ class QuestionMaker {
             // add s/t if there aren't enough other albums and noe are already s/t
             incorrectAnswers.push(this.artistData.name);
         }
-        console.log(track.name, correctAnswer, incorrectAnswers);
         question.text = "What album has the track " + track.name + "?";
         question.correctAnswer = correctAnswer;
         question.incorrectAnswers = incorrectAnswers;

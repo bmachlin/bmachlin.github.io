@@ -66,15 +66,16 @@ class Runner {
         this.xOrder = rightBias ? [1, 0, -1] : [-1, 0, 1];
         this.yOrder = upBias ? [1, 0, -1] : [-1, 0, 1];
         this.color = col;
-        this.directionX = random([-1, 1]);
+        this.directionX = random([-1, 0, 1]);
         this.directionY = random([-1, 0, 1]);
+        if (this.directionX == 0 && this.directionY == 0) this.directionX = -1;
         this.isAlive = true;
     }
 
     updateDirection() {
         // if current direction is clear, continue
         if (this.isDirectionClear(this.directionX, this.directionY)) {
-            if (noise(this.x, this.y) > randomTurnProbability) {
+            if (noise(this.x*100, this.y*100) > randomTurnProbability) {
                 return;
             }
             else {
@@ -100,7 +101,10 @@ class Runner {
 
     isDirectionClear(xd, yd) {
         let key = `${this.x + xd},${this.y + yd}`;
-        return !covered.has(key) || !covered.get(key);
+        if (covered.has(key) && covered.get(key)) return false;
+
+        // if ((this.directionX != 0 && this.directionY == 0))
+        return true;
     }
 
     checkBounds() {

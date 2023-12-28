@@ -88,7 +88,7 @@ function reset() { activate(); }
 
 function draw() {
     activate();
-    background(175, 153, 131);
+    background(20, 20, 20);
     grid = [];
 
     for (let i = 0; i < cols; i++) {

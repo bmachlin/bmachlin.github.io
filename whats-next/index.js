@@ -1,53 +1,45 @@
+let DEBUG = true;
+let DEBUG2 = true;
 
-document.addEventListener('DOMContentLoaded', () => {
-    let pp = document.getElementsByClassName("playpause")[0];
-    pp.onclick = (e) => { pp.classList.toggle("paused"); };
-    ready();
-});
+document.addEventListener('DOMContentLoaded', ready);
 
-let beats = 4;
-let nextBeats;
-let metronome;
-let measureDisplay;
-let beatFrequencies = [];
-let bpm;
+let context;
 
 function ready() {
-    measureDisplay = new MeasureDisplay(document.querySelector(".measure"), 4);
+    if (DEBUG2) console.log("ready");
+    context = new Context();
+    context.Settings.LoadSettings();
 }
 
 function randomizeFreqs() {
-    let freqList = document.querySelector(".beat-frequencies");
-    for (let bf of freqList.children) {
-        bf.children[1].value = Math.floor(Math.random() * 10);
-    }
+    context.Settings.RandomizeFreqs();
 }
 
 function zeroFreqs() {
-    let freqList = document.querySelector(".beat-frequencies");
-    for (let bf of freqList.children) {
-        bf.children[1].value = 0;
-    }
+    context.Settings.ZeroFreqs();
 }
 
-
-function getBeatFrequencies() {
-    let freqList = document.querySelector(".beat-frequencies");
-    let beatFreq = [];
-    for (let bf of freqList.children) {
-        let beat = parseInt(bf.children[0].innerText);
-        let freq = parseInt(bf.children[1].value);
-        beatFreq = beatFreq.concat(new Array(freq).fill(beat));
-    }
-    return beatFreq;
+function equalFreqs() {
+    context.Settings.EqualFreqs();
 }
 
-function makeNextMeasure() {
-    let freqs = getBeatFrequencies();
-    if (!freqs.length) freqs = [4];
-    let beats = freqs[Math.floor(Math.random() * freqs.length)];
-    
-    this.nextBeats = beats;
-    document.querySelector(".next-beats").innerText = beats;
+function toggle() {
+    if (DEBUG2) console.log("toggle");
+    context.playing ? pause() : play();
 }
 
+function play() {
+    if (DEBUG2) console.log("play");
+    if (context.playing) return;
+    context.playing = true;
+    document.querySelector(".playpause").classList.add("paused");
+    context.Metronome.Play();
+}
+
+function pause() {
+    if (DEBUG2) console.log("pause");
+    if (!context.playing) return;
+    context.playing = false;
+    document.querySelector(".playpause").classList.remove("paused");
+    context.Metronome.Pause();
+}

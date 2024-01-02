@@ -4,14 +4,15 @@ class Settings {
         
         this.accent1 = true;
         this.onlyPlay1 = false;
-        this.lag = 0;
+        this.useSequence = false;
+        this.sequence = [];
     }
 
     LoadSettings() {
         this.SetBpmFromElem();
         this.SetAccent1FromElem();
         this.SetOnlyPlay1FromElem();
-        this.SetLagFromElem();
+        this.SetUseSequenceFromElem();
     }
 
     SetBpmFromElem() {
@@ -26,8 +27,16 @@ class Settings {
         this.onlyPlay1 = document.querySelector("#onlyPlay1Input").checked;
     }
 
-    SetLagFromElem() {
-        this.lag = parseInt(document.querySelector("#lagInput").value);
+    SetUseSequenceFromElem() {
+        this.useSequence = document.querySelector("#useSequenceInput").checked;
+    }
+
+    SetSequenceFromElem() {
+        let sequence = document.querySelector(".beat-sequence-text").value;
+        sequence = sequence.replace(/[^0-9]/g, " ");
+        sequence = sequence.replace(/\s+/g, ",");
+        this.sequence = sequence.split(",").map(x => parseInt(x));
+        console.log(this.sequence);
     }
 
     RandomizeFreqs() {

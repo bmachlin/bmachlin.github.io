@@ -5,6 +5,7 @@ class Metronome {
 
     Play() {
         if (DEBUG2) console.log("play");
+        this.context.Settings.SetSequenceFromElem();
         this.PlayNextBeat();
     }
 
@@ -44,16 +45,23 @@ class Metronome {
         if (DEBUG2) console.log("playTick", accent);
         let tick = new Audio();
         tick.src = (accent ? "Audio/beat-1.wav" : "Audio/beat-2.wav");
-        setTimeout(() => tick.play(), this.context.Settings.lag);
+        tick.play();
     }
     
     SetNextMeasure() {
         if (DEBUG2) console.log("setNextMeasure");
-        let freqs = this.context.Settings.GetBeatFrequencies();
-        if (!freqs.length) freqs = [4];
-        let beats = freqs[Math.floor(Math.random() * freqs.length)];
+        let next = 0;
+        if (this.context.Settings.useSequence) {
+            next = this.context.Settings.sequence.shift();
+            this.context.Settings.sequence.push(next);
+        }
+        else {
+            let freqs = this.context.Settings.GetBeatFrequencies();
+            if (!freqs.length) freqs = [4];
+            next = freqs[Math.floor(Math.random() * freqs.length)];
+        }
         
-        this.context.nextBeats = beats;
-        document.querySelector(".next-beats").innerText = beats;
+        this.context.nextBeats = next;
+        document.querySelector(".next-beats").innerText = next;
     }
 }

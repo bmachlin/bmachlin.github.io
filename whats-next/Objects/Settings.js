@@ -5,6 +5,7 @@ class Settings {
         this.accent1 = true;
         this.onlyPlay1 = false;
         this.useSequence = false;
+        this.lag = 0;
         this.sequence = [];
     }
 
@@ -12,11 +13,12 @@ class Settings {
         this.SetBpmFromElem();
         this.SetAccent1FromElem();
         this.SetOnlyPlay1FromElem();
+        this.SetLagFromElem();
         this.SetUseSequenceFromElem();
     }
 
     SetBpmFromElem() {
-        this.context.bpm = Math.min(Math.max(parseInt(document.querySelector("#bpmInput").value), 40), 300);
+        this.context.bpm = Math.min(Math.max(parseInt(document.querySelector("#bpmInput").value) ?? 120, 40), 300);
     }
 
     SetAccent1FromElem() {
@@ -25,6 +27,10 @@ class Settings {
 
     SetOnlyPlay1FromElem() {
         this.onlyPlay1 = document.querySelector("#onlyPlay1Input").checked;
+    }
+
+    SetLagFromElem() {
+        this.lag = parseInt(document.querySelector("#lagInput").value) ?? 0;
     }
 
     SetUseSequenceFromElem() {

@@ -1,18 +1,22 @@
+
+
 * {
     box-sizing: border-box;
 }
 
 html {
-    background-color: #3a6f6d;
+    background-color: #1A8278;
+    --main-border-radius: 10px;
+    --main-background-color: #e6c184;
 }
 
 body {
     font-family: 'Arial', sans-serif;
-    background: #e9d4b7;
+    background-color: var(--main-background-color);
     color: #111;
     width: 80%;
     margin: 10px auto;
-    border-radius: 5px;
+    border-radius: var(--main-border-radius);
 }
 
 main {
@@ -24,8 +28,6 @@ main {
 
 /* reduce border if screen is small */
 @media (max-width: 600px) {
-    body {}
-
     main {
         width: 90%;
         margin: 10px auto;
@@ -39,10 +41,8 @@ a:visited {
     cursor: pointer;
 }
 
-
-
 main a:hover {
-    font-style: italic;
+    background-color: #faeed4;
 }
 
 main a:active {
@@ -57,9 +57,9 @@ h1 {
 nav {
     display: inline-block;
     top: 0;
-    width: fit-content;
-    background-color: #d4491a;
-    border-radius: 5px 0 0 0;
+    width: 100%;
+    background-color: #f76e2e;
+    border-radius: var(--main-border-radius) var(--main-border-radius) 0 0;
 }
 
 .home,
@@ -70,11 +70,12 @@ nav {
     text-decoration: none;
     padding: 10px;
     font-size: 20px;
-    color: #f4d7b5;
+    color: #fff;
+    border-radius: var(--main-border-radius) 0 0 0;
 }
 
 .home:hover {
-    background-color: #444;
+    background-color: #872b00;
 }
 
 blockquote {

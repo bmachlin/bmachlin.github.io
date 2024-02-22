@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex">
-    <title>Ben Machlin!</title>
-
-    <link rel="shortcut icon" href="res/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/main.css">
-    <style>
-        .wordlist {
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="noindex" name="robots"/>
+  <title>
+   Ben Machlin!
+  </title>
+  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/main.css" rel="stylesheet"/>
+  <style>
+   .wordlist {
             list-style: none;
         }
         .wordlist > li {
@@ -31,60 +31,111 @@
             padding: 5px 10px;
             width: fit-content;
         }
-    </style>
-</head>
-
-<body>
-    <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
-
-    <main>
-        <h1>Cool Words</h1>
-
-        <div id="filters">
-            <button name="randomize" onclick="randomize()">Randomize Order</button>
-            <button name="Toggle Examples" onclick="toggleExamples()">Toggle Examples</button>
-        </div>
-        <ul class="wordlist">
-            <li>
-                <span class="word">astrobleme</span> - 
-                <span class="part-of-speech">noun</span> - 
-                <span class="definition">an eroded remnant of a large, ancient crater made by the impact of a meteorite or comet</span>
-                <blockquote class="example">I came upon an astrobleme while hiking in the Oaxacan forest.</blockquote>
-            </li>
-            <li>
-                <span class="word">callipygian</span> - 
-                <span class="part-of-speech">adj.</span> - 
-                <span class="definition">having shapely buttocks</span>
-                <blockquote class="example">I peered around the Butt Museum, observing the paintings of callipygian gods.</blockquote>
-            </li>
-            <li>
-                <span class="word">minacious</span> - 
-                <span class="part-of-speech">adj.</span> - 
-                <span class="definition">menacing or threatening</span>
-                <blockquote class="example">The minacious children taunted their younger classmates.</blockquote>
-            </li>
-            <li>
-                <span class="word">bathos</span> - 
-                <span class="part-of-speech">noun</span> - 
-                <span class="definition">an anticlimax created by a change in mood from artful to trivial or ridiculous</span>
-                <blockquote class="example">The movie would've been a lot better if not for the bathos of the ending.</blockquote>
-            </li>
-        </ul>
-        <h2>Quotes</h2>
-        <ul>
-            <li>
-                <a href="https://danluu.com/look-stupid/">link</a>
-                <blockquote>
-                    it's often the case that there's a seemingly obvious but actually incorrect reason 
+  </style>
+ </head>
+ <body>
+  <nav>
+   <a class="home" href="/index.html">
+    Ben Machlin
+   </a>
+  </nav>
+  <main>
+   <h1>
+    Cool Words
+   </h1>
+   <div id="filters">
+    <button name="randomize" onclick="randomize()">
+     Randomize Order
+    </button>
+    <button name="Toggle Examples" onclick="toggleExamples()">
+     Toggle Examples
+    </button>
+   </div>
+   <ul class="wordlist">
+    <li>
+     <span class="word">
+      astrobleme
+     </span>
+     -
+     <span class="part-of-speech">
+      noun
+     </span>
+     -
+     <span class="definition">
+      an eroded remnant of a large, ancient crater made by the impact of a meteorite or comet
+     </span>
+     <blockquote class="example">
+      I came upon an astrobleme while hiking in the Oaxacan forest.
+     </blockquote>
+    </li>
+    <li>
+     <span class="word">
+      callipygian
+     </span>
+     -
+     <span class="part-of-speech">
+      adj.
+     </span>
+     -
+     <span class="definition">
+      having shapely buttocks
+     </span>
+     <blockquote class="example">
+      I peered around the Butt Museum, observing the paintings of callipygian gods.
+     </blockquote>
+    </li>
+    <li>
+     <span class="word">
+      minacious
+     </span>
+     -
+     <span class="part-of-speech">
+      adj.
+     </span>
+     -
+     <span class="definition">
+      menacing or threatening
+     </span>
+     <blockquote class="example">
+      The minacious children taunted their younger classmates.
+     </blockquote>
+    </li>
+    <li>
+     <span class="word">
+      bathos
+     </span>
+     -
+     <span class="part-of-speech">
+      noun
+     </span>
+     -
+     <span class="definition">
+      an anticlimax created by a change in mood from artful to trivial or ridiculous
+     </span>
+     <blockquote class="example">
+      The movie would've been a lot better if not for the bathos of the ending.
+     </blockquote>
+    </li>
+   </ul>
+   <h2>
+    Quotes
+   </h2>
+   <ul>
+    <li>
+     <a href="https://danluu.com/look-stupid/">
+      link
+     </a>
+     <blockquote>
+      it's often the case that there's a seemingly obvious but actually incorrect reason 
                     something is true, a slightly less obvious reason the thing seems untrue, and then a 
                     subtle and complex reason that the thing is actually true
-                </blockquote>
-            </li>
-        </ul>
-    </main>
-</body>
-<script>
-    function randomize() {
+     </blockquote>
+    </li>
+   </ul>
+  </main>
+ </body>
+ <script>
+  function randomize() {
         // https://stackoverflow.com/a/11972692
         let wordlist = document.querySelector(".wordlist");
         for (var i = wordlist.children.length; i >= 0; i--) {
@@ -98,5 +149,5 @@
             ex.style.display = ex.style.display === "none" ? "block" : "none";
         }
     }
-</script>
+ </script>
 </html>

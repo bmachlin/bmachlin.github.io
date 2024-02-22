@@ -1,73 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/res/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/main.css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="index.css" media="screen" charset="utf-8">
-    <title>What's Next Metronome</title>
-</head>
-
-<body>
-    <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
-
-    <h1 style="text-align: center;">What's Next Metronome</h1>
-    <section id="controls">
-               
-        <span>Measure length frequency:</span>
-        <div class="freq-controls">
-            <button onclick="zeroFreqs()">Zero</button>
-            <button onclick="randomizeFreqs()">Randomize</button>
-            <button onclick="equalFreqs()">Equalize</button>
-        </div>
-        <div class="beat-frequencies">
-            <div class="beat-freq"><label>1</label><input id="beat1freq" value=0 type="range" min=0 max=10></div>
-            <div class="beat-freq"><label>2</label><input id="beat2freq" value=0 type="range" min=0 max=10></div>
-            <div class="beat-freq"><label>3</label><input id="beat3freq" value=5 type="range" min=0 max=10></div>
-            <div class="beat-freq"><label>4</label><input id="beat4freq" value=10 type="range" min=0 max=10></div>
-            <div class="beat-freq"><label>5</label><input id="beat5freq" value=5 type="range" min=0 max=10></div>
-            <div class="beat-freq"><label>6</label><input id="beat6freq" value=5 type="range" min=0 max=10></div>
-            <div class="beat-freq"><label>7</label><input id="beat7freq" value=5 type="range" min=0 max=10></div>
-            <div class="beat-freq"><label>9</label><input id="beat9freq" value=0 type="range" min=0 max=10></div>
-            <div class="beat-freq"><label>10</label><input id="beat10freq" value=0 type="range" min=0 max=10>
-            </div>
-            <div class="beat-freq"><label>11</label><input id="beat11freq" value=0 type="range" min=0 max=10>
-            </div>
-            <div class="beat-freq"><label>12</label><input id="beat12freq" value=0 type="range" min=0 max=10>
-            </div>
-            <div class="beat-freq"><label>13</label><input id="beat13freq" value=0 type="range" min=0 max=10>
-            </div>
-        </div>
-        <div class="beat-sequence">
-            <div class="option"><label>Use sequence</label><input id="useSequenceInput" type="checkbox"></div>
-            <textarea class="beat-sequence-text">4</textarea>
-        </div>
-        <div class="options">
-            <div class="option"><label>BPM</label><input id="bpmInput" type="range" min=40 max=360 value=120 style="width: 8em;"></div>
-            <div class="option"><label>Lag</label><input id="lagInput" type="number" value=0 style="width: 4em;"></div>
-            <div class="option"><label>Accent beat 1</label><input id="accent1Input" type="checkbox" checked></div>
-            <div class="option"><label>Only play beat 1</label><input id="onlyPlay1Input" type="checkbox"></div>
-        </div>
-        <div class="playpause" onclick="toggle()"></div>
-    </section>
-    <hr>
-    <section id="metronome">
-        <div class="beat-info this-beat"><span id="this-beat-now">-</span>/<span id="this-beat-total">-</span></div>
-        <div class="measure">
-            <div class="beat active"></div>
-            <div class="beat"></div>
-            <div class="beat"></div>
-            <div class="beat"></div>
-        </div>
-        <div class="measure-info next-measure">Next Measure<div class="beat-info next-beats">-</div></div>
-    </section>
-</body>
-<script type="text/javascript" src="Objects/Settings.js"></script>
-<script type="text/javascript" src="Objects/MetronomeDisplay.js"></script>
-<script type="text/javascript" src="Objects/Metronome.js"></script>
-<script type="text/javascript" src="Objects/Context.js"></script>
-<script type="text/javascript" src="index.js"></script>
-
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="noindex" name="robots"/>
+  <title>
+   What's Next Metronome
+  </title>
+  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/main.css" rel="stylesheet"/>
+  <link charset="utf-8" href="index.css" media="screen" rel="stylesheet"/>
+ </head>
+ <body>
+  <nav>
+   <a class="home" href="/index.html">
+    Ben Machlin
+   </a>
+  </nav>
+  <h1 style="text-align: center;">
+   What's Next Metronome
+  </h1>
+  <section id="controls">
+   <span>
+    Measure length frequency:
+   </span>
+   <div class="freq-controls">
+    <button onclick="zeroFreqs()">
+     Zero
+    </button>
+    <button onclick="randomizeFreqs()">
+     Randomize
+    </button>
+    <button onclick="equalFreqs()">
+     Equalize
+    </button>
+   </div>
+   <div class="beat-frequencies">
+    <div class="beat-freq">
+     <label>
+      1
+     </label>
+     <input id="beat1freq" max="10" min="0" type="range" value="0"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      2
+     </label>
+     <input id="beat2freq" max="10" min="0" type="range" value="0"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      3
+     </label>
+     <input id="beat3freq" max="10" min="0" type="range" value="5"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      4
+     </label>
+     <input id="beat4freq" max="10" min="0" type="range" value="10"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      5
+     </label>
+     <input id="beat5freq" max="10" min="0" type="range" value="5"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      6
+     </label>
+     <input id="beat6freq" max="10" min="0" type="range" value="5"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      7
+     </label>
+     <input id="beat7freq" max="10" min="0" type="range" value="5"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      9
+     </label>
+     <input id="beat9freq" max="10" min="0" type="range" value="0"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      10
+     </label>
+     <input id="beat10freq" max="10" min="0" type="range" value="0"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      11
+     </label>
+     <input id="beat11freq" max="10" min="0" type="range" value="0"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      12
+     </label>
+     <input id="beat12freq" max="10" min="0" type="range" value="0"/>
+    </div>
+    <div class="beat-freq">
+     <label>
+      13
+     </label>
+     <input id="beat13freq" max="10" min="0" type="range" value="0"/>
+    </div>
+   </div>
+   <div class="beat-sequence">
+    <div class="option">
+     <label>
+      Use sequence
+     </label>
+     <input id="useSequenceInput" type="checkbox"/>
+    </div>
+    <textarea class="beat-sequence-text">4</textarea>
+   </div>
+   <div class="options">
+    <div class="option">
+     <label>
+      BPM
+     </label>
+     <input id="bpmInput" max="360" min="40" style="width: 8em;" type="range" value="120"/>
+    </div>
+    <div class="option">
+     <label>
+      Lag
+     </label>
+     <input id="lagInput" style="width: 4em;" type="number" value="0"/>
+    </div>
+    <div class="option">
+     <label>
+      Accent beat 1
+     </label>
+     <input checked="" id="accent1Input" type="checkbox"/>
+    </div>
+    <div class="option">
+     <label>
+      Only play beat 1
+     </label>
+     <input id="onlyPlay1Input" type="checkbox"/>
+    </div>
+   </div>
+   <div class="playpause" onclick="toggle()">
+   </div>
+  </section>
+  <hr/>
+  <section id="metronome">
+   <div class="beat-info this-beat">
+    <span id="this-beat-now">
+     -
+    </span>
+    /
+    <span id="this-beat-total">
+     -
+    </span>
+   </div>
+   <div class="measure">
+    <div class="beat active">
+    </div>
+    <div class="beat">
+    </div>
+    <div class="beat">
+    </div>
+    <div class="beat">
+    </div>
+   </div>
+   <div class="measure-info next-measure">
+    Next Measure
+    <div class="beat-info next-beats">
+     -
+    </div>
+   </div>
+  </section>
+ </body>
+ <script src="Objects/Settings.js" type="text/javascript">
+ </script>
+ <script src="Objects/MetronomeDisplay.js" type="text/javascript">
+ </script>
+ <script src="Objects/Metronome.js" type="text/javascript">
+ </script>
+ <script src="Objects/Context.js" type="text/javascript">
+ </script>
+ <script src="index.js" type="text/javascript">
+ </script>
 </html>

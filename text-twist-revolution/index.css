@@ -16,7 +16,8 @@
     }
 }
 
-#letters, #word {
+#letters,
+#word {
     font-size: 2vh;
 }
 
@@ -39,6 +40,11 @@
     color: red;
 }
 
+#settings {
+    padding: 10px;
+    background-color: #a5d2d2;
+}
+
 .settings-name {
     font-style: italic;
 }
@@ -48,4 +54,13 @@
     margin: 10px;
     padding: 10px;
     /* width: fit-content; */
+}
+
+#toggle-settings-bot,
+#toggle-settings-top {
+    width: 100%;
+}
+
+#game {
+    padding: 10px;
 }

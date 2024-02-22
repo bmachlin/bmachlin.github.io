@@ -1,51 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex">
-    <title>Ben Machlin!</title>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
-    <link rel="shortcut icon" href="/res/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/main.css">
-    <link rel="stylesheet" type="text/css" href="../processing.css">
-  </head>
-  <body>
-    <noscript>This page requires JavaScript.</noscript>
-    <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
-    <a href="/processing/index.html"><h1>&lt-- Processing Sketches</h1></a>
-    <main>
-        <h2>Purple Intersections</h2>
-        <div class="sketch-options">
-          <div class="sketch-controls">
-            <button class="btn-reset" onclick="reset(this)">Reset</button>
-            <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
-            <button class="btn-record">Start Recording</button>
-          </div>
-          <br>
-          <div class="param">
-            <label for="dotsInput" class="param-label">Dots</label>
-            <input type="range" min=2 max=20 value=6 step=1 class="param-slider" autocomplete="off" oninput="dotsValue.innerText = this.value" id="dotsInput">
-            <p class="param-value" id="dotsValue">6</p>
-          </div>
-          <div class="param">
-            <label for="marginInput" class="param-label">Margin</label>
-            <input type="range" min=0 max=100 value=10 step=1 class="param-slider" autocomplete="off" id="marginInput">
-            <p class="param-value" id="marginValue">10</p>
-          </div>
-          <div class="param">
-            <label for="perfInput" class="param-label">Improve Performance?</label>
-            <input type="checkbox" class="param-slider" autocomplete="off" id="perfInput">
-            <input type="checkbox" class="param-slider" autocomplete="off" id="perfInput2">
-          </div>
-        </div>
-
-        <script src="voronoi.js"></script>
-        <script src="../default-controls.js"></script>
-        <script src="../parameters.js"></script>
-    </main>
-
-  </body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="noindex" name="robots"/>
+  <title>
+   Ben Machlin!
+  </title>
+  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/main.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js">
+  </script>
+  <link href="../processing.css" rel="stylesheet" type="text/css"/>
+ </head>
+ <body>
+  <noscript>
+   This page requires JavaScript.
+  </noscript>
+  <nav>
+   <a class="home" href="/index.html">
+    Ben Machlin
+   </a>
+  </nav>
+  <a href="/processing/index.html">
+   <h1>
+    &lt;-- Processing Sketches
+   </h1>
+  </a>
+  <main>
+   <h2>
+    Purple Intersections
+   </h2>
+   <div class="sketch-options">
+    <div class="sketch-controls">
+     <button class="btn-reset" onclick="reset(this)">
+      Reset
+     </button>
+     <button class="btn-save" onclick="saveFrame(this)">
+      Save Frame
+     </button>
+     <button class="btn-record">
+      Start Recording
+     </button>
+    </div>
+    <br/>
+    <div class="param">
+     <label class="param-label" for="dotsInput">
+      Dots
+     </label>
+     <input autocomplete="off" class="param-slider" id="dotsInput" max="20" min="2" oninput="dotsValue.innerText = this.value" step="1" type="range" value="6"/>
+     <p class="param-value" id="dotsValue">
+      6
+     </p>
+    </div>
+    <div class="param">
+     <label class="param-label" for="marginInput">
+      Margin
+     </label>
+     <input autocomplete="off" class="param-slider" id="marginInput" max="100" min="0" step="1" type="range" value="10"/>
+     <p class="param-value" id="marginValue">
+      10
+     </p>
+    </div>
+    <div class="param">
+     <label class="param-label" for="perfInput">
+      Improve Performance?
+     </label>
+     <input autocomplete="off" class="param-slider" id="perfInput" type="checkbox"/>
+     <input autocomplete="off" class="param-slider" id="perfInput2" type="checkbox"/>
+    </div>
+   </div>
+   <script src="voronoi.js">
+   </script>
+   <script src="../default-controls.js">
+   </script>
+   <script src="../parameters.js">
+   </script>
+  </main>
+ </body>
 </html>

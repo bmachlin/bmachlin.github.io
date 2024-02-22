@@ -1,56 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex">
-    <title>Ben Machlin!</title>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
-    <link rel="shortcut icon" href="/res/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/main.css">
-    <link rel="stylesheet" type="text/css" href="../processing.css">
-  </head>
-  <body>
-    <noscript>This page requires JavaScript.</noscript>
-    <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
-    <a href="/processing/index.html"><h1>&lt-- Processing Sketches</h1></a>
-    <main>
-        <h2>Molecules</h2>
-        <div class="sketch-options">
-          <div class="sketch-controls">
-
-            <button class="btn-start-stop" onclick="toggle(this)">Stop</button>
-            <button class="btn-reset" onclick="reset(this)">Reset</button>
-            <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
-            <button class="btn-record">Start Recording</button>
-          </div>
-          <p>Click and hold to have molecules follow mouse. (As best as they can)</p>
-          <br>
-          <div class="param">
-            <label for="moleculesInput" class="param-label">Molecules</label>
-            <input type="range" min=2 max=100 value=50 step=1 class="param-slider" 
-                    autocomplete="off" oninput="moleculesValue.innerText = this.value" id="moleculesInput">
-            <p class="param-value" id="moleculesValue">50</p>
-          </div>
-          <div class="param">
-            <label for="diffThresholdInput" class="param-label">Distance Threshold</label>
-            <input type="range" min=1 max=500 value=100 step=1 class="param-slider"
-                    autocomplete="off" id="diffThresholdInput">
-            <p class="param-value" id="diffThresholdValue">100</p>
-          </div>
-          <div class="param">
-            <label for="blurInput" class="param-label">Blur</label>
-            <input type="range" min=1 max=255 value=1 step=1 class="param-slider"
-                    autocomplete="off" id="blurInput">
-            <p class="param-value" id="blurValue">1</p>
-          </div>
-        </div>
-        <script src="molecules.js"></script>
-        <script src="../default-controls.js"></script>
-        <script src="../parameters.js"></script>
-    </main>
-
-  </body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="noindex" name="robots"/>
+  <title>
+   Ben Machlin!
+  </title>
+  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/main.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js">
+  </script>
+  <link href="../processing.css" rel="stylesheet" type="text/css"/>
+ </head>
+ <body>
+  <noscript>
+   This page requires JavaScript.
+  </noscript>
+  <nav>
+   <a class="home" href="/index.html">
+    Ben Machlin
+   </a>
+  </nav>
+  <a href="/processing/index.html">
+   <h1>
+    &lt;-- Processing Sketches
+   </h1>
+  </a>
+  <main>
+   <h2>
+    Molecules
+   </h2>
+   <div class="sketch-options">
+    <div class="sketch-controls">
+     <button class="btn-start-stop" onclick="toggle(this)">
+      Stop
+     </button>
+     <button class="btn-reset" onclick="reset(this)">
+      Reset
+     </button>
+     <button class="btn-save" onclick="saveFrame(this)">
+      Save Frame
+     </button>
+     <button class="btn-record">
+      Start Recording
+     </button>
+    </div>
+    <p>
+     Click and hold to have molecules follow mouse. (As best as they can)
+    </p>
+    <br/>
+    <div class="param">
+     <label class="param-label" for="moleculesInput">
+      Molecules
+     </label>
+     <input autocomplete="off" class="param-slider" id="moleculesInput" max="100" min="2" oninput="moleculesValue.innerText = this.value" step="1" type="range" value="50"/>
+     <p class="param-value" id="moleculesValue">
+      50
+     </p>
+    </div>
+    <div class="param">
+     <label class="param-label" for="diffThresholdInput">
+      Distance Threshold
+     </label>
+     <input autocomplete="off" class="param-slider" id="diffThresholdInput" max="500" min="1" step="1" type="range" value="100"/>
+     <p class="param-value" id="diffThresholdValue">
+      100
+     </p>
+    </div>
+    <div class="param">
+     <label class="param-label" for="blurInput">
+      Blur
+     </label>
+     <input autocomplete="off" class="param-slider" id="blurInput" max="255" min="1" step="1" type="range" value="1"/>
+     <p class="param-value" id="blurValue">
+      1
+     </p>
+    </div>
+   </div>
+   <script src="molecules.js">
+   </script>
+   <script src="../default-controls.js">
+   </script>
+   <script src="../parameters.js">
+   </script>
+  </main>
+ </body>
 </html>

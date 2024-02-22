@@ -1,53 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex">
-    <title>Ben Machlin!</title>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
-    <link rel="shortcut icon" href="/res/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/main.css">
-    <link rel="stylesheet" type="text/css" href="../processing.css">
-  </head>
-  <body>
-    <noscript>This page requires JavaScript.</noscript>
-    <nav><a href="/index.html" class="home">Ben Machlin</a></nav>
-    <a href="/processing/index.html"><h1>&lt-- Processing Sketches</h1></a>
-    <main>
-        <h2>Line Runners</h2>
-        <p>Click RESET to apply parameter changes.</p>
-        <div class="sketch-options">
-          <div class="sketch-controls">
-
-            <button class="btn-start-stop" onclick="toggle(this)">Stop</button>
-            <button class="btn-reset" onclick="reset(this)">Reset</button>
-            <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
-            <button class="btn-record">Start Recording</button>
-          </div>
-          <br>
-          <div class="param">
-            <label for="runnersInput" class="param-label">Runners</label>
-            <input type="range" min=10 max=1000 value=200 step=10 class="param-slider" oninput="runnersValue.innerText = this.value" id="runnersInput">
-            <p class="param-value" id="runnersValue">200</p>
-          </div>
-          <div class="param">
-            <label for="turnProbInput" class="param-label">Random Turn Prob.</label>
-            <input type="range" min=0.01 max="0.5" value=0.05 step=.01 class="param-slider" oninput="turnProbValue.innerText = this.value" id="turnProbInput">
-            <p class="param-value" id="turnProbValue">0.05</p>
-          </div>
-          <div class="param">
-            <label for="radiusInput" class="param-label">Circle Radius</label>
-            <input type="range" min=0.05 max="0.5" value="0.25" step=".05" class="param-slider" oninput="radiusValue.innerText = this.value" id="radiusInput">
-            <p class="param-value" id="radiusValue">0.25</p>
-          </div>
-        </div>
-        <script src="line-runner.js"></script>
-        <script src="../default-controls.js"></script>
-        <script src="../parameters.js"></script>
-    </main>
-
-  </body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="noindex" name="robots"/>
+  <title>
+   Ben Machlin!
+  </title>
+  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/main.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js">
+  </script>
+  <link href="../processing.css" rel="stylesheet" type="text/css"/>
+ </head>
+ <body>
+  <noscript>
+   This page requires JavaScript.
+  </noscript>
+  <nav>
+   <a class="home" href="/index.html">
+    Ben Machlin
+   </a>
+  </nav>
+  <a href="/processing/index.html">
+   <h1>
+    &lt;-- Processing Sketches
+   </h1>
+  </a>
+  <main>
+   <h2>
+    Line Runners
+   </h2>
+   <p>
+    Click RESET to apply parameter changes.
+   </p>
+   <div class="sketch-options">
+    <div class="sketch-controls">
+     <button class="btn-start-stop" onclick="toggle(this)">
+      Stop
+     </button>
+     <button class="btn-reset" onclick="reset(this)">
+      Reset
+     </button>
+     <button class="btn-save" onclick="saveFrame(this)">
+      Save Frame
+     </button>
+     <button class="btn-record">
+      Start Recording
+     </button>
+    </div>
+    <br/>
+    <div class="param">
+     <label class="param-label" for="runnersInput">
+      Runners
+     </label>
+     <input class="param-slider" id="runnersInput" max="1000" min="10" oninput="runnersValue.innerText = this.value" step="10" type="range" value="200"/>
+     <p class="param-value" id="runnersValue">
+      200
+     </p>
+    </div>
+    <div class="param">
+     <label class="param-label" for="turnProbInput">
+      Random Turn Prob.
+     </label>
+     <input class="param-slider" id="turnProbInput" max="0.5" min="0.01" oninput="turnProbValue.innerText = this.value" step=".01" type="range" value="0.05"/>
+     <p class="param-value" id="turnProbValue">
+      0.05
+     </p>
+    </div>
+    <div class="param">
+     <label class="param-label" for="radiusInput">
+      Circle Radius
+     </label>
+     <input class="param-slider" id="radiusInput" max="0.5" min="0.05" oninput="radiusValue.innerText = this.value" step=".05" type="range" value="0.25"/>
+     <p class="param-value" id="radiusValue">
+      0.25
+     </p>
+    </div>
+   </div>
+   <script src="line-runner.js">
+   </script>
+   <script src="../default-controls.js">
+   </script>
+   <script src="../parameters.js">
+   </script>
+  </main>
+ </body>
 </html>

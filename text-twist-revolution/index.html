@@ -1,90 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="/res/favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="/main.css" media="screen" charset="utf-8">
-        <link rel="stylesheet" href="index.css" media="screen" charset="utf-8">
-        <title>Text Twist Revolution</title>
-    </head>
-    <body tabindex=0 onload="setup()">
-        <h1>Text Twist Revolution</h1>
-        <!-- <nav><a href="/index.html" class="home">&lt--Home</a></nav> -->
-        <p style="margin: 10px;">
-            It's like TextTwist but forever. 
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="noindex" name="robots"/>
+  <title>
+   Text Twist Revolution
+  </title>
+  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/main.css" rel="stylesheet"/>
+  <link charset="utf-8" href="index.css" media="screen" rel="stylesheet"/>
+ </head>
+ <body onload="setup()" tabindex="0">
+  <nav>
+   <a class="home" href="/index.html">
+    Ben Machlin
+   </a>
+  </nav>
+  <h1>
+   Text Twist Revolution
+  </h1>
+  <p style="margin: 10px;">
+   It's like TextTwist but forever. 
             Press ` to move on to the next word set. Space to shuffle. Enter to submit.
-        </p>
-        <button id="toggle-settings-top" style="width: 100%;" onclick="toggleSettings()">V</button>
-
-
-
-
-
-        <section id="settings" style="padding: 10px; background-color: rgb(187, 255, 255);">
-                <h3>Settings</h3>
-                <div id="themeInput" hidden>
-                    <label class="settings-name">Theme: </label>
-                        <input type="radio" id="themeLight" value="light" name="themeInput"><label for="themeLight">Light</label>
-                        <input type="radio" id="themeDark" value="dark" name="themeInput"><label for="themeDark">Dark</label>
-                </div>
-                <div class="settings-box">
-                    <label class="settings-name">Number of Letters: </label><input type="number" id="maxWordLengthInput" name="maxWordLength" min=4 max=8 size=2><br>
-                    <label class="settings-name">Minimum Word Length: </label><input type="number" id="minWordLengthInput" name="minWordLength" min=2 max=4 size=2><br>
-                </div>
-                <div class="settings-box">
-                    <label class="settings-name" for="difficulty">Difficulty: </label>
-                        <select id="difficultyInput" name="difficulty">
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        </select>
-                </div>
-                <br>
-                <button id="saveSettingsButton" onclick="saveSettings()">Save Settings</button>
-                <button id="clearSettingsButton" onclick="defaultSettings()">Restore Defaults</button>
-                <br>
-            </div>
-        </section>
-
-
-
-
-
-        <button id="toggle-settings-bot" style="width: 100%;" onclick="toggleSettings()">/\</button>
-        <section id="game" style="padding: 10px; background-color: rgb(200, 255, 237);">
-            High Score: <span id="highScoreText" style="font-weight: bold;"></span>
-            <br><br>
-            <button id="newGameButton" onclick="newGame()">New Game</button>
-            <button id="endGameButton" onclick="endGame()">End Game</button>
-            <br><br>
-            Countdown: <span id="downTimer"></span><br>
-            Score: <span id="upTimer"></span><br>
-            Level: <span id="level"></span><br>
-            Can Move On: <span id="canMoveOn"></span><br>
-            Found All Words: <span id="foundAllWords"></span><br>
-            <hr>
-            <span id="root-letters" hidden></span><br>
-            Letters: <div id="letters" style="margin: 10px;"></div>
-            Word: <div id="word" style="margin: 10px;"></div>
-            <button id="submitButton">Submit</button>
-            <button id="shuffleButton">Shuffle</button>
-            <button id="clearButton">Clear</button>
-            <button id="nextLevelButton">Next Level</button>
-            <hr>
-            <div id="findableWords"></div>
-        </section>
-
-        <script type="text/javascript" src="../Storage.js"></script>
-        <script type="text/javascript" src="Objects/Context.js"></script>
-        <script type="text/javascript" src="Objects/Setting.js"></script>
-        <script type="text/javascript" src="Objects/Settings.js"></script>
-        <script type="text/javascript" src="Objects/Scoring.js"></script>
-        <script type="text/javascript" src="Objects/Dictionary.js"></script>
-        <script type="text/javascript" src="Objects/Game.js"></script>
-        <script type="text/javascript" src="Objects/GameActions.js"></script>
-        <script type="text/javascript" src="Objects/Renderer.js"></script>
-    
-        <script type="text/javascript" src="index.js"></script>
-    </body>
+  </p>
+  <button id="toggle-settings-top" onclick="toggleSettings()">
+   V
+  </button>
+  <section id="settings">
+   <h3>
+    Settings
+   </h3>
+   <div hidden="" id="themeInput">
+    <label class="settings-name">
+     Theme:
+    </label>
+    <input id="themeLight" name="themeInput" type="radio" value="light"/>
+    <label for="themeLight">
+     Light
+    </label>
+    <input id="themeDark" name="themeInput" type="radio" value="dark"/>
+    <label for="themeDark">
+     Dark
+    </label>
+   </div>
+   <div class="settings-box">
+    <label class="settings-name">
+     Number of Letters:
+    </label>
+    <input id="maxWordLengthInput" max="8" min="4" name="maxWordLength" size="2" type="number"/>
+    <br/>
+    <label class="settings-name">
+     Minimum Word Length:
+    </label>
+    <input id="minWordLengthInput" max="4" min="2" name="minWordLength" size="2" type="number"/>
+    <br/>
+   </div>
+   <div class="settings-box">
+    <label class="settings-name" for="difficulty">
+     Difficulty:
+    </label>
+    <select id="difficultyInput" name="difficulty">
+     <option value="easy">
+      Easy
+     </option>
+     <option value="medium">
+      Medium
+     </option>
+     <option value="hard">
+      Hard
+     </option>
+    </select>
+   </div>
+   <br/>
+   <button id="saveSettingsButton" onclick="saveSettings()">
+    Save Settings
+   </button>
+   <button id="clearSettingsButton" onclick="defaultSettings()">
+    Restore Defaults
+   </button>
+   <br/>
+  </section>
+  <button id="toggle-settings-bot" onclick="toggleSettings()">
+   /\
+  </button>
+  <section id="game">
+   High Score:
+   <span id="highScoreText" style="font-weight: bold;">
+   </span>
+   <br/>
+   <br/>
+   <button id="newGameButton" onclick="newGame()">
+    New Game
+   </button>
+   <button id="endGameButton" onclick="endGame()">
+    End Game
+   </button>
+   <br/>
+   <br/>
+   Countdown:
+   <span id="downTimer">
+   </span>
+   <br/>
+   Score:
+   <span id="upTimer">
+   </span>
+   <br/>
+   Level:
+   <span id="level">
+   </span>
+   <br/>
+   Can Move On:
+   <span id="canMoveOn">
+   </span>
+   <br/>
+   Found All Words:
+   <span id="foundAllWords">
+   </span>
+   <br/>
+   <hr/>
+   <span hidden="" id="root-letters">
+   </span>
+   <br/>
+   Letters:
+   <div id="letters" style="margin: 10px;">
+   </div>
+   Word:
+   <div id="word" style="margin: 10px;">
+   </div>
+   <button id="submitButton">
+    Submit
+   </button>
+   <button id="shuffleButton">
+    Shuffle
+   </button>
+   <button id="clearButton">
+    Clear
+   </button>
+   <button id="nextLevelButton">
+    Next Level
+   </button>
+   <hr/>
+   <div id="findableWords">
+   </div>
+  </section>
+  <script src="../Storage.js" type="text/javascript">
+  </script>
+  <script src="Objects/Context.js" type="text/javascript">
+  </script>
+  <script src="Objects/Setting.js" type="text/javascript">
+  </script>
+  <script src="Objects/Settings.js" type="text/javascript">
+  </script>
+  <script src="Objects/Scoring.js" type="text/javascript">
+  </script>
+  <script src="Objects/Dictionary.js" type="text/javascript">
+  </script>
+  <script src="Objects/Game.js" type="text/javascript">
+  </script>
+  <script src="Objects/GameActions.js" type="text/javascript">
+  </script>
+  <script src="Objects/Renderer.js" type="text/javascript">
+  </script>
+  <script src="index.js" type="text/javascript">
+  </script>
+ </body>
 </html>

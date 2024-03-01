@@ -11,5 +11,5 @@
     "EXCLUDE_HTML": [],
     "EXCLUDE_TEMPLATE": [],
     "EXCLUDE_COPY": [],
-    "OVERWRITE_ALLOWED": false
+    "OVERWRITE_ALLOWED": true
 }

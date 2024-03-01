@@ -241,7 +241,6 @@ class SimpleTemplate:
             if h.path == path and not self.config["OVERWRITE_ALLOWED"]:
                 print("Will not overwrite", h.path)
                 return
-            print(normpath(self.config["INPUT_DIR"]), normpath(self.config["OUTPUT_DIR"]), path)
             os.makedirs(os.path.dirname(path), exist_ok=True)
             with open(path, "w", encoding="utf-8") as file:
                 file.write(h.content)

@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="noindex" name="robots"/>
-  <title>
-   Building Projects
-  </title>
-  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <link href="/main.css" rel="stylesheet"/>
-  <style>
-   .pic {
+
+<head>
+    <my-head title="Building Projects"></my-head>
+    <style>
+        .pic {
             margin: 10px;
             box-shadow: 1px 2px 3px rgba(0, 0, 0, .5);
             -moz-box-shadow: 1px 2px 3px rgba(0, 0, 0, .5);
@@ -21,89 +15,67 @@
             height: auto;
             width: auto;
         }
-  </style>
- </head>
- <body>
-  <nav>
-   <a class="home" href="/index.html">
-    Ben Machlin
-   </a>
-  </nav>
-  <main>
-   <h1>
-    Building Projects
-   </h1>
-   <img class="pic" loading="lazy" src="/res/building/bb-airstream-1-1.jpg"/>
-   <img class="pic" loading="lazy" src="/res/building/bb-airstream-1-2.jpg"/>
-   <img class="pic" loading="lazy" src="/res/building/bb-airstream-1-3.jpg"/>
-   <p>
-    Remodeled Airstream and trade show display
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/bb-airstream-2-1.jpg"/>
-   <p>
-    Second remodeled Airstream
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/bb-bar-1.jpg"/>
-   <img class="pic" loading="lazy" src="/res/building/bb-bar-2.jpg"/>
-   <p>
-    Bar and wall for fancy party
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/bb-cnc.png"/>
-   <p>
-    Running the big CNC router
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/bb-doors.jpg"/>
-   <p>
-    Doors for conference room
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/bb-shadow.jpg"/>
-   <p>
-    Shadow "box" for screws 'n such
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/bedframe.jpg"/>
-   <p>
-    Remade bedframe castle joint legs
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/colombia-roof-1.png"/>
-   <img class="pic" loading="lazy" src="/res/building/colombia-roof-2.png"/>
-   <p>
-    Constructing rural hostel and roof
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/colombia-shoe-rack.jpg"/>
-   <p>
-    Shoe rack!
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/colombia-yoga.jpg"/>
-   <p>
-    Yoga structure
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/portugal-shelves-1.jpg"/>
-   <img class="pic" loading="lazy" src="/res/building/portugal-shelves-2.jpg"/>
-   <img class="pic" loading="lazy" src="/res/building/portugal-shelves-3.jpg"/>
-   <p>
-    Shipping container storage shelves
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/record-shelf.jpg"/>
-   <p>
-    Record player shelf
-   </p>
-   <br/>
-   <img class="pic" loading="lazy" src="/res/building/spain-pallet-box.jpg"/>
-   <p>
-    Scrap pallet box
-   </p>
-   <br/>
-  </main>
- </body>
+    </style>
+</head>
+
+<body>
+    <navbar></navbar>
+
+    <main>
+        <h1>Building Projects</h1>
+        <!-- <img src="{{src}}" class="pic" loading="lazy"> -->
+        <building-pic src="/res/building/dome_1.jpg"></building-pic>
+        <building-pic src="/res/building/dome_2.jpg"></building-pic>
+        <building-pic src="/res/building/dome_3.jpg"></building-pic>
+        <building-pic src="/res/building/dome_4.png"></building-pic>
+        <p>Building a dome in Brazil!</p>
+        <br>
+        <building-pic src="/res/building/bb-airstream-1-1.jpg"></building-pic>
+        <building-pic src="/res/building/bb-airstream-1-2.jpg"></building-pic>
+        <building-pic src="/res/building/bb-airstream-1-3.jpg"></building-pic>
+        <p>Remodeled Airstream and trade show display</p>
+        <br>
+        <building-pic src="/res/building/bb-airstream-2-1.jpg"></building-pic>
+        <p>Second remodeled Airstream</p>
+        <br>
+        <building-pic src="/res/building/bb-bar-1.jpg"></building-pic>
+        <building-pic src="/res/building/bb-bar-2.jpg"></building-pic>
+        <p>Bar and wall for fancy party</p>
+        <br>
+        <building-pic src="/res/building/bb-cnc.png"></building-pic>
+        <p>Running the big CNC router</p>
+        <br>
+        <building-pic src="/res/building/bb-doors.jpg"></building-pic>
+        <p>Doors for conference room</p>
+        <br>
+        <building-pic src="/res/building/bb-shadow.jpg"></building-pic>
+        <p>Shadow "box" for screws 'n such</p>
+        <br>
+        <building-pic src="/res/building/bedframe.jpg"></building-pic>
+        <p>Remade bedframe castle joint legs</p>
+        <br>
+        <building-pic src="/res/building/colombia-roof-1.png"></building-pic>
+        <building-pic src="/res/building/colombia-roof-2.png"></building-pic>
+        <p>Constructing rural hostel and roof</p>
+        <br>
+        <building-pic src="/res/building/colombia-shoe-rack.jpg"></building-pic>
+        <p>Shoe rack!</p>
+        <br>
+        <building-pic src="/res/building/colombia-yoga.jpg"></building-pic>
+        <p>Yoga structure</p>
+        <br>
+        <building-pic src="/res/building/portugal-shelves-1.jpg"></building-pic>
+        <building-pic src="/res/building/portugal-shelves-2.jpg"></building-pic>
+        <building-pic src="/res/building/portugal-shelves-3.jpg"></building-pic>
+        <p>Shipping container storage shelves</p>
+        <br>
+        <building-pic src="/res/building/record-shelf.jpg"></building-pic>
+        <p>Record player shelf</p>
+        <br>
+        <building-pic src="/res/building/spain-pallet-box.jpg"></building-pic>
+        <p>Scrap pallet box</p>
+        <br>
+    </main>
+</body>
+
 </html>

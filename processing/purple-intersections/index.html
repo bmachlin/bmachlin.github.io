@@ -1,88 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="noindex" name="robots"/>
-  <title>
-   Ben Machlin!
-  </title>
-  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <link href="/main.css" rel="stylesheet"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js">
-  </script>
-  <link href="../processing.css" rel="stylesheet" type="text/css"/>
- </head>
- <body>
-  <noscript>
-   This page requires JavaScript.
-  </noscript>
-  <nav>
-   <a class="home" href="/index.html">
-    Ben Machlin
-   </a>
-  </nav>
-  <a href="/processing/index.html">
-   <h1>
-    &lt;-- Processing Sketches
-   </h1>
-  </a>
-  <main>
-   <h2>
-    Purple Intersections
-   </h2>
-   <div class="sketch-options">
-    <div class="sketch-controls">
-     <button class="btn-start-stop" onclick="toggle(this)">
-      Stop
-     </button>
-     <button class="btn-reset" onclick="reset(this)">
-      Reset
-     </button>
-     <button class="btn-save" onclick="saveFrame(this)">
-      Save Frame
-     </button>
-     <button class="btn-record">
-      Start Recording
-     </button>
-    </div>
-    <br/>
-    <div class="param">
-     <label class="param-label" for="rowsInput">
-      Rows
-     </label>
-     <input class="param-slider" id="rowsInput" max="50" min="1" oninput="rowsValue.innerText = this.value" step="1" type="range" value="10"/>
-     <p class="param-value" id="rowsValue">
-      10
-     </p>
-    </div>
-    <div class="param">
-     <label class="param-label" for="colsInput">
-      Columns
-     </label>
-     <input class="param-slider" id="colsInput" max="50" min="1" oninput="colsValue.innerText = this.value" step="1" type="range" value="10"/>
-     <p class="param-value" id="colsValue">
-      10
-     </p>
-    </div>
-    <div class="param">
-     <label class="param-label" for="fpsInput">
-      Frames Per Second
-     </label>
-     <input class="param-slider" id="fpsInput" max="10" min="1" oninput="fpsValue.innerText = this.value" step="1" type="range" value="2"/>
-     <p class="param-value" id="fpsValue">
-      2
-     </p>
-    </div>
-   </div>
-   <script src="purple-intersections.js">
-   </script>
-   <script src="../default-controls.js">
-   </script>
-   <script src="../parameters.js">
-   </script>
-  </main>
- </body>
+  <head>
+    <my-head></my-head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../processing.css">
+  </head>
+  <body>
+    <noscript>This page requires JavaScript.</noscript>
+    <navbar></navbar>
+    <a href="/processing/index.html"><h1>&lt;-- Processing Sketches</h1></a>
+    <main>
+        <h2>Purple Intersections</h2>
+        <div class="sketch-options">
+          <div class="sketch-controls">
+
+            <button class="btn-start-stop" onclick="toggle(this)">Stop</button>
+            <button class="btn-reset" onclick="reset(this)">Reset</button>
+            <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
+            <button class="btn-record">Start Recording</button>
+          </div>
+          <br>
+          <div class="param">
+            <label for="rowsInput" class="param-label">Rows</label>
+            <input type="range" min=1 max=50 value=10 step=1 class="param-slider" oninput="rowsValue.innerText = this.value" id="rowsInput">
+            <p class="param-value" id="rowsValue">10</p>
+          </div>
+          <div class="param">
+            <label for="colsInput" class="param-label">Columns</label>
+            <input type="range" min=1 max=50 value=10 step=1 class="param-slider" oninput="colsValue.innerText = this.value" id="colsInput">
+            <p class="param-value" id="colsValue">10</p>
+          </div>
+          <div class="param">
+            <label for="fpsInput" class="param-label">Frames Per Second</label>
+            <input type="range" min=1 max=10 value=2 step=1 class="param-slider" oninput="fpsValue.innerText = this.value" id="fpsInput">
+            <p class="param-value" id="fpsValue">2</p>
+          </div>
+        </div>
+        <script src="purple-intersections.js"></script>
+        <script src="../default-controls.js"></script>
+        <script src="../parameters.js"></script>
+    </main>
+
+  </body>
 </html>

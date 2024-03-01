@@ -14,7 +14,7 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: var(--main-background-color);
     color: #111;
-    width: 80%;
+    width: 90%;
     margin: 10px auto;
     border-radius: var(--main-border-radius);
 }
@@ -28,9 +28,8 @@ main {
 
 /* reduce border if screen is small */
 @media (max-width: 600px) {
-    main {
-        width: 90%;
-        margin: 10px auto;
+    main, body {
+        width: 95%;
     }
 }
 
@@ -82,9 +81,9 @@ blockquote {
     display: block;
     font-family: 'Courier New', Courier, monospace;
     color: #222222;
-    background: lightgrey;
+    background: rgb(234, 227, 221);
     padding: 1vw 1vh;
-    margin: 3vw 3vh;
+    margin: 10px;
 }
 
 .item-block {

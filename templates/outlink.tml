@@ -1,0 +1,3 @@
+outlink
+%
+<a href="{{href}}" target="_blank" rel="noopener">{{_inner_}}</a>

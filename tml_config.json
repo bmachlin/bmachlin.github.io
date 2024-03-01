@@ -1,0 +1,15 @@
+{
+    "TEMPLATE_VAR_START": "{{",
+    "TEMPLATE_VAR_END": "}}",
+    "TEMPLATE_SECTION_SPLIT": "\n%\n",
+    "EMPTY_VAR_REPLACE": true,
+    "EMPTY_VAR_VALUE": "",
+    "INPUT_DIR": ".",
+    "OUTPUT_DIR": ".",
+    "TEMPLATE_DIR": ".",
+    "EXCLUDE_ALL": ["*/.git/*", "*/node_modules", "*/__pycache__", "*.DS_Store"],
+    "EXCLUDE_HTML": [],
+    "EXCLUDE_TEMPLATE": [],
+    "EXCLUDE_COPY": [],
+    "OVERWRITE_ALLOWED": false
+}

@@ -1,118 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="noindex" name="robots"/>
-  <title>
-   Ben Machlin!
-  </title>
-  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <link href="/main.css" rel="stylesheet"/>
-  <link href="/blug/blug.css" rel="stylesheet"/>
- </head>
- <body>
-  <nav>
-   <a class="home" href="/index.html">
-    Ben Machlin
-   </a>
-  </nav>
-  <main>
-   <a href="/blug/self-hosting">
-    &lt;-- Back
-   </a>
-   <h1>
-    The Self Hosting Journey
-   </h1>
-   <h4>
-    January 18th, 2023
-   </h4>
-   <section>
-    <p>
-     Here begins my exploration of self hosting. I have only scattered knowledge on the topic.
+
+<head>
+    <my-head></my-head>
+    <link rel="stylesheet" href="/blug/blug.css">
+</head>
+
+<body>
+    <navbar></navbar>
+
+    <main>
+        <a href="/blug/self-hosting">&lt;-- Back</a>
+        <h1>The Self Hosting Journey</h1>
+        <h4>January 18th, 2023</h4>
+        <section>
+            <p>
+                Here begins my exploration of self hosting. I have only scattered knowledge on the topic.
                 I have a lot of adjacent experience but haven't had to actually do it all.
                 I'm going to document what I know (or *think* I know) and what I learn along the way.
                 Hopefully this will be useful to someone else.
-    </p>
-    <h2>
-     What I Think I Know
-    </h2>
-    <ul>
-     <li>
-      Self-hosting is having control over a server, on which you can serve whatever you want.
-     </li>
-     <li>
-      A server is just a computer; it can live in your office, in a server farm, or only exist as an abstraction and not really be tied to a specific physical computer.
-     </li>
-     <li>
-      A server serves things, usually via the Internet, and in the case of websites, through HTTP(S).
-     </li>
-     <li>
-      A program that runs on your server and serves things is called a service.
-     </li>
-     <li>
-      A port is an entry point into the server (hence the term). A server "listens" "on" a port by having a service wait for incoming messages specifying that port number.
-     </li>
-     <li>
-      Some services need to use specific ports, like HTTPS which uses port 443. Many of the lower number ports are reserved.
-     </li>
-     <li>
-      Not everything on the server should be exposed to the Internet. Some of it is only accessed to support other services, e.g. a database.
-     </li>
-     <li>
-      There are many many security risks.
-     </li>
-     <li>
-      For my website I want to use React for the frontend, Django or Ruby on Rails for the backend, and PostgreSQL for a database. (Subject to change)
-     </li>
-    </ul>
-    <h2>
-     What I Think I Need To Figure Out
-    </h2>
-    <ul>
-     <li>
-      There are several layers in between a client (e.g. my personal laptop) and a server. What are they? Which do I need to use/configure for my server to serve and which do clients need to use/configure to access my server?
-     </li>
-     <li>
-      What service(s) do I need to run on my server to host my website?
-     </li>
-     <li>
-      The backend framework for my website will run on the server, but are the frontend resources (e.g. HTML pages) also hosted on the server?
-     </li>
-     <li>
-      Does my server have a static IP? Does it need to for certain things to work?
-     </li>
-     <li>
-      What is a reverse proxy and do I need one?
-     </li>
-     <li>
-      What exactly is a webserver? Like Apache or Nginx
-     </li>
-     <li>
-      DNS, domain name, SSL cert, and other misc. bureaucratic stuff, what do I need to take care of?
-     </li>
-     <li>
-      What of all of this will I need to pay for? How much? Are there reliable free-tier or open-source versions?
-     </li>
-     <li>
-      How do I keep my server secure within reason?
-     </li>
-     <li>
-      Should I use containerization/Docker?
-     </li>
-     <li>
-      How do subdomains work/is it easy?
-     </li>
-     <li>
-      Which parts of this do I want to learn about and which parts do I want to wave a magic wand at?
-     </li>
-    </ul>
-    <p>
-     My plan is to tackle each question (and the countless follow ups) one at a time and document my findings until I have something working.
-     <br/>
-     Let's get started!
-    </p>
-   </section>
-  </main>
- </body>
+            </p>
+            <h2>What I Think I Know</h2>
+            <ul>
+                <li>Self-hosting is having control over a server, on which you can serve whatever you want.</li>
+                <li>A server is just a computer; it can live in your office, in a server farm, or only exist as an abstraction and not really be tied to a specific physical computer.</li>
+                <li>A server serves things, usually via the Internet, and in the case of websites, through HTTP(S).</li>
+                <li>A program that runs on your server and serves things is called a service.</li>
+                <li>A port is an entry point into the server (hence the term). A server "listens" "on" a port by having a service wait for incoming messages specifying that port number.</li>
+                <li>Some services need to use specific ports, like HTTPS which uses port 443. Many of the lower number ports are reserved.</li>
+                <li>Not everything on the server should be exposed to the Internet. Some of it is only accessed to support other services, e.g. a database.</li>
+                <li>There are many many security risks.</li>
+                <li>For my website I want to use React for the frontend, Django or Ruby on Rails for the backend, and PostgreSQL for a database. (Subject to change)</li>
+            </ul>
+            <h2>What I Think I Need To Figure Out</h2>
+            <ul>
+                <li>There are several layers in between a client (e.g. my personal laptop) and a server. What are they? Which do I need to use/configure for my server to serve and which do clients need to use/configure to access my server?</li>
+                <li>What service(s) do I need to run on my server to host my website?</li>
+                <li>The backend framework for my website will run on the server, but are the frontend resources (e.g. HTML pages) also hosted on the server?</li>
+                <li>Does my server have a static IP? Does it need to for certain things to work?</li>
+                <li>What is a reverse proxy and do I need one?</li>
+                <li>What exactly is a webserver? Like Apache or Nginx</li>
+                <li>DNS, domain name, SSL cert, and other misc. bureaucratic stuff, what do I need to take care of?</li>
+                <li>What of all of this will I need to pay for? How much? Are there reliable free-tier or open-source versions?</li>
+                <li>How do I keep my server secure within reason?</li>
+                <li>Should I use containerization/Docker?</li>
+                <li>How do subdomains work/is it easy?</li>
+                <li>Which parts of this do I want to learn about and which parts do I want to wave a magic wand at?</li>
+            </ul>
+            <p>
+                My plan is to tackle each question (and the countless follow ups) one at a time and document my findings until I have something working.
+                <br>
+                Let's get started!
+            </p>
+        </section>
+    </main>
+</body>
+
+
 </html>

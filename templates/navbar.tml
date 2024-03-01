@@ -1,0 +1,6 @@
+navbar
+%
+href=/index.html
+text=Ben Machlin
+%
+<nav><a href="{{href}}" class="home">{{text}}</a></nav>

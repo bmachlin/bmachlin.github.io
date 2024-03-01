@@ -1,0 +1,9 @@
+my-head
+%
+title=Ben Machlin!
+styleref=/main.css
+%
+<meta-head></meta-head>
+<title>{{title}}</title>
+<link rel="shortcut icon" href="/res/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{{styleref}}">

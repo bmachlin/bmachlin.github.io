@@ -1,109 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="noindex" name="robots"/>
-  <title>
-   Deep Cuts Quiz
-  </title>
-  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <link href="/main.css" rel="stylesheet"/>
-  <link charset="utf-8" href="quiz.css" media="screen" rel="stylesheet"/>
- </head>
- <body onload="setup()" tabindex="0">
-  <h1>
-   Deep Cuts Quiz
-  </h1>
-  <!-- <navbar text="&lt;--Home"></navbar> -->
-  <main>
-   <div id="game-info">
-    <div>
-     Question
-     <span id="question-num">
-      1
-     </span>
-     /10
-    </div>
-    <div style="text-decoration: underline;">
-     High Score:
-     <span id="high-score">
-      0
-     </span>
-    </div>
-    <div>
-     Score:
-     <span id="score">
-      0
-     </span>
-    </div>
-   </div>
-   <div id="pregame-area">
-    <h2 id="loading-text">
-     Loading artist data...
-    </h2>
-    <div class="answer-button" hidden="" id="start-button" onclick="startGame()">
-     Start Game!
-    </div>
-   </div>
-   <div hidden="" id="game-area">
-    <div id="question-text">
-     What album is this song on?
-    </div>
-    <div id="spotify-embed">
-     <div id="iframe-container">
-     </div>
-    </div>
-    <div class="mc-area" id="answer-area">
-     <div class="mc-answer answer-button correct">
-      Answer 1
-     </div>
-     <div class="mc-answer answer-button incorrect">
-      Answer 2
-     </div>
-     <div class="mc-answer answer-button">
-      Answer 3
-     </div>
-     <div class="mc-answer answer-button">
-      Answer 4
-     </div>
-    </div>
-    <div class="answer-button" hidden="" id="next-button" onclick="nextQuestion()">
-     Next
-    </div>
-   </div>
-  </main>
-  <script async="" src="https://open.spotify.com/embed-podcast/iframe-api/v1">
-  </script>
-  <script src="/Storage.js" type="text/javascript">
-  </script>
-  <script src="/Setting.js" type="text/javascript">
-  </script>
-  <script src="/Spotify.js" type="text/javascript">
-  </script>
-  <script src="config.js" type="text/javascript">
-  </script>
-  <script src="Objects/Context.js" type="text/javascript">
-  </script>
-  <script src="Objects/Settings.js" type="text/javascript">
-  </script>
-  <script src="Objects/AlbumDataRetriever.js" type="text/javascript">
-  </script>
-  <script src="Objects/ArtistData.js" type="text/javascript">
-  </script>
-  <script src="Objects/Game.js" type="text/javascript">
-  </script>
-  <script src="Objects/GameActions.js" type="text/javascript">
-  </script>
-  <script src="Objects/Renderer.js" type="text/javascript">
-  </script>
-  <script src="Objects/Questions/QuestionMaker.js" type="text/javascript">
-  </script>
-  <script src="Objects/Questions/Question.js" type="text/javascript">
-  </script>
-  <script src="Objects/Questions/ChoiceQuestion.js" type="text/javascript">
-  </script>
-  <script src="quiz.js" type="text/javascript">
-  </script>
- </body>
+    <head>
+        <my-head title="Deep Cuts Quiz"></my-head>
+        <link rel="stylesheet" href="quiz.css" media="screen" charset="utf-8">
+    </head>
+    <body tabindex=0 onload="setup()">
+        <h1>Deep Cuts Quiz</h1>
+        <!-- <navbar text="&lt;--Home"></navbar> -->
+
+        <main>
+            <div id="game-info">
+                <div>Question <span id="question-num">1</span>/10</div>
+                <div style="text-decoration: underline;">High Score: <span id="high-score">0</span></div>
+                <div>Score: <span id="score">0</span></div>
+            </div>
+
+            <div id="pregame-area">
+                <h2 id="loading-text">Loading artist data...</h2>
+                <div hidden id="start-button" class="answer-button" onclick="startGame()">Start Game!</div>
+            </div>
+    
+            <div hidden id="game-area">
+                <div id="question-text">What album is this song on?</div>
+                <div id="spotify-embed"><div id="iframe-container"></div></div>
+                <div id="answer-area" class="mc-area">
+                    <div class="mc-answer answer-button correct">Answer 1</div>
+                    <div class="mc-answer answer-button incorrect">Answer 2</div>
+                    <div class="mc-answer answer-button">Answer 3</div>
+                    <div class="mc-answer answer-button">Answer 4</div>
+                </div>
+                <div hidden id="next-button" class="answer-button" onclick="nextQuestion()">Next</div>
+            </div>
+            
+        </main>
+
+        <script src="https://open.spotify.com/embed-podcast/iframe-api/v1" async></script>
+
+        <script type="text/javascript" src="/Storage.js"></script>
+        <script type="text/javascript" src="/Setting.js"></script>
+        <script type="text/javascript" src="/Spotify.js"></script>
+        <script type="text/javascript" src="config.js"></script>
+        <script type="text/javascript" src="Objects/Context.js"></script>
+        <script type="text/javascript" src="Objects/Settings.js"></script>
+        <script type="text/javascript" src="Objects/AlbumDataRetriever.js"></script>
+        <script type="text/javascript" src="Objects/ArtistData.js"></script>
+        <script type="text/javascript" src="Objects/Game.js"></script>
+        <script type="text/javascript" src="Objects/GameActions.js"></script>
+        <script type="text/javascript" src="Objects/Renderer.js"></script>
+        <script type="text/javascript" src="Objects/Questions/QuestionMaker.js"></script>
+        <script type="text/javascript" src="Objects/Questions/Question.js"></script>
+        <script type="text/javascript" src="Objects/Questions/ChoiceQuestion.js"></script>
+    
+        <script type="text/javascript" src="quiz.js"></script>
+    </body>
 </html>

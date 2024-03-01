@@ -1,98 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="noindex" name="robots"/>
-  <title>
-   Ben Machlin!
-  </title>
-  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <link href="/main.css" rel="stylesheet"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js">
-  </script>
-  <link href="../processing.css" rel="stylesheet" type="text/css"/>
- </head>
- <body>
-  <noscript>
-   This page requires JavaScript.
-  </noscript>
-  <nav>
-   <a class="home" href="/index.html">
-    Ben Machlin
-   </a>
-  </nav>
-  <a href="/processing/index.html">
-   <h1>
-    &lt;-- Processing Sketches
-   </h1>
-  </a>
-  <main>
-   <h2>
-    Color Streaks
-   </h2>
-   <div class="sketch-options">
-    <div class="sketch-controls">
-     <button class="btn-start-stop" onclick="toggle(this)">
-      Stop
-     </button>
-     <button class="btn-reset" onclick="reset(this)">
-      Reset
-     </button>
-     <button class="btn-save" onclick="saveFrame(this)">
-      Save Frame
-     </button>
-     <button class="btn-record">
-      Start Recording
-     </button>
-    </div>
-    <br/>
-    <div class="param">
-     <label class="param-label" for="linesInput">
-      Lines
-     </label>
-     <input autocomplete="off" class="param-slider" id="linesInput" max="100" min="1" step="1" type="range" value="20"/>
-     <p class="param-value" id="linesValue">
-      20
-     </p>
-    </div>
-    <div class="param">
-     <label class="param-label" for="colorInput">
-      Color
-     </label>
-     <select id="colorInput" name="colorInput" onchange="updateColors()">
-      <option value="1">
-       Red
-      </option>
-      <option value="0">
-       Gray
-      </option>
-      <option value="2">
-       Blue
-      </option>
-      <option value="3">
-       Green
-      </option>
-      <option value="4">
-       Yellow
-      </option>
-      <option value="5">
-       Purple
-      </option>
-      <option value="6">
-       Rainbow
-      </option>
-     </select>
-    </div>
-   </div>
-   <script src="color-streaks.js">
-   </script>
-   <script src="../default-controls.js">
-   </script>
-   <script src="../parameters.js">
-   </script>
-  </main>
- </body>
+
+<head>
+    <my-head></my-head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../processing.css">
+</head>
+
+<body>
+    <noscript>This page requires JavaScript.</noscript>
+    <navbar></navbar>
+    <a href="/processing/index.html">
+        <h1>&lt;-- Processing Sketches</h1>
+    </a>
+    <main>
+        <h2>Color Streaks</h2>
+        <div class="sketch-options">
+            <div class="sketch-controls">
+
+                <button class="btn-start-stop" onclick="toggle(this)">Stop</button>
+                <button class="btn-reset" onclick="reset(this)">Reset</button>
+                <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
+                <button class="btn-record">Start Recording</button>
+            </div>
+            <br>
+            <div class="param">
+                <label for="linesInput" class="param-label">Lines</label>
+                <input type="range" min=1 max=100 value=20 step=1 class="param-slider" autocomplete="off" id="linesInput">
+                <p class="param-value" id="linesValue">20</p>
+              </div>
+            <div class="param">
+                <label for="colorInput" class="param-label">Color</label>
+                <select id="colorInput" name="colorInput" onchange="updateColors()">
+                    <option value=1>Red</option>
+                    <option value=0>Gray</option>
+                    <option value=2>Blue</option>
+                    <option value=3>Green</option>
+                    <option value=4>Yellow</option>
+                    <option value=5>Purple</option>
+                    <option value=6>Rainbow</option>
+                </select>
+            </div>
+
+        </div>
+        <script src="color-streaks.js"></script>
+        <script src="../default-controls.js"></script>
+        <script src="../parameters.js"></script>
+    </main>
+
+</body>
+
 </html>

@@ -1,266 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="noindex" name="robots"/>
-  <title>
-   Cool Stuff
-  </title>
-  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <link href="/main.css" rel="stylesheet"/>
-  <style>
-   .linkedList p, .linkedList h2 {
+
+<head>
+    <my-head title="Cool Stuff"></my-head>
+    <style>
+        .linkedList p, .linkedList h2 {
             margin: 2px 10px;
-            text-indent: 3%;
         }
         .linkedList {
             list-style: none;
+            padding: 0px;
         }
         .linkedList ul {
-            list-style: disc;
+            list-style: none;
             margin: 10px 0px;
         }
-  </style>
- </head>
- <body>
-  <nav>
-   <a class="home" href="/index.html">
-    Ben Machlin
-   </a>
-  </nav>
-  <main>
-   <h1>
-    Cool Stuff
-   </h1>
-   <ul class="linkedList">
-    <!--hehehe-->
-    <li>
-     <h2>
-      People
-     </h2>
-     <ul>
-      <li>
-       <a href="https://lauren-mccarthy.com/" rel="noopener" target="_blank">
-        Lauren McCarthy
-       </a>
-       <p>
-        A favorite artist/performer/free thinker of mine. Lots of cool social and technological experiments, art pieces, and generally awesome projects. Creator of p5js.
-       </p>
-      </li>
-      <li>
-       <a href="http://tom7.org/" rel="noopener" target="_blank">
-        Tom 7
-       </a>
-       <p>
-        An old-growth treasure trove of fun little internet pages. What this site aspires to be tbh.
-       </p>
-      </li>
-      <li>
-       <a href="https://twitter.com/pangmeli" rel="noopener" target="_blank">
-        Pangmeli
-       </a>
-       <p>
-        A free-spirited thinker on Twitter. Lots of poignant observations and unique alternative perspectives.
-       </p>
-      </li>
-      <li>
-       <a href="http://worrydream.com" rel="noopener" target="_blank">
-        Bret Victor
-       </a>
-       <p>
-        A design-oriented thinker and visionary that has a tendency to make you rethink everything.
-       </p>
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h2>
-      Projects
-     </h2>
-     <ul>
-      <li>
-       <a href="https://ubu.com/" rel="noopener" target="_blank">
-        UbuWeb
-       </a>
-       <p>
-        Invaluable collection of obscure art in many mediums. Could spend days combing through it all.
-       </p>
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h2>
-      Fun &amp; Games
-     </h2>
-     <ul>
-      <li>
-       <a href="https://neal.fun/" rel="noopener" target="_blank">
-        neal.fun
-       </a>
-       <p>
-        Projects by Neal Agarwhal, many super super cool games, experiments, lessons, nick knacks. Easy way to kill time and enjoy it!
-       </p>
-      </li>
-      <li>
-       <a href="https://boltkey.cz/prison-game/" rel="noopener" target="_blank">
-        Prison Game
-       </a>
-       <p>
-        Awesome online social experiment. What score did you get? I got 41 just, now but it's not my first time playing :P
-       </p>
-      </li>
-      <li>
-       <a href="https://krazydad.com/" rel="noopener" target="_blank">
-        Krazy Dad
-       </a>
-       <p>
-        Fun puzzles and games! I recommend Two Not Touch if you need several hours to kill.
-       </p>
-      </li>
-     </ul>
-     <h2>
-      Effects, Fallacies, Thought experiments
-     </h2>
-     <ul>
-      <li>
-       <a href="https://github.com/dwmkerr/hacker-laws" rel="noopener" target="_blank">
-        Good list of computer-related laws
-       </a>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/Goodhart%27s_law" rel="noopener" target="_blank">
-        Goodhart's law
-       </a>
-       <p>
-        Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes.
-       </p>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/McNamara_fallacy" rel="noopener" target="_blank">
-        McNamara fallacy
-       </a>
-       <p>
-        Making a decision based solely on quantitative observations (or metrics) and ignoring all others.
-       </p>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect" rel="noopener" target="_blank">
-        Dunning-Kruger effect
-       </a>
-       <p>
-        People with low ability at a task overestimate their own ability, and that people with high ability at a task underestimate their own ability.
-       </p>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/Streisand_effect" rel="noopener" target="_blank">
-        Streisand effect
-       </a>
-       <p>
-        When attempting to hide, remove, or censor information has the unintended consequence of increasing awareness of that information.
-       </p>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/Perverse_incentive#The_original_cobra_effect" rel="noopener" target="_blank">
-        Cobra effect
-       </a>
-       <p>
-        When an incentive creates results opposite to what was intended. Funny origin story:
-       </p>
-       <blockquote>
-        The British government, concerned about the number of venomous cobras in Delhi, offered a bounty for every dead cobra. 
+        .linkedList li {
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <navbar></navbar>
+
+    <main>
+        <h1>Cool Stuff</h1>
+        <ul class="linkedList"> <!--hehehe-->
+            <li>
+                <h2>People</h2>
+                <ul>
+                    <li>
+                        <outlink href="https://lauren-mccarthy.com/">Lauren McCarthy</outlink>
+                        <p>A favorite artist/performer/free thinker of mine. Lots of cool social and technological experiments, art pieces, and generally awesome projects. Creator of p5js.</p>
+                    </li>
+                    <li>
+                        <outlink href="http://tom7.org/">Tom 7</outlink>
+                        <p>An old-growth treasure trove of fun little internet pages. What this site aspires to be tbh.</p>
+                    </li>
+                    <li>
+                        <outlink href="https://twitter.com/pangmeli">Pangmeli</outlink>
+                        <p>A cultural critic (in a sense) on Twitter. Lots of poignant observations and alternative perspectives.</p>
+                    </li>
+                    <li>
+                        <outlink href="http://worrydream.com">Bret Victor</outlink>
+                        <p>A design-oriented thinker and visionary that has a tendency to make you rethink everything.</p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>Projects</h2>
+                <ul>
+                    <li>
+                        <outlink href="https://ubu.com/">UbuWeb</outlink>
+                        <p>Invaluable collection of obscure art in many mediums. Could spend days combing through it all.</p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>Fun & Games</h2>
+                <ul>
+                    <li>
+                        <outlink href="https://neal.fun/">neal.fun</outlink>
+                        <p>Projects by Neal Agarwhal, many super super cool games, experiments, lessons, nick knacks. Easy way to kill time and enjoy it!</p>
+                    </li>
+                    <li>
+                        <outlink href="https://boltkey.cz/prison-game/">Prison Game</outlink>
+                        <p>Awesome online social experiment. What score did you get? I got 41 just, now but it's not my first time playing :P</p>
+                    </li>
+                    <li>
+                        <outlink href="https://krazydad.com/">Krazy Dad</outlink>
+                        <p>Fun puzzles and games! I recommend Two Not Touch if you need several hours to kill.</p>
+                    </li>
+                </ul>
+                <h2>Effects, Fallacies, Thought experiments</h2>
+                <ul>
+                    <li>
+                        <outlink href="https://github.com/dwmkerr/hacker-laws">Good list of computer-related laws</outlink>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/Goodhart%27s_law">Goodhart's law</outlink>
+                        <p>Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes.</p>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/McNamara_fallacy">McNamara fallacy</outlink>
+                        <p>Making a decision based solely on quantitative observations (or metrics) and ignoring all others.</p>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect">Dunning-Kruger effect</outlink>
+                        <p>People with low ability at a task overestimate their own ability, and that people with high ability at a task underestimate their own ability.</p>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/Streisand_effect">Streisand effect</outlink>
+                        <p>When attempting to hide, remove, or censor information has the unintended consequence of increasing awareness of that information.</p>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/Perverse_incentive#The_original_cobra_effect">Cobra effect</outlink>
+                        <p>When an incentive creates results opposite to what was intended. Funny origin story: </p>
+                        <blockquote>The British government, concerned about the number of venomous cobras in Delhi, offered a bounty for every dead cobra. 
                             Initially, this was a successful strategy; large numbers of snakes were killed for the reward. 
                             Eventually, however, enterprising people began to breed cobras for the income. 
                             When the government became aware of this, the reward program was scrapped. 
-                            When cobra breeders set their now-worthless snakes free, the wild cobra population further increased.
-       </blockquote>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/IKEA_effect" rel="noopener" target="_blank">
-        IKEA effect
-       </a>
-       <p>
-        People place a disproportionately high value on products they partially created. From
-        <a href="https://www.hbs.edu/ris/Publication%20Files/11-091.pdf" rel="noopener" target="_blank">
-         the paper
-        </a>
-        :
-       </p>
-       <blockquote>
-        Participants saw their amateurish creations - of both utilitarian and hedonic products 
-                            - as similar in value to the creations of experts, and expected others to share their opinions.
-       </blockquote>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/Conway%27s_law" rel="noopener" target="_blank">
-        Conway's Law
-       </a>
-       <blockquote>
-        Organizations design systems [that] mirror their own communication structure.
-       </blockquote>
-      </li>
-      <li>
-       <a href="https://www.hyrumslaw.com/" rel="noopener" target="_blank">
-        Hyrum's Law (The Law of Implicit Interfaces)
-       </a>
-       <blockquote>
-        With a sufficient number of users of an API, it does not matter what you promise in the contract: 
-                            all observable behaviors of your system will be depended on by somebody.
-       </blockquote>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/Parkinson%27s_law" rel="noopener" target="_blank">
-        Parkinson's Law
-       </a>
-       +
-       <a href="https://en.wikipedia.org/wiki/Hofstadter%27s_law" rel="noopener" target="_blank">
-        Hofstadter's Law
-       </a>
-       <p>
-        Parkinson's Law states that "work expands so as to fill the time available for its completion." 
+                            When cobra breeders set their now-worthless snakes free, the wild cobra population further increased.</blockquote>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/IKEA_effect">IKEA effect</outlink>
+                        <p>People place a disproportionately high value on products they partially created. From 
+                            <outlink href="https://www.hbs.edu/ris/Publication%20Files/11-091.pdf">the paper</a>:</outlink>
+                        <blockquote>Participants saw their amateurish creations - of both utilitarian and hedonic products 
+                            - as similar in value to the creations of experts, and expected others to share their opinions.</blockquote>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/Conway%27s_law">Conway's Law</outlink>
+                        <blockquote>Organizations design systems [that] mirror their own communication structure.</blockquote>
+                    </li>
+                    <li>
+                        <outlink href="https://www.hyrumslaw.com/">Hyrum's Law (The Law of Implicit Interfaces)</outlink>
+                        <blockquote>With a sufficient number of users of an API, it does not matter what you promise in the contract: 
+                            all observable behaviors of your system will be depended on by somebody.</blockquote>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/Parkinson%27s_law">Parkinson's Law</outlink>
+                        + <outlink href="https://en.wikipedia.org/wiki/Hofstadter%27s_law">Hofstadter's Law</outlink>
+                        <p>
+                            Parkinson's Law states that "work expands so as to fill the time available for its completion." 
                             While Hofstadter's Law states: "It always takes longer than you expect, even when you take into account Hofstadter's Law."
-                            Therefore work will
-        <em>
-         always
-        </em>
-        take as long as you plan and
-        <em>
-         always
-        </em>
-        some more time after that.
-       </p>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/Law_of_triviality" rel="noopener" target="_blank">
-        The Law of Triviality
-       </a>
-       <blockquote>
-        people within an organization commonly or typically give disproportionate weight to trivial issues
-       </blockquote>
-       <p>
-        The line of reasoning is that more people are more knowledgeable on less complex things and will have something to say. 
+                            Therefore work will <em>always</em> take as long as you plan and <em>always</em> some more time after that.
+                        </p>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/Law_of_triviality">The Law of Triviality</outlink>
+                        <blockquote>people within an organization commonly or typically give disproportionate weight to trivial issues</blockquote>
+                        <p>
+                            The line of reasoning is that more people are more knowledgeable on less complex things and will have something to say. 
                             The other reason being people want to look like they're contributing and will pipe up about things they know about. 
                             The canonical example is a committee building a power plant will spend a ton of time talking about the bike shed over the 
                             actual power plant itself. I feel like this "law" is a good one to remember because it'll happen to you and you'll 
                             chuckle to yourself while the people in your meeting drone on.
-       </p>
-      </li>
-      <li>
-       <a href="https://en.wikipedia.org/wiki/Shifting_baseline" rel="noopener" target="_blank">
-        Shifting Baseline
-       </a>
-       <p>
-        People will assume that what they're used to is the natural state of things. E.g. The abundance of certain fish 
+                        </p>
+                    </li>
+                    <li>
+                        <outlink href="https://en.wikipedia.org/wiki/Shifting_baseline">Shifting Baseline</outlink>
+                        <p>
+                            People will assume that what they're used to is the natural state of things. E.g. The abundance of certain fish 
                             from when you were a child vs now. You might think it's only changed slightly but in reality the "original"/"natural" 
                             population is much larger.
-       </p>
-       <blockquote>
-        There is a loss of perception of change that occurs when each generation redefines what is "natural".
-       </blockquote>
-      </li>
-     </ul>
-    </li>
-   </ul>
-  </main>
- </body>
+                        </p>
+                        <blockquote>There is a loss of perception of change that occurs when each generation redefines what is "natural". </blockquote>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </main>
+</body>
 </html>

@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="noindex" name="robots"/>
-  <title>
-   Projects
-  </title>
-  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <link href="/main.css" rel="stylesheet"/>
-  <style>
-   .item {
+
+<head>
+    <my-head title="Projects"></my-head>
+    <style>
+        .item {
             background: #ffe8d2;
             display: block;
             padding: 10px 5px;
@@ -32,130 +26,79 @@
             font-size: 1.3em;
             margin: 10px auto;
         }
-  </style>
- </head>
- <body>
-  <nav>
-   <a class="home" href="/index.html">
-    Ben Machlin
-   </a>
-  </nav>
-  <main>
-   <h1>
-    Projects
-   </h1>
-   <div class="item-block">
-    <h2>
-     <a href="/text-twist-revolution/" target="_self">
-      Text Twist Revolution
-     </a>
-    </h2>
-    <p>
-     I recreated the classic word unscrambling webgame Text Twist but added my own features.
+    </style>
+
+</head>
+
+<body>
+    <navbar></navbar>
+
+    <main>
+        <h1>Projects</h1>
+        <div class="item-block">
+            <h2><a href="/text-twist-revolution/" target="_self">Text Twist Revolution</a></h2>
+            <p>
+                I recreated the classic word unscrambling webgame Text Twist but added my own features.
                 Most notably, you can advance to a new level as soon as you get the pangram. The UI is...simple, 
                 but it works and is fun!
-    </p>
-   </div>
-   <div class="item-block">
-    <h2>
-     <a href="/whats-next/" target="_self">
-      What's Next Metronome
-     </a>
-    </h2>
-    <p>
-     This is a super super quick project I made to help me practice playing in odd time signatures.
-    </p>
-   </div>
-   <div class="item-block">
-    <h2>
-     <a href="/chronography/" target="_blank">
-      Chronography
-     </a>
-    </h2>
-    <p>
-     A proof-of-concept web app that allows you to compare musical attributes of songs over the
-                course of an album, playlist, or artist's career. You can find the source at
-     <a href="https://github.com/bmachlin/chronography" target="_blank">
-      this repo
-     </a>
-     .
-    </p>
-   </div>
-   <div class="item-block">
-    <h2>
-     <a href="/tab-scroller/index.html" target="_self">
-      Tab Scroller
-     </a>
-    </h2>
-    <h2>
-     <a href="/tab-scroller-2/index.html" target="_self">
-      Tab Scroller 2
-     </a>
-    </h2>
-    <p>
-     Super simple web tool that lets you paste tablature (or any text really) with time stamps
+            </p>
+        </div>
+        <div class="item-block">
+            <h2><a href="/whats-next/" target="_self">What's Next Metronome</a></h2>
+            <p>
+                This is a super super quick project I made to help me practice playing in odd time signatures.
+            </p>
+        </div>
+        <div class="item-block">
+            <h2><a href="/chronography/" target="_blank">Chronography</a></h2>
+            <p>
+                A proof-of-concept web app that allows you to compare musical attributes of songs over the
+                course of an album, playlist, or artist's career. You can find the source at <a
+                    href="https://github.com/bmachlin/chronography" target="_blank">this repo</a>.
+            </p>
+        </div>
+        <div class="item-block">
+            <h2><a href="/tab-scroller/index.html" target="_self">Tab Scroller</a></h2>
+            <h2><a href="/tab-scroller-2/index.html" target="_self">Tab Scroller 2</a></h2>
+            <p>
+                Super simple web tool that lets you paste tablature (or any text really) with time stamps
                 and it will scroll at the appropriate speed. Ability to with YouTube video.
-    </p>
-   </div>
-   <div class="item-block">
-    <h2>
-     Persimmon Project App
-    </h2>
-    <p>
-     A cross-platform mobile app that allowed investors insight into the portfolio performance as well as news and updates.
+            </p>
+        </div>
+        <div class="item-block">
+            <h2>Persimmon Project App</h2>
+            <p>
+                A cross-platform mobile app that allowed investors insight into the portfolio performance as well as news and updates.
                 Developed with Ionic. The app was live-updated with data from a financial portfolio service.
-    </p>
-   </div>
-   <div class="item-block">
-    <h2>
-     Musique
-    </h2>
-    <p>
-     A senior capstone project that implemented democratic music queuing. Users could host and
+            </p>
+        </div>
+        <div class="item-block">
+            <h2>Musique</h2>
+            <p>
+                A senior capstone project that implemented democratic music queuing. Users could host and
                 join "parties" in which party-goers could queue songs and vote on songs in the queue. The queue would
                 automatically sort by number of votes and playback through the host's device. We used the Spotify
                 API and Firebase to create a functional Android app.
-    </p>
-   </div>
-   <div class="item-block">
-    <h2>
-     Other Projects
-    </h2>
-    <ul>
-     <li>
-      Inverse reinforment learning agent that learned to play harmony (chords) when given an input melody
-                    using live user feedback (Python)
-     </li>
-     <li>
-      Project comparing language used in popular news outlets using NLP, web scraping,
-                    sentiment analysis, and statistical analysis (Python)
-     </li>
-     <li>
-      Cross platform app for monitoring a private cryptocurrency investment portfolio (Ionic)
-     </li>
-     <li>
-      Research in creative exploration for robots involving AI planning algorithms (Java)
-     </li>
-     <li>
-      File copying protocol from scratch using end to end principles (C)
-     </li>
-     <li>
-      Database from scratch with pages, blocks, and cache (C)
-     </li>
-     <li>
-      Exploration and presentation of the network attributes of Spotify related artists (now called "Fans Also Like") (Python)
-     </li>
-     <li>
-      Flowchart, hierarchichal tree, directed force, and other data visualizations (mostly Processing)
-     </li>
-     <li>
-      <a href="/processing.html">
-       Various Processing and p5.js sketches
-      </a>
-     </li>
-     <!--idea: a page where ppl can render p5 sketches. possibly with interactive sliders for variables!-->
-    </ul>
-   </div>
-  </main>
- </body>
+            </p>
+        </div>
+        <div class="item-block">
+            <h2>Other Projects</h2>
+            <ul>
+                <li>Inverse reinforment learning agent that learned to play harmony (chords) when given an input melody
+                    using live user feedback (Python)</li>
+                <li>Project comparing language used in popular news outlets using NLP, web scraping,
+                    sentiment analysis, and statistical analysis (Python)</li>
+                <li>Cross platform app for monitoring a private cryptocurrency investment portfolio (Ionic)</li>
+                <li>Research in creative exploration for robots involving AI planning algorithms (Java)</li>
+                <li>File copying protocol from scratch using end to end principles (C)</li>
+                <li>Database from scratch with pages, blocks, and cache (C)</li>
+                <li>Exploration and presentation of the network attributes of Spotify related artists (now called "Fans Also Like") (Python)</li>
+                <li>Flowchart, hierarchichal tree, directed force, and other data visualizations (mostly Processing)</li>
+                <li><a href="/processing.html">Various Processing and p5.js sketches</a></li>
+                <!--idea: a page where ppl can render p5 sketches. possibly with interactive sliders for variables!-->
+            </ul>
+        </div>
+
+    </main>
+</body>
 </html>

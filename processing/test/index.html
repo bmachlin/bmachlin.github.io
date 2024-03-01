@@ -1,61 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="noindex" name="robots"/>
-  <title>
-   Ben Machlin!
-  </title>
-  <link href="/res/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <link href="/main.css" rel="stylesheet"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js">
-  </script>
-  <link href="../processing.css" rel="stylesheet" type="text/css"/>
- </head>
- <body>
-  <noscript>
-   This page requires JavaScript.
-  </noscript>
-  <nav>
-   <a class="home" href="/index.html">
-    Ben Machlin
-   </a>
-  </nav>
-  <a href="/processing/index.html">
-   <h1>
-    &lt;-- Processing Sketches
-   </h1>
-  </a>
-  <main>
-   <h2>
-    Test
-   </h2>
-   <div class="sketch-options">
-    <div class="sketch-controls">
-     <button class="btn-start-stop" onclick="toggle(this)">
-      Stop
-     </button>
-     <button class="btn-reset" onclick="reset(this)">
-      Reset
-     </button>
-     <button class="btn-save" onclick="saveFrame(this)">
-      Save Frame
-     </button>
-     <button class="btn-record">
-      Start Recording
-     </button>
-    </div>
-    <br/>
-   </div>
-   <script src="test.js">
-   </script>
-   <script src="../default-controls.js">
-   </script>
-   <script src="../parameters.js">
-   </script>
-  </main>
- </body>
+  <head>
+    <my-head></my-head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../processing.css">
+  </head>
+  <body>
+    <noscript>This page requires JavaScript.</noscript>
+    <navbar></navbar>
+    <a href="/processing/index.html"><h1>&lt;-- Processing Sketches</h1></a>
+    <main>
+        <h2>Test</h2>
+        <div class="sketch-options">
+          <div class="sketch-controls">
+            <button class="btn-start-stop" onclick="toggle(this)">Stop</button>
+            <button class="btn-reset" onclick="reset(this)">Reset</button>
+            <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
+            <button class="btn-record">Start Recording</button>
+          </div>
+          <br>
+        </div>
+        <script src="test.js"></script>
+        <script src="../default-controls.js"></script>
+        <script src="../parameters.js"></script>
+    </main>
+
+  </body>
 </html>

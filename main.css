@@ -14,7 +14,7 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: var(--main-background-color);
     color: #111;
-    width: 90%;
+    width: 60%;
     margin: 10px auto;
     border-radius: var(--main-border-radius);
 }
@@ -26,8 +26,15 @@ main {
     padding: 10px;
 }
 
+/* reduce border if screen is medium */
+@media (max-width: 1200px) {
+    main, body {
+        width: 80%;
+    }
+}
+
 /* reduce border if screen is small */
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     main, body {
         width: 95%;
     }
@@ -89,8 +96,9 @@ blockquote {
 .item-block {
     background: #ffe8d2;
     display: block;
-    padding: 10px 5px;
+    padding: 10px 10px;
     margin: 20px auto;
+    border-radius: var(--main-border-radius);
 }
 
 .item-block h2 {

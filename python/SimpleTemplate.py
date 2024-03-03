@@ -221,10 +221,13 @@ class SimpleTemplate:
     def CopyFile(self, fp):
         excludePatterns = self.config["EXCLUDE_ALL"] + self.config["EXCLUDE_COPY"]
         if not self.ShouldExclude(excludePatterns, fp):
+            if self.config["INPUT_DIR"] == ".":
+                fp = "./" + fp
             newFp = fp.replace(normpath(self.config["INPUT_DIR"]), normpath(self.config["OUTPUT_DIR"]), 1)
             if newFp == fp:
                 print("Will not overwrite", fp, self.config["INPUT_DIR"], self.config["OUTPUT_DIR"])
                 return
+            print("Copying", fp, "to", newFp)
             shutil.copy(fp, newFp)
         
 
@@ -266,6 +269,8 @@ class SimpleTemplate:
             return
         
         fileChanged = normpath(fileChanged)
+        if self.config["INPUT_DIR"] == ".":
+            fileChanged = "./" + fileChanged
         
         if fileChanged in [x.path for x in self.htmlFiles]:
             self.ProcessAll()

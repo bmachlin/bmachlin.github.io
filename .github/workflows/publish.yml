@@ -42,7 +42,7 @@ jobs:
           pip install watchdog
       - name: Build
         run: |
-          python python/watch.py tml_config.json
+          python python/build.py tml_config_prod.json
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

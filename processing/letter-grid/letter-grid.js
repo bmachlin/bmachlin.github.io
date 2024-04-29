@@ -8,10 +8,11 @@ let rows = 1;
 let cols = 1;
 
 let inv = false;
-let shouldDraw = false;
+let shouldDraw = true;
 let c = "S";
 
 let letterGrid;
+let neatness;
 
 let TOP = 0;
 let BOT = 1;
@@ -132,7 +133,8 @@ function activate() {
     textFont(perfont);
     textSize(tSize);
 
-    
+    neatness = getSliderValue(elemById("neatnessInput"));
+
     if (shouldDraw) {
         draw();
         return;
@@ -194,7 +196,7 @@ function getLetter(x, y) {
     return result;
 }
 
-let matchThreshold = 1;
+
 
 function getLetter2(x, y) {
     if (letterGrid[x][y] != "")
@@ -202,6 +204,8 @@ function getLetter2(x, y) {
     let options = Object.keys(PS);
     let maxVal = 0;
     let maxOptions = [];
+    let neatnessFactor = map(neatness, 0, 1, 2, 0);
+    print(neatness, neatnessFactor)
 
     let surrounds = {};
     let positions = [[-1,0],[1,0],[0,-1],[0,1]];
@@ -215,12 +219,12 @@ function getLetter2(x, y) {
                 continue;
             let k2 = letterGrid[x+xDif][y+yDif];
             total += getMatch(k,k2,positions2[i]);
-            surrounds[k2] = 1;
         }
+        surrounds[k] = total;
         if (total > maxVal) {
             maxVal = total;
             maxOptions = [k];
-        } else if (total + matchThreshold >= maxVal) {
+        } else if (total + neatnessFactor >= maxVal) {
             maxOptions.push(k);
         }
     }

@@ -19,7 +19,6 @@
         <h2>Beat Generator</h2>
         <div class="sketch-options">
             <div class="sketch-controls">
-
                 <button class="btn-start-stop" onclick="toggle(this)">Stop</button>
                 <button class="btn-reset" onclick="reset(this)">Reset</button>
                 <button class="btn-save" onclick="saveFrame(this)">Save Frame</button>
@@ -28,14 +27,16 @@
             <br>
             <div class="param">
                 <label for="bpmInput" class="param-label">bpm</label>
-                <input type="range" min=20 max=400 value=120 step=1 class="param-slider" oninput="bpmValue.innerText = this.value" id="bpmInput">
+                <input type="range" min=20 max=400 value=120 step=1 class="param-slider"
+                    oninput="bpmValue.innerText = this.value" id="bpmInput">
                 <p class="param-value" id="bpmValue">120</p>
-              </div>
-              <div class="param">
+            </div>
+            <div class="param">
                 <label for="lengthInput" class="param-label">length</label>
-                <input type="range" min=2 max=16 value=8 step=1 class="param-slider" oninput="lengthValue.innerText = this.value" id="lengthInput">
+                <input type="range" min=2 max=16 value=8 step=1 class="param-slider"
+                    oninput="lengthValue.innerText = this.value" id="lengthInput">
                 <p class="param-value" id="lengthValue">8</p>
-              </div>
+            </div>
 
         </div>
         <script src="../default-controls.js"></script>

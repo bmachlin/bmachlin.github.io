@@ -7,11 +7,11 @@ let tSize = 50;
 let rows = 1;
 let cols = 1;
 
-let inv = true;
-let shouldDraw = true;
-let c = "A";
+let inv = false;
+let shouldDraw = false;
+let c = "S";
 
-let letterGrid = [];
+let letterGrid;
 
 let TOP = 0;
 let BOT = 1;
@@ -24,6 +24,7 @@ let RIGHT = 3;
 let PS = {
     "A": {
         "A": [0, 0, 0, 0],
+        "E": [0, .5, 0, 0],
         "J": [0, .5, 0, 0],
         "K": [0, 1, 0, 0],
         "L": [0, .5, 0, 0],
@@ -31,8 +32,19 @@ let PS = {
         "O": [0, 0, 0, 0],
         "R": [0, 0, 0, 0]
     },
+    "E": {
+        "A": [.5, 0, 0, 0],
+        "E": [1, 1, .5, .5],
+        "J": [.5, 0, .5, .5],
+        "K": [.5, .5, .5, .5],
+        "L": [1, 0, .25, .5],
+        "M": [.5, 1, .5, .5],
+        "O": [0, 0, 0, 0],
+        "R": [.5, 0, 0, .5]
+    },
     "J": {
         "A": [.5, 0, 0, 0],
+        "E": [0, .5, .5, .5],
         "J": [.25, .25, .25, .25],
         "K": [.25, 0, .5, .5],
         "L": [0, 0, 1, .25],
@@ -42,15 +54,17 @@ let PS = {
     },
     "K": {
         "A": [1, 0, 0, 0],
+        "E": [.5, .5, .5, .5],
         "J": [0, 0, 0, 0],
         "K": [1, 1, .5, .5],
         "L": [.5, .5, .25, .5],
         "M": [1, 1, 1, .5],
-        "O": [0, 0, 0, 0],
+        "O": [0, 0, 0, .5],
         "R": [1, 0, 0, .5]
     },
     "L": {
         "A": [.5, 0, 0, 0],
+        "E": [0, 1, .5, .25],
         "J": [0, 0, 0, 0],
         "K": [1, .5, .5, .25],
         "L": [.5, .5, 1, 1],
@@ -60,17 +74,19 @@ let PS = {
     },
     "M": {
         "A": [1, 0, 0, 0],
+        "E": [.5, .5, .5, 1],
         "J": [0, 0, 0, 0],
         "K": [.5, 1, 1, 1],
         "L": [.5, 1, .25, 1],
-        "M": [1, 1, 1, 1],
+        "M": [.75, .75, 1, 1],
         "O": [0, 0, 0, 0],
         "R": [1, 0, 0, 1]
     },
     "O": {
         "A": [0, 0, 0, 0],
+        "E": [0, 0, 0, 0],
         "J": [0, 0, 0, 0],
-        "K": [0, 0, 0, 0],
+        "K": [0, 0, .5, 0],
         "L": [0, 0, 0, 0],
         "M": [0, 0, 0, 0],
         "O": [0, 0, 0, 0],
@@ -78,6 +94,7 @@ let PS = {
     },
     "R": {
         "A": [0, 0, 0, 0],
+        "E": [0, .5, .5, 0],
         "J": [0, .5, .25, .5],
         "K": [0, 1, .5, 0],
         "L": [0, .5, .25, 0],
@@ -99,12 +116,12 @@ function setup() {
 
 function activate() {
     background(255);
-
     noStroke();
 
     cols = floor(width / squareSize);
     rows = floor(height / squareSize);
-
+    
+    letterGrid = []
     for (let i = 0; i < cols; i++) {
         letterGrid.push([]);
         for (let j = 0; j < rows; j++) {
@@ -115,7 +132,11 @@ function activate() {
     textFont(perfont);
     textSize(tSize);
 
-    if (shouldDraw) return;
+    
+    if (shouldDraw) {
+        draw();
+        return;
+    }
 
     let alpha = Object.keys(PS).join("");
     let testcols = floor(width/(squareSize*3.25));
@@ -137,7 +158,6 @@ function activate() {
             }
         }
     }
-    
 }
 
 function getLetter(x, y) {
@@ -174,6 +194,8 @@ function getLetter(x, y) {
     return result;
 }
 
+let matchThreshold = 1;
+
 function getLetter2(x, y) {
     if (letterGrid[x][y] != "")
         return letterGrid[x][y];
@@ -181,6 +203,7 @@ function getLetter2(x, y) {
     let maxVal = 0;
     let maxOptions = [];
 
+    let surrounds = {};
     let positions = [[-1,0],[1,0],[0,-1],[0,1]];
     let positions2 = [TOP,BOT,LEFT,RIGHT];
     for (let k of options) {
@@ -191,19 +214,20 @@ function getLetter2(x, y) {
             if (x + xDif >= rows || x + xDif < 0 || y + yDif >= cols || y + yDif < 0)
                 continue;
             let k2 = letterGrid[x+xDif][y+yDif];
-            total += getMatch(k,k2,positions2[i]) >= .5 ? 1 : 0;
+            total += getMatch(k,k2,positions2[i]);
+            surrounds[k2] = 1;
         }
-        if (total == maxVal) {
-            maxOptions.push(k);
-        }
-        else if (total > maxVal) {
+        if (total > maxVal) {
             maxVal = total;
             maxOptions = [k];
+        } else if (total + matchThreshold >= maxVal) {
+            maxOptions.push(k);
         }
     }
 
     if (maxOptions.length == 0) maxOptions = ["O"];
     let result = maxOptions[Math.floor(Math.random() * maxOptions.length)];
+    print(maxVal,surrounds,maxOptions,result)
     letterGrid[x][y] = result;
     return result;
 }
@@ -232,7 +256,7 @@ async function draw() {
         let yPos = y * squareSize;
         let letter = getLetter2(x, y);
         text(letter, xPos, yPos + squareSize);
-        await new Promise(r => setTimeout(r, 500));
+        // await new Promise(r => setTimeout(r, 500));
     }
     noLoop();
 }

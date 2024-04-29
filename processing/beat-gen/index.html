@@ -27,27 +27,20 @@
             </div>
             <br>
             <div class="param">
-                <label for="linesInput" class="param-label">Lines</label>
-                <input type="range" min=1 max=100 value=20 step=1 class="param-slider" oninput="linesValue.innerText = this.value" id="linesInput">
-                <p class="param-value" id="linesValue">20</p>
+                <label for="bpmInput" class="param-label">bpm</label>
+                <input type="range" min=20 max=400 value=120 step=1 class="param-slider" oninput="bpmValue.innerText = this.value" id="bpmInput">
+                <p class="param-value" id="bpmValue">120</p>
               </div>
-            <div class="param">
-                <label for="colorInput" class="param-label">Color</label>
-                <select id="colorInput" name="colorInput" onchange="updateColors()">
-                    <option value=0>Gray</option>
-                    <option value=1>Red</option>
-                    <option value=2>Blue</option>
-                    <option value=3>Green</option>
-                    <option value=4>Yellow</option>
-                    <option value=5>Purple</option>
-                    <option value=6>Rainbow</option>
-                </select>
-            </div>
+              <div class="param">
+                <label for="lengthInput" class="param-label">length</label>
+                <input type="range" min=2 max=16 value=8 step=1 class="param-slider" oninput="lengthValue.innerText = this.value" id="lengthInput">
+                <p class="param-value" id="lengthValue">8</p>
+              </div>
 
         </div>
-        <script src="beat-gen.js"></script>
         <script src="../default-controls.js"></script>
         <script src="../parameters.js"></script>
+        <script src="beat-gen.js"></script>
     </main>
 
 </body>

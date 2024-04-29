@@ -1,3 +1,5 @@
+let elemById = document.getElementById.bind(document);
+
 // https://stackoverflow.com/a/175787
 function isNumeric(str) {
     if (typeof str != "string") return false // we only process strings!  

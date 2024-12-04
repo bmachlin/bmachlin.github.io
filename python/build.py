@@ -1,6 +1,8 @@
 import sys
 import time
 import logging
+import argparse
+from pathlib import Path
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler, FileSystemEventHandler
 from SimpleTemplate import SimpleTemplate
@@ -23,32 +25,29 @@ class SimpleTemplateHandler(FileSystemEventHandler):
     
 
 if __name__ == "__main__":
-    path = "."
-    config_path = "./tml_config.json" # default config file to use
-    if len(sys.argv) > 1:
-        config_path = sys.argv[1]
-        
-    watch = False
-    if len(sys.argv) > 2:
-        watch = sys.argv[2].lower() == "watch"
+    parser = argparse.ArgumentParser()
+    parser.add_argument("config", type=str, nargs="?", default="tml_config_dev.json", help="path to the TML config file")
+    parser.add_argument("-w", "--watch", action="store_true", default=False, help="continuously process changes to input directory")
+    parser.add_argument("-v", "--verbose", action="count", default=0, help="increase output logs (max 3 levels -vvv)")
+    args = parser.parse_args()
     
-    print("config path", config_path)
-    st = SimpleTemplate(configPath=config_path)
-    print("input dir", st.config["INPUT_DIR"])
-    print("output dir", st.config["OUTPUT_DIR"])
+    if (args.verbose > 0):
+        print("config path:", args.config)
+        
+    st = SimpleTemplate(configPath=args.config, logLevel=args.verbose)
+    print(st.config["INPUT_DIR"], "-->", st.config["OUTPUT_DIR"])
     st.ProcessAll()
     
-    if not watch:
+    if not args.watch:
         sys.exit()
-    path = st.config["INPUT_DIR"]
     
     event_handler = SimpleTemplateHandler()
     observer = Observer()
-    observer.schedule(event_handler, path, recursive=True)
+    observer.schedule(event_handler, st.config["INPUT_DIR"], recursive=True)
     observer.start()
     try:
         while True:
             time.sleep(1)
-    except KeyboardInterrupt:
+    except Exception:
         observer.stop()
     observer.join()

@@ -10,7 +10,7 @@ class Template(FileObject):
                      # cannot contain spaces or special characters or be a reserved HTML word
     
     def __str__(self):
-        return "Template: " + self.id + " " + self.path
+        return self.id + " (" + str(self.path) + ")"
     
     def __repr__(self):
-        return "Template: " + self.id + " " + self.path
+        return self.id + " (" + str(self.path) + ")"

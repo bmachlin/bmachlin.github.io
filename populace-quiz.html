@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <my-head title="Populace Quiz"></my-head>
+        <style>
+            body {
+                padding: 20px;
+            }
+
+            input[type="range"] {
+                height: 200px;
+                transform: rotate(270deg);
+                -moz-transform: rotate(270deg);
+                position: relative;
+            }
+
+            #inputs {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .range {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .range span {
+                font-size: 1.2em;
+                margin-bottom: 20px;
+            }
+
+            #actionBtn {
+                display: block;
+                margin: 30px auto;
+                padding: 12px 35px;
+                font-size: 1.2em;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 25px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+            }
+
+            #actionBtn:hover {
+                background-color: #45a049;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            }
+
+            #actionBtn:active {
+                transform: translateY(1px);
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .slider-container {
+                display: flex;
+                align-items: center;
+                position: relative;
+            }
+
+            .value-display {
+                writing-mode: horizontal-tb;
+                font-size: 1.2em;
+                position: absolute;
+                transition: all 0.05s ease;
+                transform-origin: right center;
+                white-space: nowrap;
+                left: 20px;
+                color: #164c5c;
+            }
+
+            .slider-label {
+                font-size: 1.2em;
+                margin-bottom: 10px;
+                text-align: center;
+                display: block;
+                font-weight: bold;
+            }
+
+            .result {
+                color: #028a09;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            What do we think? What is real?
+        </h1>
+        <p>
+            American adults were asked to estimate the percent of American adults that each prompt applies to. Guess what the median guess was, and what the real percent is.
+        </p>
+        <p><a href="https://today.yougov.com/politics/articles/41556-americans-misestimate-small-subgroups-population">Primary Source</a>
+            <a href="https://www.census.gov/quickfacts/">Source 2</a> 
+            <a href="https://data.census.gov">Source 3</a> 
+            
+            Survey data collected in January 2022. Real value data gathered from various places from 2009-2022. The figures are obviously not exact, but should be within a reasonable margin of error.</p>
+        <h2>
+            Prompt:
+        </h2>
+        <div hidden="" id="prompt-area">
+            <p id="prompt">
+                [prompt]
+            </p>
+            <div id="inputs">
+                <div class="range">
+                    <span class="slider-label">Median Guess</span>
+                    <div class="slider-container">
+                        <span class="value-display">50%</span>
+                        <input id="range1" max="100" min="0" step="1" type="range" oninput="updateValuePosition(this)"/>
+                        <span class="result" hidden>50%</span>
+                    </div>
+                </div>
+                <div class="range">
+                    <span class="slider-label">Your Guess</span>
+                    <div class="slider-container">
+                        <span class="value-display">50%</span>
+                        <input id="range2" max="100" min="0" step="1" type="range" oninput="updateValuePosition(this)"/>
+                        <span class="result" hidden>50%</span>
+                    </div>
+                </div>
+            </div>
+            <button id="actionBtn" onclick="handleAction()">
+                Guess!
+            </button>
+        </div>
+    </body>
+    <script>
+        // https://today.yougov.com/politics/articles/41556-americans-misestimate-small-subgroups-population
+        // Median estimates of group sizes relative to actual population estimates
+        // [0] is the prompt, [1] is the real percent, [2] is the average guess
+        let data = [
+            ['have a household income over $1 million', 0, 10],
+            ['are transgender', 1, 21],
+            ['have a household income over $500 thousand', 1, 26],
+            ['are Muslim', 1, 27],
+            ['are Native American', 1, 27],
+            ['are Jewish', 2, 30],
+            ['live in New York City', 3, 30],
+            ['are gay or lesbian', 3, 30],
+            ['are atheists', 3, 33],
+            ['are bisexual', 4, 29],
+            ['are members of a union', 4, 36],
+            ['are vegan or vegetarian', 5, 30],
+            ['are Asian', 6, 29],
+            ['are a military veteran', 6, 40],
+            ['live in Texas', 9, 30],
+            ['are left-handed', 11, 34],
+            ['live in California', 12, 32],
+            ['are Black', 14, 41],
+            ['have an advanced degree', 12, 37],
+            ['are first-generation immigrants', 14, 33],
+            ['are Hispanic', 20, 39],
+            ['are Catholic', 22, 41],
+            ['own a gun', 32, 54],
+            ['have at least a college degree', 34, 47],
+            ['have a household income over $100 thousand', 34, 38],
+            ['have a passport', 37, 45],
+            ['are Democrats', 42, 50],
+            ['are obese', 42, 56],
+            ['are Republicans', 47, 49],
+            ['are married', 51, 52],
+            ['have at least one child', 57, 59],
+            ['voted in the 2020 election', 62, 61],
+            ['have a household income over $50 thousand', 62, 50],
+            // ['are white', 60, 59],
+            ['own a house', 65, 49],
+            ['are fully vaccinated against COVID-19', 66, 60],
+            ['have a pet', 67, 64],
+            ['are Christian', 70, 57],
+            ['have read a book in the past year', 77, 50],
+            ['have a household income over $25 thousand', 82, 65],
+            ['have a drivers license', 83, 71],
+            ['own a smartphone', 85, 80],
+            ['have flown on a plane', 88, 61],
+            ['own a car', 88, 67],
+            ['have at least a high school degree', 89, 68]
+        ];
+
+        let currentItem = null;
+        let hasGuessed = false;
+
+        function updateValuePosition(slider) {
+            const valueDisplay = slider.previousElementSibling;
+            const percent = slider.value;
+            valueDisplay.textContent = percent + '%';
+            
+            const sliderRect = slider.getBoundingClientRect();
+            const containerRect = slider.parentElement.getBoundingClientRect();
+            
+            const startY = 20;  // Padding from top
+            const endY = containerRect.height - 40;  // Padding from bottom
+            const usableHeight = endY - startY;
+            
+            const position = startY + ((100 - percent) / 100) * usableHeight;
+            
+            valueDisplay.style.top = `${position}px`;
+        }
+
+        function handleAction() {
+            const btn = document.querySelector("#actionBtn");
+            
+            if (!hasGuessed) {
+                const sliders = document.querySelectorAll('input[type="range"]');
+                sliders.forEach(slider => slider.disabled = true);
+                
+                const results = document.querySelectorAll('.result');
+                results[0].textContent = `${currentItem[2]}%`;
+                results[1].textContent = `${currentItem[1]}%`;
+                results.forEach((result, index) => {
+                    result.hidden = false;
+                    let slider = sliders[index];
+                    
+                    const sliderRect = slider.getBoundingClientRect();
+                    const containerRect = slider.parentElement.getBoundingClientRect();
+                    
+                    const startY = 20;  // Padding from top
+                    const endY = containerRect.height - 40;  // Padding from bottom
+                    const usableHeight = endY - startY;
+                    
+                    // Calculate position
+                    const percent = currentItem[2 -index];
+                    const position = startY + ((100 - percent) / 100) * usableHeight;
+                    
+                    const userGuess = parseInt(sliders[index].value);
+                    const targetValue = currentItem[2 -index];
+                    const accuracy = 1 - Math.abs(userGuess - targetValue) / 100;
+                    const adjustedAccuracy = accuracy < 0.6 ? accuracy * 0.2 : ((accuracy - 0.6) * 2.5);
+                                        
+                    const hue = adjustedAccuracy * 120; // 0 is red, 120 is green
+                    const color = `hsl(${hue}, 50%, 45%)`;
+            
+                    
+                    result.style.position = 'absolute';
+                    result.style.top = `${position}px`;
+                    result.style.right = '20px';
+                    result.style.color = color;
+
+                    console.log("accuracy", adjustedAccuracy, accuracy, targetValue, userGuess);
+                });
+                
+                
+                // Update button
+                btn.textContent = "Next!";
+                hasGuessed = true;
+            } else {
+                // Handle next
+                hasGuessed = false;
+                btn.textContent = "Guess!";
+                document.querySelectorAll('input[type="range"]').forEach(slider => slider.disabled = false);
+                document.querySelectorAll('.result').forEach(result => result.hidden = true);
+                run();
+            }
+        }
+
+        function run(event) {
+            document.querySelector("#prompt-area").hidden = false;
+            
+            // Get a new random item
+            currentItem = data[Math.floor(Math.random() * data.length)];
+            document.querySelector("#prompt").textContent = 
+                `What percentage of American adults...${currentItem[0]}?`;
+            
+            // Reset results and slider positions
+            document.querySelectorAll('.result').forEach(el => {
+                el.hidden = true;
+                el.textContent = '';
+            });
+            
+            // Initialize slider positions
+            document.querySelectorAll('input[type="range"]').forEach(slider => {
+                slider.value = 50;
+                updateValuePosition(slider);
+            });
+        }
+
+        window.onload = run;
+    </script>
+</html>

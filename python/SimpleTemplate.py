@@ -234,8 +234,8 @@ class SimpleTemplate:
     ########## OUTPUT ##########
 
     def _copy_input_directory(self):
-        if self.logLevel >= 4: print("_copy_input_directory")
-        if self.config["INPUT_DIR"] == self.config["OUTPUT_DIR"]:
+        if self.logLevel >= 4: print("_copy_input_directory", self.config["INPUT_DIR"], self.config["OUTPUT_DIR"])
+        if str(self.config["INPUT_DIR"]) == str(self.config["OUTPUT_DIR"]):
             if self.logLevel > 0: print("No need to copy in place")
             return
         excludePatterns = self.config["EXCLUDE_ALL"] + self.config["EXCLUDE_COPY"] + [str(self.config["OUTPUT_DIR"]) + "*"]

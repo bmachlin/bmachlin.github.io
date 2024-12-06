@@ -235,6 +235,9 @@ class SimpleTemplate:
 
     def _copy_input_directory(self):
         if self.logLevel >= 4: print("_copy_input_directory")
+        if self.config["INPUT_DIR"] == self.config["OUTPUT_DIR"]:
+            if self.logLevel > 0: print("No need to copy in place")
+            return
         excludePatterns = self.config["EXCLUDE_ALL"] + self.config["EXCLUDE_COPY"] + [str(self.config["OUTPUT_DIR"]) + "*"]
         def excludeFn(path, names):
             excluded = []
@@ -242,7 +245,6 @@ class SimpleTemplate:
                 fp = Path(path) / name
                 if self._should_exclude(excludePatterns, fp) or self._is_html_or_template(fp):
                     excluded.append(name)
-                    # print("excluding", name)
             return excluded
         
         if self.logLevel >= 1: print("Copying input dir to output dir", self.config["INPUT_DIR"], self.config["OUTPUT_DIR"])

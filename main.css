@@ -5,15 +5,15 @@
 }
 
 html {
-    background-color: #1A8278;
+    background-color: #353536;
     --main-border-radius: 10px;
-    --main-background-color: #e6c184;
+    --main-background-color: #424242;
 }
 
 body {
     font-family: 'Arial', sans-serif;
     background-color: var(--main-background-color);
-    color: #111;
+    color: #c1c1c1;
     width: 60%;
     margin: 10px auto;
     border-radius: var(--main-border-radius);
@@ -29,7 +29,7 @@ main {
 /* reduce border if screen is medium */
 @media (max-width: 1200px) {
     main, body {
-        width: 80%;
+        width: 90%;
     }
 }
 
@@ -40,15 +40,22 @@ main {
     }
 }
 
+/* reduce border entirely if screen is tiny */
+@media (max-width: 800px) {
+    main, body {
+        width: 99%;
+    }
+}
+
 a,
 a:visited {
     text-decoration: underline;
-    color: #222;
+    color: #c6c0ca;
     cursor: pointer;
 }
 
 main a:hover {
-    background-color: #faeed4;
+    background-color: #664498;
 }
 
 main a:active {
@@ -64,7 +71,7 @@ nav {
     display: inline-block;
     top: 0;
     width: 100%;
-    background-color: #f76e2e;
+    background-color: #664498;
     border-radius: var(--main-border-radius) var(--main-border-radius) 0 0;
 }
 
@@ -81,7 +88,7 @@ nav {
 }
 
 .home:hover {
-    background-color: #872b00;
+    background-color: #482f6c;
 }
 
 blockquote {

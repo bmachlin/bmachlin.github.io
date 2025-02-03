@@ -4,3 +4,10 @@ Welcome to the ReadMe for my personal website. Most of the content is probably b
 There's a mix of very old and very new (as of this writing) code. You may want to peek around in /text-twist-revolution or /tab-scroller-2 or (in progress) /deep-cuts-quiz
 
 I enjoy building things out of as much plain, client-side HTML/CSS/JS as I can. There are definitely some moments when a server or web framework would be helpful, but the overhead, tooling, package management, versioning, dependencies, deployment, build chain.......all make it harder to Just Write Code. So I'm willing to write myself a small library or helper function for my specific purpose.
+
+## TODO
+- Run TTR word list through common-ness API and add options for playing with easy -> hard dictionary
+- Theme picker
+- Fix Tab Scroller 2 - timing is broken
+- Expand Processing Sketches, more sliders/knobs
+

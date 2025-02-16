@@ -56,6 +56,16 @@
     /* width: fit-content; */
 }
 
+input, select {
+    border-radius: 10px;
+    width: 20%;
+    height: 2rem;
+    text-align: center;
+    background: var(--lite-bg-color);
+    color: var(--accent-color-dark);
+    font-weight: bolder;
+}
+
 #toggle-settings-bot,
 #toggle-settings-top {
     width: 100%;

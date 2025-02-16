@@ -4,15 +4,28 @@
     box-sizing: border-box;
 }
 
-html {
-    background-color: #353536;
+:root {
     --main-border-radius: 10px;
-    --main-background-color: #424242;
+    --main-bg-color: #292828;
+    --main-bg-color-lite: color-mix(in srgb, var(--main-bg-color) 90%, white);
+    --main-bg-color-dark: color-mix(in srgb, var(--main-bg-color) 80%, black);
+    --accent-color: #664498;
+    --accent-color-lite: color-mix(in srgb, var(--accent-color) 80%, white);
+    --accent-color-dark: color-mix(in srgb, var(--accent-color) 80%, black);
+    --accent-color-darker: color-mix(in srgb, var(--accent-color) 50%, black);
+    --lite-bg-color: #82A6B1;
+    --lite-bg-color-dark: color-mix(in srgb, var(--lite-bg-color) 80%, black);
+    --lite-bg-color-darker: color-mix(in srgb, var(--lite-bg-color) 50%, black);
+    --dark-text-color: #292828;
+}
+
+html {
+    background-color: var(--main-bg-color);
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--main-background-color);
+    font-family: 'Lucida Sans Typewriter', sans-serif;
+    background-color: var(--main-bg-color-lite);
     color: #c1c1c1;
     width: 60%;
     margin: 10px auto;
@@ -55,7 +68,7 @@ a:visited {
 }
 
 main a:hover {
-    background-color: #664498;
+    background-color: var(--accent-color-darker);
 }
 
 main a:active {
@@ -71,7 +84,7 @@ nav {
     display: inline-block;
     top: 0;
     width: 100%;
-    background-color: #664498;
+    background-color: var(--accent-color);
     border-radius: var(--main-border-radius) var(--main-border-radius) 0 0;
 }
 
@@ -101,7 +114,7 @@ blockquote {
 }
 
 .item-block {
-    background: #ffe8d2;
+    background: #28223e;
     display: block;
     padding: 10px 10px;
     margin: 20px auto;
@@ -122,4 +135,29 @@ blockquote {
     width: 90%;
     font-size: 1.3em;
     margin: 10px auto;
+}
+
+button {
+    background-color: var(--lite-bg-color);
+    color: var(--dark-text-color);
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+    word-break: break-word;
+    padding: 10px 14px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 0.5px var(--lite-bg-color-darker);
+    outline: 0px solid transparent;
+    border: 0;
+    margin: 3px;
+}
+
+button:hover {
+    background-color: var(--lite-bg-color-dark);
+}
+
+button:hover:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
 }

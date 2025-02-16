@@ -3,6 +3,7 @@
 
 <head>
     <my-head title="Building Projects"></my-head>
+    <swiper-css></swiper-css>
     <style>
         .pic {
             margin: 10px;
@@ -23,65 +24,27 @@
 
     <main>
         <h1>Building Projects</h1>
-        <!-- <img src="{{src}}" class="pic" loading="lazy"> -->
-        <building-pic src="/res/building/bench-5.jpg"></building-pic>
-        <building-pic src="/res/building/bench-4.jpg"></building-pic>
-        <building-pic src="/res/building/bench-3.jpg"></building-pic>
-        <building-pic src="/res/building/bench-2.jpg"></building-pic>
-        <building-pic src="/res/building/bench-1.jpg"></building-pic>
-        <p>Building a bench to go over our radiator</p>
-        <building-pic src="/res/building/dome_1.jpg"></building-pic>
-        <building-pic src="/res/building/dome_2.jpg"></building-pic>
-        <building-pic src="/res/building/dome_3.jpg"></building-pic>
-        <building-pic src="/res/building/dome_4.png"></building-pic>
-        <p>Building a dome in Brazil!</p>
-        <br>
-        <building-pic src="/res/building/bb-airstream-1-1.jpg"></building-pic>
-        <building-pic src="/res/building/bb-airstream-1-2.jpg"></building-pic>
-        <building-pic src="/res/building/bb-airstream-1-3.jpg"></building-pic>
-        <p>Remodeled Airstream and trade show display</p>
-        <br>
-        <building-pic src="/res/building/bb-airstream-2-1.jpg"></building-pic>
-        <p>Second remodeled Airstream</p>
-        <br>
-        <building-pic src="/res/building/bb-bar-1.jpg"></building-pic>
-        <building-pic src="/res/building/bb-bar-2.jpg"></building-pic>
-        <p>Bar and wall for fancy party</p>
-        <br>
-        <building-pic src="/res/building/bb-cnc.png"></building-pic>
-        <p>Running the big CNC router</p>
-        <br>
-        <building-pic src="/res/building/bb-doors.jpg"></building-pic>
-        <p>Doors for conference room</p>
-        <br>
-        <building-pic src="/res/building/bb-shadow.jpg"></building-pic>
-        <p>Shadow "box" for screws 'n such</p>
-        <br>
-        <building-pic src="/res/building/bedframe.jpg"></building-pic>
-        <p>Remade bedframe castle joint legs</p>
-        <br>
-        <building-pic src="/res/building/colombia-roof-1.png"></building-pic>
-        <building-pic src="/res/building/colombia-roof-2.png"></building-pic>
-        <p>Constructing rural hostel and roof</p>
-        <br>
-        <building-pic src="/res/building/colombia-shoe-rack.jpg"></building-pic>
-        <p>Shoe rack!</p>
-        <br>
-        <building-pic src="/res/building/colombia-yoga.jpg"></building-pic>
-        <p>Yoga structure</p>
-        <br>
-        <building-pic src="/res/building/portugal-shelves-1.jpg"></building-pic>
-        <building-pic src="/res/building/portugal-shelves-2.jpg"></building-pic>
-        <building-pic src="/res/building/portugal-shelves-3.jpg"></building-pic>
-        <p>Shipping container storage shelves</p>
-        <br>
-        <building-pic src="/res/building/record-shelf.jpg"></building-pic>
-        <p>Record player shelf</p>
-        <br>
-        <building-pic src="/res/building/spain-pallet-box.jpg"></building-pic>
-        <p>Scrap pallet box</p>
-        <br>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="/res/building/bench-5.jpg" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/cutting_board.jpg" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/lamp.jpg" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/marble_table.jpg" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/mic_stand.jpg" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/menorah.jpg" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/tv_stand.jpg" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/bb-airstream-1-2.jpg" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/bb-bar-1.jpg" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/dome_4.png" loading="lazy"></div>
+                <div class="swiper-slide"><img src="/res/building/portugal-shelves-1.jpg" loading="lazy"></div>
+            </div>
+            <!-- Pagination & Navigation -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
     </main>
+    <swiper-js></swiper-js>
 </body>
 
 </html>

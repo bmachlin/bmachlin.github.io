@@ -33,6 +33,7 @@ function defaultSettings() {
     context.Settings.SaveDefaultSettings();
 }
 function toggleSettings() {
+    if (!context.Game.IsGameOver()) return;
     context.Settings.ToggleSettings();
 }
 
@@ -45,6 +46,7 @@ function initialRender() {
     context.Renderer.RenderWord(true);
     context.Renderer.RenderFindableWords();
     context.Renderer.RenderHighScore();
+    context.Settings.CloseSettings();
 }
 
 //#endregion

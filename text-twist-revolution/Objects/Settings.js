@@ -71,6 +71,16 @@ class Settings {
     SaveSettingObj(setting, useDeafult=false) {
         this.storage.setItem(setting.name, useDeafult ? setting.default : setting.value);
     }
+
+    OpenSettings() {
+        this.showSettings.value = true;
+        this.SetSettingsVisible();
+    }
+
+    CloseSettings() {
+        this.showSettings.value = false;
+        this.SetSettingsVisible();
+    }
     
     ToggleSettings() {
         this.showSettings.value = !this.showSettings.value;

@@ -46,22 +46,14 @@ class Scoring {
     }
 
     Easy(word) {
-        console.log("esay")
-        let length = word.length;
-        return 3 + length - this.minlen;
+        return 3 + word.length - this.minlen;
     }
 
     Medium(word) {
-        console.log("m")
-
-        let length = word.length;
-        return 2 + length - this.minlen;
+        return 2 + word.length - this.minlen;
     }
 
     Hard(word) {
-        console.log("h")
-
-        let length = word.length;
-        return 1 + length - this.minlen;
+        return 1 + word.length - this.minlen;
     }
 }

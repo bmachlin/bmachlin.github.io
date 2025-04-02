@@ -25,7 +25,7 @@ class Scoring {
                 return this.Easy(word);
             case this.MEDIUM:
                 return this.Medium(word);
-            case HARD:
+            case this.HARD:
                 return this.Hard(word);
             default:
                 return this.Easy(word);
@@ -38,7 +38,7 @@ class Scoring {
                 return 5;
             case this.MEDIUM:
                 return 3;
-            case HARD:
+            case this.HARD:
                 return 1;
             default:
                 return 5;

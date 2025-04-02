@@ -65,13 +65,14 @@ function endGame() {
         context.Renderer.RenderHighScore();
     }
     context.Renderer.RenderFindableWords(true);
+    context.GameActions.EndGame();
     clearInterval(looper);
 }
 
 function updateGame() {
-    if (document.activeElement != document.body) {
-        document.body.focus();
-    }
+    // if (document.activeElement != document.body) {
+    //     document.body.focus();
+    // }
     context.GameActions.IncrementTimers(interval);
     document.getElementById("root-letters").innerHTML = context.Game.letters.join(" ").toUpperCase();
     document.getElementById("downTimer").innerHTML = context.Game.downTimerSec;

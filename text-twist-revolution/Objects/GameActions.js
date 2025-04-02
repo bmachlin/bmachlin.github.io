@@ -41,6 +41,10 @@ class GameActions {
         this.context.Renderer.RenderFindableWords();
     }
 
+    EndGame() {
+        this.Game.downTimer = 0;
+    }
+
     //#endregion
 
     //#region word actions

@@ -99,7 +99,7 @@
             <a href="https://data.census.gov">Source 3</a> 
             
             Survey data collected in January 2022. Real value data gathered from various places from 2009-2022. The figures are obviously not exact, but should be within a reasonable margin of error.</p>
-        <h2>
+        <h2 id="status-header">
             Prompt:
         </h2>
         <div hidden="" id="prompt-area">
@@ -134,51 +134,10 @@
         // Median estimates of group sizes relative to actual population estimates
         // [0] is the prompt, [1] is the real percent, [2] is the average guess
         let data = [
-            ['have a household income over $1 million', 0, 10],
-            ['are transgender', 1, 21],
-            ['have a household income over $500 thousand', 1, 26],
-            ['are Muslim', 1, 27],
-            ['are Native American', 1, 27],
-            ['are Jewish', 2, 30],
-            ['live in New York City', 3, 30],
-            ['are gay or lesbian', 3, 30],
-            ['are atheists', 3, 33],
-            ['are bisexual', 4, 29],
-            ['are members of a union', 4, 36],
-            ['are vegan or vegetarian', 5, 30],
-            ['are Asian', 6, 29],
-            ['are a military veteran', 6, 40],
-            ['live in Texas', 9, 30],
-            ['are left-handed', 11, 34],
-            ['live in California', 12, 32],
-            ['are Black', 14, 41],
-            ['have an advanced degree', 12, 37],
-            ['are first-generation immigrants', 14, 33],
-            ['are Hispanic', 20, 39],
-            ['are Catholic', 22, 41],
-            ['own a gun', 32, 54],
-            ['have at least a college degree', 34, 47],
-            ['have a household income over $100 thousand', 34, 38],
-            ['have a passport', 37, 45],
-            ['are Democrats', 42, 50],
-            ['are obese', 42, 56],
-            ['are Republicans', 47, 49],
-            ['are married', 51, 52],
-            ['have at least one child', 57, 59],
-            ['voted in the 2020 election', 62, 61],
-            ['have a household income over $50 thousand', 62, 50],
-            // ['are white', 60, 59],
-            ['own a house', 65, 49],
-            ['are fully vaccinated against COVID-19', 66, 60],
-            ['have a pet', 67, 64],
-            ['are Christian', 70, 57],
-            ['have read a book in the past year', 77, 50],
-            ['have a household income over $25 thousand', 82, 65],
-            ['have a drivers license', 83, 71],
-            ['own a smartphone', 85, 80],
-            ['have flown on a plane', 88, 61],
-            ['own a car', 88, 67],
-            ['have at least a high school degree', 89, 68]
+            ['have a household income over $1 million', 0, 10, false],
+            ['are transgender', 1, 21, false],
+            ['have a household income over $500 thousand', 1, 26, false],
+            ['have at least a high school degree', 89, 68, false]
         ];
 
         let currentItem = null;
@@ -261,7 +220,23 @@
             document.querySelector("#prompt-area").hidden = false;
             
             // Get a new random item
-            currentItem = data[Math.floor(Math.random() * data.length)];
+            let randomIndex = Math.floor(Math.random() * data.length);
+            currentItem = data[randomIndex];
+            while(currentItem[3] && randomIndex < data.length * 2) {
+                randomIndex += 1;
+                currentItem = data[randomIndex%data.length];
+            }
+
+            if (randomIndex >= data.length * 2) {
+                // Game over
+                document.querySelector("#prompt-area").hidden = true;
+                document.querySelector("#status-header").textContent = "Game Over!";
+                console.log("Game over!");
+                return;
+            }
+
+            data[randomIndex%data.length][3] = true;
+
             document.querySelector("#prompt").textContent = 
                 `What percentage of American adults...${currentItem[0]}?`;
             
